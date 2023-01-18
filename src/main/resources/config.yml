@@ -1,0 +1,7 @@
+Totem:
+  # The probability that totem doesn't work
+  # 100 = 100% (totem always works)
+  # 0 = 0% (totem never works)
+  # ONLY AFFECTS VANILLA TOTEMS
+  chance: 100
+

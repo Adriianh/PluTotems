@@ -1,0 +1,84 @@
+# Some important links
+# 1.- Item format: https://github.com/CryptoMorin/XSeries/wiki/XItemStack
+# 2.- Particle List: https://github.com/ByteZ1337/ParticleLib/blob/master/src/main/java/xyz/xenondevs/particle/ParticleEffect.java#L58-L153
+# 3.- Sound List: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
+# 4.- Potion Type List: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionType.html
+# 5.- Head List: https://minecraft-heads.com/custom-heads/
+# 6.- Kether: https://kether.tabooproject.org/list.html (You'll need to use a translator, it's in Chinese.)
+#
+# (Important)
+# 1.- SpigotMC Profile: https://www.spigotmc.org/members/adrian0w0.853456/
+# 2.- Discord: Adriiánh#1754
+# 3.- GitHub: https://github.com/adriianh/plutotems
+#
+# That's all, please report any bugs to my GitHub repository
+#
+
+# Totem ID
+KingTotem:
+  # Any name, you can use hex colors and legacy colors.
+  name: "&6King of the Totems"
+  # The type of totem. It can be "Item" or "Armor".
+  type: "Item"
+  # You can add rarity to the totem, it has no functionality, but I've added 'cause I can.
+  # Maybe I'll add something in the future, but for now, you can use it in the item lore lol
+  rarity: "&6&lLEGENDARY"
+  item:
+    # Any minecraft material
+    material: TOTEM_OF_UNDYING
+    # Head value in case material is "PLAYER_HEAD".
+    # Item name, you can use hex colors and legacy colors.
+    name: "&6King of the Totems"
+    # Item lore, you can add multiple lines. Use hex colors and legacy colors.
+    # Placeholders:
+    # {id}, {description}, {name}. {type}, {rarity}
+    lore:
+      - ""
+      - "&7Use this totem to become the king of the totems!"
+      - "&7(Will be used when you're about to die)"
+      - ""
+      - "&fType: &7{type}"
+      - ""
+  # Custom options for the totem
+  options:
+    # Amount of health to be given when the totem is used.
+    health: 5.0
+    # Toggle totem animation when the totem is used.
+    playAnimation: true
+    # If the totem is to be activated by clicking with it
+    # isClickable: true
+    # If the totem should be activated by eating it
+    # isConsumable: true
+    # If the totem should be activated by throwing it away (Q)
+    # isThrowable: true
+    # If the totem should be activated by pickup it
+    # isPickupable: true
+    # If the totem should be activated by placing it
+    # isPlaceable: true
+  conditions:
+    # Conditions are checked in the following order: probability -> permission -> kether
+    # Probability that the totem works
+    # 100 = 100% (totem always works)
+    # 0 = 0% (totem never works)
+    chance:
+      value: 100
+    # Permission required to use the totem
+    permissions:
+      value: "plutotems.use.kingtotem"
+    # The totem will work if the script returns "true". Otherwise, it will not work
+    # Read kether.tabooproject.org/list.html for more info
+    kether:
+      - "check player level < 50"
+  # Actions to be executed when the player uses the totem
+  actions:
+    - "title: &aKING | &7You have used the &6King of the Totems &7totem!"
+    - "broadcast: {player} &7has used the &6King of the Totems &7totem!"
+    - "sound: ENTITY_PLAYER_LEVELUP-1-1"
+  # Scripts to be executed when the player uses the totem
+  # Read kether.tabooproject.org/list.html for more info
+  scripts:
+    - 'player absorption amount to 100'
+  # Effects to give when using a totem
+  # POTION_EFFECT_ID:LEVEL:DURATION
+  effects:
+    - 'health_boost:2:600'
