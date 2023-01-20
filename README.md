@@ -38,13 +38,13 @@ GradleWrapper is included in this project.
 **Windows:**
 
 ```
-gradlew.bat clean build
+gradlew.bat jar
 ```
 
 **macOS/Linux:**
 
 ```
-./gradlew clean build
+./gradlew jar
 ```
 
 Build artifacts should be found in `./build/libs` folder.

@@ -50,3 +50,15 @@ configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 }
+
+tasks {
+    jar {
+        manifest.attributes["Main-Class"] = "me.adriianhdev.plutotems.PluTotems"
+        val dependencies = configurations
+            .runtimeClasspath
+            .get()
+            .map(::zipTree)
+        from(dependencies)
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+}
