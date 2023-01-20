@@ -4,4 +4,7 @@ Totem:
   # 0 = 0% (totem never works)
   # ONLY AFFECTS VANILLA TOTEMS
   chance: 100
+  # Show totem animation when using a totem
+  # ONLY AFFECTS CUSTOM TOTEMS
+  playAnimation: true
 

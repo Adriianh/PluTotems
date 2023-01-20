@@ -10,7 +10,7 @@ object ItemDropEvent {
         val player = event.player
         val item = event.itemDrop.itemStack
 
-        if(!TotemUtil.isTotem(item)) return
+        if (!TotemUtil.isTotem(item)) return
         val totem = TotemUtil.getTotem(item)!!
         val option = totem.data.options
 

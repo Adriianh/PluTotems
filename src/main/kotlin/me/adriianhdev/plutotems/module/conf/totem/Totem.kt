@@ -8,7 +8,6 @@ import taboolib.common5.Coerce
 import taboolib.module.kether.KetherShell
 import taboolib.module.kether.printKetherErrorMessage
 import taboolib.platform.util.sendLang
-import java.util.concurrent.CompletableFuture
 
 private val config = ConfigManager.config
 
@@ -35,7 +34,7 @@ data class Options(
 data class Condition(
     val chance: Int = 100,
     val permission: String? = null,
-    val script: List<String>
+    val script: List<String>? = null
 ) {
     fun check(player: Player): Boolean {
         if (chance != 100 && (0..100).random() > chance) {
@@ -46,17 +45,19 @@ data class Condition(
             player.sendLang("Totem-No-Permission")
             return false
         }
-        return (if (script.isEmpty()) {
-            CompletableFuture.completedFuture(true)
-        } else {
-            try {
-                KetherShell.eval(script, sender = adaptPlayer(player)).thenApply {
-                    Coerce.toBoolean(it)
-                }
-            } catch (e: Throwable) {
-                e.printKetherErrorMessage()
-                CompletableFuture.completedFuture(false)
+        if (script!!.isNotEmpty()) {
+            val result = KetherShell.eval(script, sender = adaptPlayer(player)).thenApply {
+                Coerce.toBoolean(it)
+            }.exceptionally {
+                it.printKetherErrorMessage()
+                false
+            }.get()
+
+            if (!result) {
+                player.sendLang("Totem-Script-Failed")
+                return false
             }
-        }).get()  ?: true
+        }
+        return true
     }
 }

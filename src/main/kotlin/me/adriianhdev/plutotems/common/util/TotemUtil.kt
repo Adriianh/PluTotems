@@ -10,6 +10,7 @@ import org.bukkit.EntityEffect
 import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
 import org.bukkit.entity.Player
+import org.bukkit.event.Cancellable
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
@@ -92,5 +93,32 @@ object TotemUtil {
             player.playEffect(EntityEffect.HURT)
             player.playEffect(EntityEffect.TOTEM_RESURRECT)
         }
+    }
+
+    fun handleAction(player: Player, event: Cancellable) {
+        val offhand = player.inventory.itemInOffHand
+        val hand = player.inventory.itemInMainHand
+
+        if (isTotem(offhand)) {
+            check(offhand, player, event)
+        } else {
+            if (isTotem(hand)) {
+                check(hand, player, event)
+            }
+        }
+    }
+
+    private fun check(item: ItemStack, player: Player, event: Cancellable) {
+        val totem = getTotem(item)!!
+
+        if (!checkCondition(player, totem)) {
+            event.isCancelled = false
+            item.amount--
+
+            return
+        }
+
+        event.isCancelled = true
+        run(player, totem, item)
     }
 }

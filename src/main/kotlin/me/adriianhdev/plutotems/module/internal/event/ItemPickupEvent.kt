@@ -12,21 +12,22 @@ object ItemPickupEvent {
         val item = event.item.itemStack
 
         if (player !is Player) return
-        if(!TotemUtil.isTotem(item)) return
+        if (!TotemUtil.isTotem(item)) return
 
         val totem = TotemUtil.getTotem(item)!!
         val option = totem.data.options
 
         if (!totem.type.equals("Item")) return
-        if (option.isPickupable!!) {
-            event.isCancelled = true
+        if (option.isPickupable!!) return
 
-            if (!TotemUtil.checkCondition(player, totem)) {
-                item.amount--
-                return
-            }
+        item.amount--
+        event.isCancelled = true
 
-            TotemUtil.run(player, totem, item)
+        if (!TotemUtil.checkCondition(player, totem)) {
+            item.amount--
+            return
         }
+
+        TotemUtil.run(player, totem, item)
     }
 }

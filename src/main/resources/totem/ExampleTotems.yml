@@ -1,32 +1,17 @@
-# Some important links
-# 1.- Item format: https://github.com/CryptoMorin/XSeries/wiki/XItemStack
-# 2.- Particle List: https://github.com/ByteZ1337/ParticleLib/blob/master/src/main/java/xyz/xenondevs/particle/ParticleEffect.java#L58-L153
-# 3.- Sound List: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
-# 4.- Potion Type List: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionType.html
-# 5.- Head List: https://minecraft-heads.com/custom-heads/
-# 6.- Kether: https://kether.tabooproject.org/list.html (You'll need to use a translator, it's in Chinese.)
-#
-# (Important)
-# 1.- SpigotMC Profile: https://www.spigotmc.org/members/adrian0w0.853456/
-# 2.- Discord: Adriiánh#1754
-# 3.- GitHub: https://github.com/adriianh/plutotems
-#
-# That's all, please report any bugs to my GitHub repository
-#
-
 # Totem ID
 KingTotem:
   # Any name, you can use hex colors and legacy colors.
   name: "&6King of the Totems"
   # The type of totem. It can be "Item" or "Armor".
   type: "Item"
-  # You can add rarity to the totem, it has no functionality, but I've added 'cause I can.
+  # You can add rarity to the totem, it has no functionality, but I've added 'cause I can (?
   # Maybe I'll add something in the future, but for now, you can use it in the item lore lol
   rarity: "&6&lLEGENDARY"
   item:
     # Any minecraft material
-    material: TOTEM_OF_UNDYING
+    material: PLAYER_HEAD
     # Head value in case material is "PLAYER_HEAD".
+    skull: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDRhYjlkNmQ5ZjZkMjMxNGEyYmZmZjk4ZmRiODBmY2I0Y2UwYzhlZjc4ODEzMWE5YzZjMjJlY2M3MGU4M2Q3OSJ9fX0=
     # Item name, you can use hex colors and legacy colors.
     name: "&6King of the Totems"
     # Item lore, you can add multiple lines. Use hex colors and legacy colors.
@@ -39,28 +24,12 @@ KingTotem:
       - ""
       - "&fType: &7{type}"
       - ""
-  # Custom options for the totem
-  options:
-    # Amount of health to be given when the totem is used.
-    health: 5.0
-    # Toggle totem animation when the totem is used.
-    playAnimation: true
-    # If the totem is to be activated by clicking with it
-    # isClickable: true
-    # If the totem should be activated by eating it
-    # isConsumable: true
-    # If the totem should be activated by throwing it away (Q)
-    # isThrowable: true
-    # If the totem should be activated by pickup it
-    # isPickupable: true
-    # If the totem should be activated by placing it
-    # isPlaceable: true
   conditions:
     # Conditions are checked in the following order: probability -> permission -> kether
     # Probability that the totem works
     # 100 = 100% (totem always works)
     # 0 = 0% (totem never works)
-    chance:
+    probability:
       value: 100
     # Permission required to use the totem
     permissions:
@@ -72,7 +41,7 @@ KingTotem:
   # Actions to be executed when the player uses the totem
   actions:
     - "title: &aKING | &7You have used the &6King of the Totems &7totem!"
-    - "broadcast: {player} &7has used the &6King of the Totems &7totem!"
+    - "broadcast: &7{player} has used the &6King of the Totems &7totem!"
     - "sound: ENTITY_PLAYER_LEVELUP-1-1"
   # Scripts to be executed when the player uses the totem
   # Read kether.tabooproject.org/list.html for more info
@@ -82,3 +51,164 @@ KingTotem:
   # POTION_EFFECT_ID:LEVEL:DURATION
   effects:
     - 'health_boost:2:600'
+CrystalTotem:
+  name: "{#eeaeca}Crystal Totem"
+  type: "Item"
+  item:
+    material: END_CRYSTAL
+    name: "{#eeaeca}Crystal Totem"
+    lore:
+      - ""
+      - "&7Use this totem to become the king of the totems!"
+      - ""
+      - "&7(Will be used when you're about to die)"
+      - ""
+  options:
+    isClickable: true
+  conditions:
+    chance:
+      value: 100
+    permission:
+      value: "plutotems.use.crystaltotem"
+    kether:
+      - "check player level < 50"
+  actions:
+    - "title: {#eeaeca}CRYSTAL | &7You have used the {#eeaeca}Crystal Totem &7totem!"
+    - "broadcast: &7{player} has used the {#eeaeca}Crystal Totem &7totem!"
+    - "sound: ENTITY_PLAYER_LEVELUP-1-1"
+  scripts:
+    - 'player absorption amount to 4'
+DrinkableTotem:
+  name: "{#ffaa00}Drinkable Totem"
+  type: "Item"
+  item:
+    material: HONEY_BOTTLE
+    name: "{#ffaa00}Drinkable Totem"
+    lore:
+      - ""
+      - "&7Want totem effects? Drink this totem!"
+      - ""
+  options:
+    health: 10.0
+    isConsumable: true
+  conditions:
+    chance:
+      value: 100
+    permission:
+      value: "plutotems.use.drinkabletotem"
+    kether:
+      - "check player level < 50"
+  actions:
+    - "title: {#ffaa00}DRINK | &7You have used the {#ffaa00}Drinkable Totem &7totem!"
+    - "broadcast: &7{player} has used the {#ffaa00}Drinkable Totem &7totem!"
+    - "sound: ENTITY_PLAYER_LEVELUP-1-1"
+  scripts:
+    - 'player absorption amount add 4'
+DragonTotem:
+  name: "{#ce32ee}Dragon Totem"
+  type: "Item"
+  item:
+    material: DRAGON_EGG
+    name: "{#ce32ee}Dragon Totem"
+    lore:
+      - ""
+      - "&7Use this totem to become the king of the totems!"
+      - ""
+      - "&7(Will be used when you're about to die)"
+      - ""
+  options:
+    isPlaceable: true
+  conditions:
+    chance:
+      value: 100
+    permission:
+      value: "plutotems.use.dragontotem"
+    kether:
+      - "check player level < 50"
+  actions:
+    - "title: {#ce32ee}DRAGON | &7You have used the {#ce32ee}Dragon Totem &7totem!"
+    - "broadcast: &7{player} has used the {#ce32ee}Dragon Totem &7totem!"
+    - "sound: ENTITY_PLAYER_LEVELUP-1-1"
+  scripts:
+    - 'player absorption amount to 4'
+FireTotem:
+  name: "{#fdbb2d}Fire Totem"
+  type: "Item"
+  item:
+    material: FIRE_CHARGE
+    name: "{#fdbb2d}Fire Totem"
+    lore:
+      - ""
+      - "&7Use this totem to become the king of the totems!"
+      - ""
+      - "&7(Will be used when you're about to die)"
+      - ""
+  options:
+    isThrowable: true
+  conditions:
+    chance:
+      value: 100
+    permission:
+      value: "plutotems.use.firetotem"
+    kether:
+      - "check player level < 50"
+  actions:
+    - "title: {#fdbb2d}FIRE | &7You have used the {#fdbb2d}Fire Totem &7totem!"
+    - "broadcast: &7{player} has used the {#fdbb2d}Fire Totem &7totem!"
+    - "sound: ENTITY_PLAYER_LEVELUP-1-1"
+  scripts:
+    - 'player absorption amount to 4'
+SnowTotem:
+  name: "{#94bbe9}Frozen Totem"
+  type: "Item"
+  item:
+    material: POWDER_SNOW_BUCKET
+    name: "{#94bbe9}Frozen Totem"
+    lore:
+      - ""
+      - "&7Use this totem to become the king of the totems!"
+      - ""
+      - "&7(Will be used when you're about to die)"
+      - ""
+  options:
+    isPickupable: true
+  conditions:
+    chance:
+      value: 100
+    permission:
+      value: "plutotems.use.snowtotem"
+    kether:
+      - "check player level < 50"
+  actions:
+    - "title: {#94bbe9}SNOW | &7You have used the {#94bbe9}Snow Totem &7totem!"
+    - "broadcast: &7{player} has used the {#94bbe9}Snow Totem &7totem!"
+    - "sound: ENTITY_PLAYER_LEVELUP-1-1"
+  scripts:
+    - 'player absorption amount to 4'
+EnderTotem:
+  name: "{#b246fc}Ender Totem"
+  type: "Item"
+  item:
+    material: ENDER_PEARL
+    name: "{#b246fc}Ender Totem"
+    lore:
+      - ""
+      - "&7Use this totem to become the king of the totems!"
+      - ""
+      - "&7(Will be used when you're about to die)"
+      - ""
+  options:
+    isClickable: true
+  conditions:
+    chance:
+      value: 100
+    permission:
+      value: "plutotems.use.snowtotem"
+    kether:
+      - "check player level < 50"
+  actions:
+    - "title: {#b246fc}ENDER | &7You have used the {#b246fc}Ender Totem &7totem!"
+    - "broadcast: &7{player} has used the {#b246fc}Ender Totem &7totem!"
+    - "sound: ENTITY_PLAYER_LEVELUP-1-1"
+  scripts:
+    - 'player absorption amount to 4'

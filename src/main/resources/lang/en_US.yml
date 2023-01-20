@@ -50,3 +50,14 @@ Totem-No-Permission:
     sound: ENTITY_VILLAGER_NO
     volume: 1
     pitch: 1
+Totem-Script-Failed:
+  - type: title
+    title: "&cERROR"
+    subtitle: "You didn't meet the requirements."
+    fadein: 20
+    stay: 15
+    fadeout: 20
+  - type: sound
+    sound: ENTITY_VILLAGER_NO
+    volume: 1
+    pitch: 1

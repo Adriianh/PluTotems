@@ -1,5 +1,6 @@
 package me.adriianhdev.plutotems.common.util
 
+import me.adriianhdev.plutotems.common.util.color.colorify
 import me.adriianhdev.plutotems.module.conf.totem.Totem
 
 object StringUtil {
@@ -9,5 +10,6 @@ object StringUtil {
             .replace("{description}", totem.description ?: "")
             .replace("{type}", totem.type ?: "")
             .replace("{rarity}", totem.rarity ?: "")
+            .colorify()
     }
 }
