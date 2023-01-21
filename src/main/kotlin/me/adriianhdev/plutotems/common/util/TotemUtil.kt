@@ -32,7 +32,7 @@ object TotemUtil {
         return container.get(key, PersistentDataType.STRING)
     }
 
-    private fun hasKey(item: ItemStack): Boolean {
+    fun hasKey(item: ItemStack): Boolean {
         val container = item.itemMeta!!.persistentDataContainer
         return container.has(key, PersistentDataType.STRING)
     }
@@ -73,6 +73,30 @@ object TotemUtil {
         item.amount--
     }
 
+    fun run(player: Player, totem: Totem) {
+        val actions = totem.data.actions ?: return
+        val scripts = totem.data.scripts ?: return
+        val effects = totem.data.effects ?: return
+
+        if (actions.isNotEmpty()) {
+            actions.forEach { action ->
+                Action.execute(action, player)
+            }
+        }
+
+        if (scripts.isNotEmpty()) {
+            scripts.eval(player)
+        }
+
+        if (effects.isNotEmpty()) {
+            effects.forEach { effect ->
+                Effect.addDeathEffect(effect, player)
+            }
+        }
+
+        handlePlayer(player, totem)
+    }
+
     fun checkCondition(player: Player, totem: Totem): Boolean {
         val conditions = totem.data.conditions
         if (conditions.check(player)) {
@@ -89,7 +113,7 @@ object TotemUtil {
         player.health = (player.health + healthAmount)
                 .coerceAtMost(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.defaultValue)
 
-        if (playAnimation) {
+        if (playAnimation == true) {
             player.playEffect(EntityEffect.HURT)
             player.playEffect(EntityEffect.TOTEM_RESURRECT)
         }

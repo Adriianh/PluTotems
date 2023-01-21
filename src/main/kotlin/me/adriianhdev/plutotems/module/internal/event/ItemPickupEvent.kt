@@ -8,26 +8,28 @@ import taboolib.common.platform.event.SubscribeEvent
 object ItemPickupEvent {
     @SubscribeEvent
     fun onItemPickup(event: EntityPickupItemEvent) {
-        val player = event.entity
+        val player = event.entity as? Player ?: return
+        val world = player.world
         val item = event.item.itemStack
+        val loc = event.item.location
 
-        if (player !is Player) return
         if (!TotemUtil.isTotem(item)) return
-
-        val totem = TotemUtil.getTotem(item)!!
+        val totem = TotemUtil.getTotem(item) ?: return
         val option = totem.data.options
 
-        if (!totem.type.equals("Item")) return
-        if (option.isPickupable!!) return
-
-        item.amount--
+        if (!option.isPickupable!!) return
+        if (!TotemUtil.checkCondition(player, totem)) return
         event.isCancelled = true
 
-        if (!TotemUtil.checkCondition(player, totem)) {
+        if (item.amount > 1) {
             item.amount--
-            return
-        }
 
-        TotemUtil.run(player, totem, item)
+            event.item.remove()
+            world.dropItem(loc, item)
+            TotemUtil.run(player, totem)
+        } else {
+            event.item.remove()
+            TotemUtil.run(player, totem)
+        }
     }
 }
