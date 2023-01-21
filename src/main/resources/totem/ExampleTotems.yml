@@ -1,3 +1,19 @@
+# Some important links
+# 1.- Item format: https://github.com/CryptoMorin/XSeries/wiki/XItemStack
+# 2.- Particle List: https://github.com/ByteZ1337/ParticleLib/blob/master/src/main/java/xyz/xenondevs/particle/ParticleEffect.java#L58-L153
+# 3.- Sound List: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
+# 4.- Potion Type List: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionType.html
+# 5.- Head List: https://minecraft-heads.com/custom-heads/
+# 6.- Kether: https://kether.tabooproject.org/list.html (You'll need to use a translator, it's in Chinese.)
+#
+# (Important)
+# 1.- SpigotMC Profile: https://www.spigotmc.org/members/adrian0w0.853456/
+# 2.- Discord: Adriiánh#1754
+# 3.- GitHub: https://github.com/adriianh/plutotems
+#
+# That's all, please report any bugs to my GitHub repository
+#
+
 # Totem ID
 KingTotem:
   # Any name, you can use hex colors and legacy colors.
@@ -24,12 +40,28 @@ KingTotem:
       - ""
       - "&fType: &7{type}"
       - ""
+  # Custom options for the totem
+  options:
+    # Amount of health to be given when the totem is used.
+    health: 5.0
+    # Toggle totem animation when the totem is used.
+    playAnimation: true
+    # If the totem is to be activated by clicking with it
+    # isClickable: true
+    # If the totem should be activated by eating it
+    # isConsumable: true
+    # If the totem should be activated by throwing it away (Q)
+    # isThrowable: true
+    # If the totem should be activated by pickup it
+    # isPickupable: true
+    # If the totem should be activated by placing it
+    # isPlaceable: true
   conditions:
     # Conditions are checked in the following order: probability -> permission -> kether
     # Probability that the totem works
     # 100 = 100% (totem always works)
     # 0 = 0% (totem never works)
-    probability:
+    chance:
       value: 100
     # Permission required to use the totem
     permissions:
@@ -65,6 +97,7 @@ CrystalTotem:
       - ""
   options:
     isClickable: true
+    playAnimation: true
   conditions:
     chance:
       value: 100
@@ -90,6 +123,7 @@ DrinkableTotem:
       - ""
   options:
     health: 10.0
+    playAnimation: true
     isConsumable: true
   conditions:
     chance:
@@ -118,6 +152,7 @@ DragonTotem:
       - ""
   options:
     isPlaceable: true
+    playAnimation: true
   conditions:
     chance:
       value: 100
@@ -145,6 +180,7 @@ FireTotem:
       - ""
   options:
     isThrowable: true
+    playAnimation: true
   conditions:
     chance:
       value: 100
@@ -172,6 +208,7 @@ SnowTotem:
       - ""
   options:
     isPickupable: true
+    playAnimation: true
   conditions:
     chance:
       value: 100
@@ -199,6 +236,7 @@ EnderTotem:
       - ""
   options:
     isClickable: true
+    playAnimation: true
   conditions:
     chance:
       value: 100
