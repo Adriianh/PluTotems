@@ -22,5 +22,22 @@ val getCommand = subCommand {
             sender.sendLang("Command-Totem-Get", totem.id)
             PlayerUtil.giveTotem(sender, totem)
         }
+        dynamic(comment = "amount", optional = true) {
+            suggestion<Player> { _, _ ->
+                (1..64).map { it.toString() }
+            }
+            execute<Player> { sender, context, argument ->
+                val totem = TotemManager.getTotem(context.argument(-1))
+                val amount = argument.toInt()
+
+                if (totem == null) {
+                    sender.sendLang("Command-Unknown-Totem", context.argument(-1))
+                    return@execute
+                }
+
+                sender.sendLang("Command-Totem-Get", totem.id)
+                PlayerUtil.giveTotem(sender, totem, amount)
+            }
+        }
     }
 }

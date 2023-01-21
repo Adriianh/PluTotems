@@ -15,7 +15,7 @@ taboolib {
     install("module-nms", "module-nms-util")
     install("platform-bukkit")
     classifier = null
-    version = "6.0.10-42"
+    version = "6.0.10-71"
 
     relocate("ink.ptms.um", "$group.um")
 

@@ -7,23 +7,31 @@ import taboolib.library.xseries.XItemStack
 
 object PlayerUtil {
     fun giveTotem(player: Player, totem: Totem) {
-        val totemItem = totem.item
+        val totemItem = totem.item.clone()
 
-        totemItem.itemMeta?.let { itemMeta ->
-            if (itemMeta.hasLore()) {
-                val lore = itemMeta.lore
+        totemItem.itemMeta.let { it ->
+            it?.lore = it?.lore?.map { it.replaceVar(totem) }
 
-                for (i in lore!!.indices) {
-                    lore[i] = lore[i].replaceVar(totem)
-                }
-
-                itemMeta.lore = lore
-            }
-            totemItem.itemMeta = itemMeta
+            totemItem.itemMeta = it
             TotemUtil.setKey(totemItem, totem)
 
             XItemStack.giveOrDrop(player, totemItem)
         }
+    }
+
+    fun giveTotem(player: Player, totem: Totem, amount: Int) {
+        val totemItem = totem.item.clone()
+
+        val totemMeta = totemItem.itemMeta
+        totemMeta.let { it ->
+            it?.lore = it?.lore?.map { it.replaceVar(totem) }
+        }
+
+        totemItem.itemMeta = totemMeta
+        totemItem.amount = amount
+        TotemUtil.setKey(totemItem, totem)
+
+        XItemStack.giveOrDrop(player, totemItem)
     }
 
     fun removeTotem(player: Player, totem: Totem) {
