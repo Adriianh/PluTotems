@@ -1,9 +1,13 @@
 package me.adriianhdev.plutotems.module.conf.totem.action.impl
 
+import me.adriianhdev.plutotems.module.conf.totem.action.Action
 import org.bukkit.entity.Player
 
-object ActionFrozen {
-    fun execute(player: Player, time: Int) {
+object ActionFrozen: Action {
+    override val identifier: String = "FROZEN"
+
+    override fun execute(player: Player, value: String) {
+        val time = value.toInt()
         player.freezeTicks = 140 + (time * 20)
     }
 }

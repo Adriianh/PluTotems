@@ -1,11 +1,14 @@
 package me.adriianhdev.plutotems.module.conf.totem.action.impl
 
 import me.adriianhdev.plutotems.common.util.color.colorify
+import me.adriianhdev.plutotems.module.conf.totem.action.Action
 import org.bukkit.entity.Player
 
-object ActionTitle {
-    fun execute(player: Player, message: String) {
-        val split = message.split(" | ", limit = 5)
+object ActionTitle: Action {
+    override val identifier: String = "TITLE"
+
+    override fun execute(player: Player, value: String) {
+        val split = value.split(" | ", limit = 5)
 
         val title = split[0].colorify()
         val subtitle = split.getOrNull(1)?.colorify()

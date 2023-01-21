@@ -4,7 +4,7 @@ import me.adriianhdev.plutotems.PluTotems
 import me.adriianhdev.plutotems.common.util.KetherUtil.eval
 import me.adriianhdev.plutotems.module.conf.totem.Totem
 import me.adriianhdev.plutotems.module.conf.totem.TotemManager
-import me.adriianhdev.plutotems.module.conf.totem.action.Action
+import me.adriianhdev.plutotems.module.conf.totem.action.ActionManager
 import me.adriianhdev.plutotems.module.conf.totem.effect.Effect
 import org.bukkit.EntityEffect
 import org.bukkit.NamespacedKey
@@ -55,7 +55,7 @@ object TotemUtil {
 
         if (actions.isNotEmpty()) {
             actions.forEach { action ->
-                Action.execute(action, player)
+                ActionManager.execute(action, player)
             }
         }
 
@@ -80,7 +80,7 @@ object TotemUtil {
 
         if (actions.isNotEmpty()) {
             actions.forEach { action ->
-                Action.execute(action, player)
+                ActionManager.execute(action, player)
             }
         }
 

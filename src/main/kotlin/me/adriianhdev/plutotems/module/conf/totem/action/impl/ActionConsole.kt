@@ -1,12 +1,15 @@
 package me.adriianhdev.plutotems.module.conf.totem.action.impl
 
+import me.adriianhdev.plutotems.module.conf.totem.action.Action
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
-object ActionConsole {
-    fun execute(player: Player, message: String) {
+object ActionConsole: Action {
+    override val identifier: String = "CONSOLE"
+
+    override fun execute(player: Player, value: String) {
         Bukkit.dispatchCommand(
-            Bukkit.getConsoleSender(), message.replace("{player}", player.name)
+            Bukkit.getConsoleSender(), value.replace("{player}", player.name)
         )
     }
 }

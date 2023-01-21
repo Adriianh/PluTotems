@@ -1,5 +1,6 @@
 package me.adriianhdev.plutotems.module.conf.totem.action.impl
 
+import me.adriianhdev.plutotems.module.conf.totem.action.Action
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import taboolib.library.xseries.parseToItemStack
@@ -10,9 +11,11 @@ import xyz.xenondevs.particle.data.texture.BlockTexture
 import xyz.xenondevs.particle.data.texture.ItemTexture
 import java.awt.Color
 
-object ActionParticle {
-    fun execute(player: Player, text: String) {
-        val split = text.split(" | ")
+object ActionParticle: Action {
+    override val identifier: String = "PARTICLE"
+
+    override fun execute(player: Player, value: String) {
+        val split = value.split(" | ")
         val particle = split[0]
         val amount = split[1].toInt()
         val offsetX = split[2].toFloat()
