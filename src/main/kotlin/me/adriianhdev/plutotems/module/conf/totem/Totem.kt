@@ -24,6 +24,7 @@ data class Totem(
 data class Options(
     val healthAmount: Double = config.getDouble("Totem.health"),
     val playAnimation: Boolean? = config.getBoolean("Totem.playAnimation"),
+    val autoTotem: Boolean? = null,
     val isClickable: Boolean? = null,
     val isConsumable: Boolean? = null,
     val isThrowable: Boolean? = null,
