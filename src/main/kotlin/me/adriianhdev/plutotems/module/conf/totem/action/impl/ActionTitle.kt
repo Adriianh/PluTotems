@@ -4,7 +4,7 @@ import me.adriianhdev.plutotems.common.util.color.colorify
 import me.adriianhdev.plutotems.module.conf.totem.action.Action
 import org.bukkit.entity.Player
 
-object ActionTitle: Action {
+object ActionTitle : Action {
     override val identifier: String = "TITLE"
 
     override fun execute(player: Player, value: String) {

@@ -11,7 +11,7 @@ import xyz.xenondevs.particle.data.texture.BlockTexture
 import xyz.xenondevs.particle.data.texture.ItemTexture
 import java.awt.Color
 
-object ActionParticle: Action {
+object ActionParticle : Action {
     override val identifier: String = "PARTICLE"
 
     override fun execute(player: Player, value: String) {

@@ -5,7 +5,7 @@ import me.adriianhdev.plutotems.module.conf.totem.action.Action
 import org.bukkit.entity.Player
 import taboolib.platform.util.sendActionBar
 
-object ActionBar: Action {
+object ActionBar : Action {
     override val identifier: String = "ACTIONBAR"
 
     override fun execute(player: Player, value: String) {

@@ -3,7 +3,7 @@ package me.adriianhdev.plutotems.module.conf.totem.action.impl
 import me.adriianhdev.plutotems.module.conf.totem.action.Action
 import org.bukkit.entity.Player
 
-object ActionFrozen: Action {
+object ActionFrozen : Action {
     override val identifier: String = "FROZEN"
 
     override fun execute(player: Player, value: String) {

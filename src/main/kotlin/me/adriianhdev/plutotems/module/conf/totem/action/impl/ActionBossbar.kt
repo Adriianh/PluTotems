@@ -8,7 +8,7 @@ import org.bukkit.boss.BarStyle
 import org.bukkit.entity.Player
 import taboolib.common.platform.function.submit
 
-object ActionBossbar: Action {
+object ActionBossbar : Action {
     override val identifier: String = "BOSSBAR"
 
     override fun execute(player: Player, value: String) {

@@ -5,7 +5,7 @@ import org.bukkit.entity.Player
 import taboolib.library.xseries.XSound
 import taboolib.platform.util.sendLang
 
-object ActionSound: Action {
+object ActionSound : Action {
     override val identifier: String = "SOUND"
 
     override fun execute(player: Player, value: String) {

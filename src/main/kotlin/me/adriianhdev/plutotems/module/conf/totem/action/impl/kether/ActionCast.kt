@@ -33,6 +33,7 @@ class ActionCast {
                     }
                     MythicMobsCast(mechanic, trigger)
                 }
+
                 else -> error("out of case")
             }
         }
