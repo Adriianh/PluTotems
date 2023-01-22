@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender
 import taboolib.common.platform.command.CommandBody
 import taboolib.common.platform.command.CommandHeader
 import taboolib.common.platform.command.mainCommand
+import taboolib.common.platform.command.subCommand
 import taboolib.common.platform.function.adaptCommandSender
 import taboolib.module.chat.TellrawJson
 import taboolib.platform.util.asLangText
@@ -38,6 +39,13 @@ object TotemCommand {
     @CommandBody(permission = "plutotems.command.reload")
     val reload = reloadCommand
 
+    @CommandBody(permission = "plutotems.command.help")
+    val help = subCommand {
+        execute<CommandSender> { sender, _, _ ->
+            generateMainHelper(sender)
+        }
+    }
+
     @CommandBody
     val main = mainCommand {
         execute<CommandSender> { sender, _, argument ->
@@ -61,9 +69,11 @@ object TotemCommand {
         TellrawJson()
             .append("  ").append("§6PluTotems")
             .append(" ").append("§f${PluTotems.plugin.description.version}")
-            .hoverText("""
+            .hoverText(
+                """
                 §7Plugin version: §2${PluTotems.plugin.description.version}
-            """.trimIndent()).sendTo(proxySender)
+            """.trimIndent()
+            ).sendTo(proxySender)
         proxySender.sendMessage("")
         TellrawJson()
             .append("  §7${sender.asLangText("Command-Help-Type")}: ").append("§f/plutotems §8[...]")
@@ -75,7 +85,8 @@ object TotemCommand {
         javaClass.declaredFields.forEach { field ->
             if (!field.isAnnotationPresent(TotemHelper::class.java)) return@forEach
             val name = field.name
-            val regularName = name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+            val regularName =
+                name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
             val desc = sender.asLangText("Command-$regularName-Description")
 
             TellrawJson()
