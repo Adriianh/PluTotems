@@ -1,13 +1,10 @@
 # Commands (Messages)
-Command-Plugin-Reload: "&8[&a!&8] &fReload complete, without problems."
-Command-Unknown-Totem: "&8[&c!&8] &fTotem &6{0} &fnot found."
-Command-Unknown-Player: "&8[&c!&8] &fPlayer not found."
-Command-Totem-Get: "&8[&a!&8] &FReceived totem {0}"
-Command-Totem-Give: "&8[&a!&8] &fGiving totem {0} to {1}"
-Command-Totem-Remove: "&8[&a!&8] &fRemoving totem {0} from {1}"
-Command-Totem-List: #This replaces only the list header
-  - "§6PluTotems"
-  - "§7Totems:"
+Command-Plugin-Reload: "§8[§6PluTotems§8] §aINFO §f| &7Reload complete, without problems."
+Command-Unknown-Totem: "§8[§6PluTotems§8] §cERROR §f| §7Totem &6{0} &fnot found."
+Command-Unknown-Player: "§8[§6PluTotems§8] §cERROR §f| §7Player not found."
+Command-Totem-Get: "§8[§6PluTotems§8] §aINFO §f| &7Received totem {0}"
+Command-Totem-Give: "§8[§6PluTotems§8] §aINFO §f| &7Giving totem {0} to {1}"
+Command-Totem-Remove: "§8[§6PluTotems§8] §aINFO §f| &7Removing totem {0} from {1}"
 
 # Commands (Description)
 Command-Help-Type: "Type"
@@ -20,14 +17,14 @@ Command-List-Description: "List loaded totems"
 Command-Reload-Description: "Reload all configurations"
 
 # Messages
-Totem-Resurrect-Success: "&8[&a!&8] &fThe totem worked and you have been saved."
-Totem-Resurrect-Failure: "&8[&c!&8] &fThe totem did not work and you have died."
-Totem-Hold-Item: "&8[&c!&8] &fYou must hold a totem!"
+Totem-Resurrect-Success: "§8[§6PluTotems§8] §aINFO §f| &7The totem worked and you have been saved."
+Totem-Resurrect-Failure: "§8[§6PluTotems§8] §cERROR §f| §7The totem did not work and you have died."
+Totem-Hold-Item: "§8[§6PluTotems§8] §cERROR §f| §7You must hold a totem!"
 Totem-Remove-Item: "&8[&a!&8] &6{1} &ftook the totem &6{0} &ffrom you"
-Totem-Non-Consumable: "&8[&c!&8] &fYou can't eat this totem."
-Totem-Non-Placeable: "&8[&c!&8] &fYou can't place this totem."
-Totem-Non-Clickable: "&8[&c!&8] &fYou can't click this totem."
-Totem-Unknown-Sound: "&8[&c!&8] &fThis sound doesn't exist"
+Totem-Non-Consumable: "§8[§6PluTotems§8] §cERROR §f| §7You can't eat this totem."
+Totem-Non-Placeable: "§8[§6PluTotems§8] §cERROR §f| §7You can't place this totem."
+Totem-Non-Clickable: "§8[§6PluTotems§8] §cERROR §f| §7You can't click this totem."
+Totem-Unknown-Sound: "§8[§6PluTotems§8] §cERROR §f| §7This sound doesn't exist"
 Totem-Chance-Failed:
   - type: title
     title: "&cFAIL"
