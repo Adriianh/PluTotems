@@ -147,7 +147,17 @@ object HexUtil {
                 val hexSteps = Arrays.stream(
                     getCaptureGroup(matcher, "hex")!!.substring(1).split(":").toTypedArray()
                 )
-                    .map { x: String -> if (x.length != 4) x else String.format("#%s%s%s%s%s%s", x[1], x[1], x[2], x[2], x[3], x[3]) }
+                    .map { x: String ->
+                        if (x.length != 4) x else String.format(
+                            "#%s%s%s%s%s%s",
+                            x[1],
+                            x[1],
+                            x[2],
+                            x[2],
+                            x[3],
+                            x[3]
+                        )
+                    }
                     .map { nm: String? -> Color.decode(nm) }
                     .collect(Collectors.toList())
                 val speedGroup = getCaptureGroup(matcher, "speed")
@@ -382,7 +392,8 @@ object HexUtil {
     /**
      * Allows generation of an animated rainbow gradient with a fixed number of steps
      */
-    class AnimatedRainbow(totalColors: Int, saturation: Float, brightness: Float, speed: Int) : Rainbow(totalColors, saturation, brightness) {
+    class AnimatedRainbow(totalColors: Int, saturation: Float, brightness: Float, speed: Int) :
+        Rainbow(totalColors, saturation, brightness) {
         init {
             hue = ((((floor(System.currentTimeMillis() / 50.0)) / 360) * speed) % 1).toFloat()
         }
