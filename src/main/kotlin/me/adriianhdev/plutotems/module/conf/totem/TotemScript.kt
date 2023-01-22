@@ -8,5 +8,6 @@ data class TotemScript(
     val options: Options,
     val actions: List<String>? = null,
     val scripts: List<String>? = null,
-    val effects: List<String>? = null
+    val effects: List<String>? = null,
+    val heldEffect: List<String>? = null
 )

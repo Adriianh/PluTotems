@@ -55,6 +55,7 @@ object ConfigLoader {
             val actions = config.getStringList("$key.actions")
             val scripts = config.getStringList("$key.scripts")
             val effects = config.getStringList("$key.effects")
+            val heldEffect = config.getStringList("$key.heldEffects")
 
             val item = config.getConfigurationSection("$key.item")!!.let {
                 XItemStack.deserialize(it) { it.colorify() }
@@ -67,6 +68,7 @@ object ConfigLoader {
             val options = Options(
                 config.getDouble("$key.options.health"),
                 config.getBoolean("$key.options.playAnimation"),
+                config.getBoolean("$key.options.autoTotem"),
                 config.getBoolean("$key.options.isClickable"),
                 config.getBoolean("$key.options.isConsumable"),
                 config.getBoolean("$key.options.isThrowable"),
@@ -74,7 +76,7 @@ object ConfigLoader {
                 config.getBoolean("$key.options.isPlaceable")
             )
 
-            val totemScript = TotemScript(item, conditions, options, actions, scripts, effects)
+            val totemScript = TotemScript(item, conditions, options, actions, scripts, effects, heldEffect)
             val totem = Totem(
                 id = key,
                 item = item,

@@ -1,5 +1,8 @@
 package me.adriianhdev.plutotems.module.internal.event
 
+import me.adriianhdev.plutotems.common.util.ExecutorUtils.checkCondition
+import me.adriianhdev.plutotems.common.util.ExecutorUtils.checkEffects
+import me.adriianhdev.plutotems.common.util.ExecutorUtils.run
 import me.adriianhdev.plutotems.common.util.PlayerUtil
 import me.adriianhdev.plutotems.common.util.TotemUtil
 import org.bukkit.event.block.BlockPlaceEvent
@@ -18,19 +21,21 @@ object BlockPlaceEvent {
 
         event.isCancelled = true
 
-        if (!totem.type.equals("Item")) return
+        if (!totem.type.equals("item", true)) return
         if (!option.isPlaceable!!) {
             player.sendLang("Totem-Non-Placeable")
             return
         }
 
-        if (!TotemUtil.checkCondition(player, totem)) {
+        if (!checkCondition(player, totem)) {
             event.isCancelled = true
             item.amount--
 
             return
         }
 
-        TotemUtil.run(player, totem, item)
+        checkEffects(player, item)
+        run(player, totem)
+        item.amount--
     }
 }

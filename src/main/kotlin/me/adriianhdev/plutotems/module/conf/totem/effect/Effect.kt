@@ -5,7 +5,7 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
 object Effect {
-    fun addDeathEffect(text: String, player: Player) {
+    fun addEffect(text: String, player: Player) {
         val effect = text.split(":")[0]
         val level = text.split(":")[1]
         val duration = text.split(":")[2]
@@ -16,6 +16,15 @@ object Effect {
                 duration.toInt(),
                 level.toInt()
             )
+        )
+    }
+
+    fun removeEffect(text: String, player: Player) {
+        val effect = text.split(":")[0]
+        if (!player.hasPotionEffect(PotionEffectType.getByName(effect)!!)) return
+
+        player.removePotionEffect(
+            PotionEffectType.getByName(effect)!!
         )
     }
 }

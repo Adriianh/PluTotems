@@ -1,5 +1,8 @@
 package me.adriianhdev.plutotems.module.internal.event
 
+import me.adriianhdev.plutotems.common.util.ExecutorUtils.checkCondition
+import me.adriianhdev.plutotems.common.util.ExecutorUtils.checkEffects
+import me.adriianhdev.plutotems.common.util.ExecutorUtils.run
 import me.adriianhdev.plutotems.common.util.TotemUtil
 import org.bukkit.event.player.PlayerInteractEvent
 import taboolib.common.platform.event.EventPriority
@@ -20,17 +23,19 @@ object ItemInteractEvent {
         if (option.isPlaceable == true) return
         event.isCancelled = true
 
-        if (!totem.type.equals("Item")) return
+        if (!totem.type.equals("item", true)) return
         if (!option.isClickable!!) {
             player.sendLang("Totem-Non-Clickable")
             return
         }
 
-        if (!TotemUtil.checkCondition(player, totem)) {
+        if (!checkCondition(player, totem)) {
             item.amount--
             return
         }
 
-        TotemUtil.run(player, totem, item)
+        checkEffects(player, item)
+        run(player, totem)
+        item.amount--
     }
 }

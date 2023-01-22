@@ -1,5 +1,8 @@
 package me.adriianhdev.plutotems.module.internal.event
 
+import me.adriianhdev.plutotems.common.util.ExecutorUtils.checkCondition
+import me.adriianhdev.plutotems.common.util.ExecutorUtils.checkEffects
+import me.adriianhdev.plutotems.common.util.ExecutorUtils.run
 import me.adriianhdev.plutotems.common.util.TotemUtil
 import org.bukkit.event.player.PlayerDropItemEvent
 import taboolib.common.platform.event.SubscribeEvent
@@ -14,16 +17,18 @@ object ItemDropEvent {
         val totem = TotemUtil.getTotem(item)!!
         val option = totem.data.options
 
-        if (!totem.type.equals("Item")) return
+        if (!totem.type.equals("item", true)) return
         if (option.isThrowable!!) {
             event.isCancelled = true
 
-            if (!TotemUtil.checkCondition(player, totem)) {
+            if (!checkCondition(player, totem)) {
                 item.amount--
                 return
             }
 
-            TotemUtil.run(player, totem, item)
+            checkEffects(player, item)
+            run(player, totem)
+            item.amount--
         }
     }
 }
