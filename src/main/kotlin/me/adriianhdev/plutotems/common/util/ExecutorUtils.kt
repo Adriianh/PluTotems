@@ -64,7 +64,6 @@ object ExecutorUtils {
                     }
                 }
             }
-
             inventory.any { TotemUtil.isTotem(it) } -> {
                 for (i in 0 until inventory.size) {
                     val item = inventory.getItem(i) ?: continue

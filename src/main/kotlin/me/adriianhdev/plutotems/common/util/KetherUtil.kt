@@ -11,7 +11,7 @@ import taboolib.module.kether.script
 import java.util.concurrent.CompletableFuture
 
 object KetherUtil {
-    fun eval(player: Player, script: String) : CompletableFuture<Any?> {
+    fun eval(player: Player, script: String): CompletableFuture<Any?> {
         return try {
             KetherShell.eval(script, sender = adaptPlayer(player))
         } catch (e: LocalizedException) {
