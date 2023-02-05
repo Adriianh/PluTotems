@@ -22,7 +22,8 @@ object ActionManager {
         registerAction(
             ActionBar, ActionBossbar, ActionBroadcast, ActionCommand, ActionConsole,
             ActionEffect, ActionFire, ActionFrozen, ActionMessage, ActionParticle,
-            ActionScript, ActionSound, ActionTellraw, ActionTitle
+            ActionScript, ActionSound, ActionTellraw, ActionTitle, ActionLang,
+            ActionMiniMessage
         )
     }
 

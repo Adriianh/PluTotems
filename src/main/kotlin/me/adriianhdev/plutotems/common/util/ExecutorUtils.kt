@@ -1,6 +1,8 @@
 package me.adriianhdev.plutotems.common.util
 
+import me.adriianhdev.plutotems.common.util.EntityUtil.spawnEntity
 import me.adriianhdev.plutotems.common.util.KetherUtil.eval
+import me.adriianhdev.plutotems.common.util.SchematicUtil.paste
 import me.adriianhdev.plutotems.common.util.TotemUtil.isAirOrNull
 import me.adriianhdev.plutotems.module.conf.totem.Totem
 import me.adriianhdev.plutotems.module.conf.totem.action.ActionManager
@@ -16,24 +18,80 @@ object ExecutorUtils {
         val actions = totem.data.actions ?: return
         val scripts = totem.data.scripts ?: return
         val effects = totem.data.effects ?: return
+        val types = totem.data.types
+        val type = totem.data.types.type
 
         if (actions.isNotEmpty()) {
             actions.forEach { action ->
-                ActionManager.execute(action, player)
+                when {
+                    type.equals("item", true) || type.equals("armor", true) -> {
+                        ActionManager.execute(action, player)
+                    }
+                    else -> {
+                        ActionManager.execute(action, player)
+
+                        if (types.options.executeActions.equals("all", true)) {
+                            PlayerUtil.getNearbyPlayers(player, totem.data.types.radius!!).forEach { entity ->
+                                ActionManager.execute(action, entity)
+                            }
+                        }
+                    }
+                }
             }
         }
 
         if (scripts.isNotEmpty()) {
-            scripts.eval(player)
+            when {
+                type.equals("item", true) || type.equals("armor", true) -> {
+                    scripts.eval(player)
+                }
+                else -> {
+                    scripts.eval(player)
+
+                    if (types.options.executeActions.equals("all", true)) {
+                        PlayerUtil.getNearbyPlayers(player, totem.data.types.radius!!).forEach { entity ->
+                            scripts.eval(entity)
+                        }
+                    }
+                }
+            }
         }
 
         if (effects.isNotEmpty()) {
             effects.forEach { effect ->
-                Effect.addEffect(effect, player)
+                when {
+                    type.equals("item", true) || type.equals("armor", true) -> {
+                        Effect.addEffect(effect, player)
+                    }
+                    else -> {
+                        Effect.addEffect(effect, player)
+
+                        if (types.options.executeActions.equals("all", true)) {
+                            PlayerUtil.getNearbyPlayers(player, totem.data.types.radius!!).forEach { entity ->
+                                Effect.addEffect(effect, entity)
+                            }
+                        }
+                    }
+                }
             }
         }
 
         handlePlayer(player, totem)
+    }
+
+    fun runType(player: Player, totem: Totem) {
+        val type = totem.data.types.type
+
+        when {
+            type.equals("structure", true) -> {
+                paste(player, totem)
+            }
+            type.equals("entity", true) -> {
+                spawnEntity(player, totem)
+            }
+        }
+
+        run(player, totem)
     }
 
     fun handleAction(player: Player, event: EntityDamageEvent) {
@@ -46,18 +104,16 @@ object ExecutorUtils {
             TotemUtil.isTotem(offHand) -> {
                 check(offHand, player, event)
             }
-
             TotemUtil.isTotem(hand) -> {
                 check(hand, player, event)
             }
-
             armor.isNotEmpty() -> {
                 for (item in armor) {
                     if (isAirOrNull(item)) continue
 
                     if (TotemUtil.isTotem(item)) {
                         val totem = TotemUtil.getTotem(item)!!
-                        if (!totem.type.equals("armor", true)) return
+                        if (!totem.data.types.type.equals("armor", true)) return
 
                         check(item, player, event)
                         break
@@ -88,7 +144,7 @@ object ExecutorUtils {
         val totem = TotemUtil.getTotem(item)!!
         val effects = totem.data.heldEffect ?: return
 
-        if (!totem.type.equals("armor", true)) return
+        if (!totem.data.types.type.equals("armor", true)) return
 
         effects.forEach { effect ->
             Effect.removeEffect(effect, player)
@@ -97,10 +153,7 @@ object ExecutorUtils {
 
     fun checkCondition(player: Player, totem: Totem): Boolean {
         val conditions = totem.data.conditions
-        if (conditions.check(player)) {
-            return true
-        }
-        return false
+        return conditions.check(player)
     }
 
     private fun handlePlayer(player: Player, totem: Totem) {

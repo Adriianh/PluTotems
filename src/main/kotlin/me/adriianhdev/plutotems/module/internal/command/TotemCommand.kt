@@ -39,6 +39,10 @@ object TotemCommand {
     @CommandBody(permission = "plutotems.command.reload")
     val reload = reloadCommand
 
+    @TotemHelper
+    @CommandBody(permission = "plutotems.command.schematic")
+    val schematic = SchematicCommand
+
     @CommandBody(permission = "plutotems.command.help")
     val help = subCommand {
         execute<CommandSender> { sender, _, _ ->

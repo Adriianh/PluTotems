@@ -1,10 +1,15 @@
 # Commands (Messages)
-Command-Plugin-Reload: "§8[§6PluTotems§8] §aINFO §f| &7Reload complete, without problems."
-Command-Unknown-Totem: "§8[§6PluTotems§8] §cERROR §f| §7Totem &6{0} &fnot found."
-Command-Unknown-Player: "§8[§6PluTotems§8] §cERROR §f| §7Player not found."
-Command-Totem-Get: "§8[§6PluTotems§8] §aINFO §f| &7Received totem {0}"
-Command-Totem-Give: "§8[§6PluTotems§8] §aINFO §f| &7Giving totem {0} to {1}"
-Command-Totem-Remove: "§8[§6PluTotems§8] §aINFO §f| &7Removing totem {0} from {1}"
+Command-Plugin-Reload: "§8[§6PluTotems§8] §aINFO §f| &7Reload complete, without problems"
+Command-Unknown-Totem: "§8[§6PluTotems§8] §cERROR §f| §7Totem &6{0} &7not found"
+Command-Unknown-Player: "§8[§6PluTotems§8] §cERROR §f| §7Player not found"
+Command-Totem-Get: "§8[§6PluTotems§8] §aINFO §f| &7Received totem &6{0}"
+Command-Totem-Give: "§8[§6PluTotems§8] §aINFO §f| &7Giving totem &6{0} &7to &6{1}"
+Command-Totem-Remove: "§8[§6PluTotems§8] §aINFO §f| &7Removing totem &6{0} &7from &6{1}"
+Command-Schematic-Empty-Clipboard: "§8[§6PluTotems§8] §cERROR §f| §7You must have a schematic in your clipboard"
+Command-Schematic-Invalid-Name: "§8[§6PluTotems§8] §cERROR §f| §7Invalid schematic name"
+Command-Schematic-Already-Exists: "§8[§6PluTotems§8] §cERROR §f| §7Schematic &6{0} &7already exists"
+Command-Schematic-Saved: "§8[§6PluTotems§8] §aINFO §f| &7Schematic &6{0} &7saved"
+Command-Schematic-Deleted: "§8[§6PluTotems§8] §aINFO §f| &7Schematic &6{0} &7deleted"
 
 # Commands (Description)
 Command-Help-Type: "Type"
@@ -17,14 +22,18 @@ Command-List-Description: "List loaded totems"
 Command-Reload-Description: "Reload all configurations"
 
 # Messages
+Totem-Non-Entity: "§8[§6PluTotems§8] §cERROR §f| &7Totem {0} has entity type but it doesn't have an entity."
+Totem-Non-Structure: "§8[§6PluTotems§8] §cERROR §f| &7Totem {0} has structure type but it doesn't have a structure."
 Totem-Resurrect-Success: "§8[§6PluTotems§8] §aINFO §f| &7The totem worked and you have been saved."
 Totem-Resurrect-Failure: "§8[§6PluTotems§8] §cERROR §f| §7The totem did not work and you have died."
 Totem-Hold-Item: "§8[§6PluTotems§8] §cERROR §f| §7You must hold a totem!"
-Totem-Remove-Item: "&8[&a!&8] &6{1} &ftook the totem &6{0} &ffrom you"
+Totem-Remove-Item: "&8[&6PluTotems&8] &6{1} &7took the totem &6{0} &7from you"
 Totem-Non-Consumable: "§8[§6PluTotems§8] §cERROR §f| §7You can't eat this totem."
 Totem-Non-Placeable: "§8[§6PluTotems§8] §cERROR §f| §7You can't place this totem."
 Totem-Non-Clickable: "§8[§6PluTotems§8] §cERROR §f| §7You can't click this totem."
 Totem-Unknown-Sound: "§8[§6PluTotems§8] §cERROR §f| §7This sound doesn't exist"
+Totem-Unknown-Schematic: "§8[§6PluTotems§8] §cERROR §f| §7This schematic doesn't exist"
+Totem-Entity-Protect: "§8[§6PluTotems§8] §cERROR §f| §7You can't damage your own totem entity."
 Totem-Chance-Failed:
   - type: title
     title: "&cFAIL"

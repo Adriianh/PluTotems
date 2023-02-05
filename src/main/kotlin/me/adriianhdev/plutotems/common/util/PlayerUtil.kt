@@ -60,4 +60,14 @@ object PlayerUtil {
         }
         return false
     }
+
+    fun getNearbyPlayers(player: Player, radius: Double): List<Player> {
+        val nearbyPlayers = mutableListOf<Player>()
+
+        player.getNearbyEntities(radius, radius, radius)
+            .filterIsInstance<Player>()
+            .forEach { nearbyPlayers.add(it) }
+
+        return nearbyPlayers
+    }
 }

@@ -34,13 +34,6 @@ object HexUtil {
                 org.bukkit.ChatColor.COLOR_CHAR
     )
 
-    /**
-     * Gets a capture group from a regex Matcher if it exists
-     *
-     * @param matcher The Matcher
-     * @param group The group name
-     * @return the capture group value, or null if not found
-     */
     private fun getCaptureGroup(matcher: Matcher, group: String): String? {
         return try {
             matcher.group(group)
@@ -51,12 +44,6 @@ object HexUtil {
         }
     }
 
-    /**
-     * Parses gradients, hex colors, and legacy color codes
-     *
-     * @param message The message
-     * @return A color-replaced message
-     */
     fun colorify(message: String): String {
         var parsed = message
         parsed = parseRainbow(parsed)
@@ -66,7 +53,7 @@ object HexUtil {
         return parsed
     }
 
-    fun parseRainbow(message: String): String {
+    private fun parseRainbow(message: String): String {
         return mirrorNow("Handler:Color:Rainbow") {
             var parsed = message
             var matcher = RAINBOW_PATTERN.matcher(parsed)
@@ -136,7 +123,7 @@ object HexUtil {
         }
     }
 
-    fun parseGradients(message: String): String {
+    private fun parseGradients(message: String): String {
         return mirrorNow("Handler:Color:Gradients") {
             var parsed = message
             var matcher = GRADIENT_PATTERN.matcher(parsed)
@@ -204,7 +191,7 @@ object HexUtil {
         }
     }
 
-    fun parseHex(message: String): String {
+    private fun parseHex(message: String): String {
         return mirrorNow("Handler:Color:Hex") {
             var parsed = message
             for (pattern: Pattern in HEX_PATTERNS) {
@@ -221,17 +208,10 @@ object HexUtil {
         }
     }
 
-    fun parseLegacy(message: String): String {
+    private fun parseLegacy(message: String): String {
         return ChatColor.translateAlternateColorCodes('&', message)
     }
 
-    /**
-     * Returns the index before the color changes
-     *
-     * @param content     The content to search through
-     * @param searchAfter The index at which to search after
-     * @return the index of the color stop, or the end of the string index if none is found
-     */
     private fun findStop(content: String, searchAfter: Int): Int {
         val matcher = STOP.matcher(content)
         while (matcher.find()) {
@@ -252,12 +232,6 @@ object HexUtil {
         }
     }
 
-    /**
-     * Finds the closest hex or ChatColor value as the hex string
-     *
-     * @param hex The hex color
-     * @return The closest ChatColor value
-     */
     private fun translateHex(hex: String): String {
         return ChatColor.of(hex).toString()
     }
@@ -266,27 +240,20 @@ object HexUtil {
         return ChatColor.of(color).toString()
     }
 
-    /**
-     * Maps hex codes to ChatColors
-     */
-    private enum class ChatColorHexMapping(hex: Int, val chatColor: ChatColor) {
-        BLACK(0x000000, ChatColor.BLACK), DARK_BLUE(0x0000AA, ChatColor.DARK_BLUE), DARK_GREEN(
-            0x00AA00,
-            ChatColor.DARK_GREEN
+    private enum class ChatColorHexMapping(hex: Int) {
+        BLACK(0x000000), DARK_BLUE(0x0000AA), DARK_GREEN(
+            0x00AA00
         ),
-        DARK_AQUA(0x00AAAA, ChatColor.DARK_AQUA), DARK_RED(0xAA0000, ChatColor.DARK_RED), DARK_PURPLE(
-            0xAA00AA,
-            ChatColor.DARK_PURPLE
+        DARK_AQUA(0x00AAAA), DARK_RED(0xAA0000), DARK_PURPLE(
+            0xAA00AA
         ),
-        GOLD(0xFFAA00, ChatColor.GOLD), GRAY(0xAAAAAA, ChatColor.GRAY), DARK_GRAY(0x555555, ChatColor.DARK_GRAY), BLUE(
-            0x5555FF,
-            ChatColor.BLUE
+        GOLD(0xFFAA00), GRAY(0xAAAAAA), DARK_GRAY(0x555555), BLUE(
+            0x5555FF
         ),
-        GREEN(0x55FF55, ChatColor.GREEN), AQUA(0x55FFFF, ChatColor.AQUA), RED(0xFF5555, ChatColor.RED), LIGHT_PURPLE(
-            0xFF55FF,
-            ChatColor.LIGHT_PURPLE
+        GREEN(0x55FF55), AQUA(0x55FFFF), RED(0xFF5555), LIGHT_PURPLE(
+            0xFF55FF
         ),
-        YELLOW(0xFFFF55, ChatColor.YELLOW), WHITE(0xFFFFFF, ChatColor.WHITE);
+        YELLOW(0xFFFF55), WHITE(0xFFFFFF);
 
         val red: Int = (hex shr 16) and 0xFF
         val green: Int = (hex shr 8) and 0xFF
@@ -295,15 +262,9 @@ object HexUtil {
     }
 
     private interface ColorGenerator {
-        /**
-         * @return the next color in the sequence
-         */
         operator fun next(): Color
     }
 
-    /**
-     * Allows generation of a multipart gradient with a defined number of steps
-     */
     open class Gradient(colors: List<Color>, steps: Int) :
         ColorGenerator {
         private val gradients: MutableList<TwoStopGradient>
@@ -320,12 +281,6 @@ object HexUtil {
             private val lowerRange: Float,
             private val upperRange: Float
         ) {
-            /**
-             * Gets the color of this gradient at the given step
-             *
-             * @param step The step
-             * @return The color of this gradient at the given step
-             */
             fun colorAt(step: Int): Color {
                 return Color(
                     calculateHexPiece(step, startColor.red, endColor.red),
@@ -356,9 +311,6 @@ object HexUtil {
         }
     }
 
-    /**
-     * Allows generation of an animated multipart gradient with a defined number of steps
-     */
     class AnimatedGradient(colors: List<Color>, steps: Int, speed: Int) :
         Gradient(colors, steps) {
         init {
@@ -389,9 +341,6 @@ object HexUtil {
         }
     }
 
-    /**
-     * Allows generation of an animated rainbow gradient with a fixed number of steps
-     */
     class AnimatedRainbow(totalColors: Int, saturation: Float, brightness: Float, speed: Int) :
         Rainbow(totalColors, saturation, brightness) {
         init {
@@ -401,7 +350,3 @@ object HexUtil {
 }
 
 fun String.colorify() = HexUtil.colorify(this)
-fun String.parseLegacy() = HexUtil.parseLegacy(this)
-fun String.parseHex() = HexUtil.parseHex(this)
-fun String.parseRainbow() = HexUtil.parseRainbow(this)
-fun String.parseGradients() = HexUtil.parseGradients(this)

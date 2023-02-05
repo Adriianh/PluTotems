@@ -1,5 +1,7 @@
 package me.adriianhdev.plutotems.module.conf.totem
 
+import me.adriianhdev.plutotems.common.util.TotemEntity
+import me.adriianhdev.plutotems.common.util.TotemSchematic
 import me.adriianhdev.plutotems.module.conf.ConfigManager
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -16,14 +18,32 @@ data class Totem(
     val item: ItemStack,
     val name: String? = null,
     val description: String? = null,
-    val type: String? = null,
     val rarity: String? = null,
-    val data: TotemScript
+    val data: TotemScript,
+)
+
+data class Types(
+    val type: String?,
+    val options: TypesOptions,
+    val entity: TotemEntity? = null,
+    val schematic: TotemSchematic? = null,
+    val animation: Boolean? = null,
+    val amplitude: Double = 0.5,
+    val frequency: Double = 1.0,
+    val duration: Int = 15,
+    val radius: Double? = 10.0
+)
+
+data class TypesOptions(
+    val giveEffect: String? = "self",
+    val executeActions: String? = "self",
+    val executeScripts: String? = "self",
+    val runOnKill: Boolean? = null
 )
 
 data class Options(
     val healthAmount: Double = config.getDouble("Totem.health"),
-    val playAnimation: Boolean? = config.getBoolean("Totem.playAnimation"),
+    val playAnimation: Boolean = config.getBoolean("Totem.playAnimation"),
     val autoTotem: Boolean? = null,
     val isClickable: Boolean? = null,
     val isConsumable: Boolean? = null,

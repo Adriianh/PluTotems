@@ -6,6 +6,8 @@ import org.bukkit.potion.PotionEffectType
 
 object Effect {
     fun addEffect(text: String, player: Player) {
+        if (text.isEmpty()) return
+
         val effect = text.split(":")[0]
         val level = text.split(":")[1]
         val duration = text.split(":")[2]

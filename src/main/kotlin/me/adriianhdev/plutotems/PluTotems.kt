@@ -16,4 +16,8 @@ object PluTotems : Plugin() {
     override fun onEnable() {
         PluTotemsLoader.init()
     }
+
+    override fun onDisable() {
+        PluTotemsLoader.unload()
+    }
 }

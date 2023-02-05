@@ -1,17 +1,28 @@
 package me.adriianhdev.plutotems.common.plugin
 
 import me.adriianhdev.plutotems.PluTotems
+import me.adriianhdev.plutotems.common.util.EntityUtil
+import me.adriianhdev.plutotems.common.util.SchematicUtil
 import me.adriianhdev.plutotems.module.conf.ConfigLoader
 import me.adriianhdev.plutotems.module.conf.ConfigManager
 import me.adriianhdev.plutotems.module.internal.task.EffectTask
+import net.kyori.adventure.platform.bukkit.BukkitAudiences
 import org.bukkit.Bukkit
 import taboolib.common.platform.function.info
 import taboolib.module.lang.Language
 
+
 object PluTotemsLoader {
+    private var adventure: BukkitAudiences? = null
+
+    fun adventure(): BukkitAudiences {
+        checkNotNull(adventure) { "Tried to access Adventure when the plugin was disabled!" }
+        return adventure!!
+    }
+
     fun load() {
         Language.default = "en_US"
-        info("Loading PluTotems...")
+        info("Language set to: ${Language.default}")
     }
 
     fun init() {
@@ -19,6 +30,18 @@ object PluTotemsLoader {
         aboutText()
         ConfigLoader.loader()
         registerTasks()
+        this.adventure = BukkitAudiences.create(PluTotems.plugin)
+    }
+
+    fun unload() {
+        info("Unloading PluTotems...")
+        SchematicUtil.undoAll()
+        EntityUtil.removeEntity()
+
+        if (this.adventure != null) {
+            this.adventure!!.close()
+            this.adventure = null
+        }
     }
 
     fun reload() {
