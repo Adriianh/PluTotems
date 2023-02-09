@@ -28,7 +28,7 @@ PluTotems is a plugin that allows you to create totems with custom effects, trig
 - [ ] GUI / Editor
 - [ ] Add more actions
 - [ ] Add more triggers
-- [ ] Add totem types (Item, Armor, [Structure?])
+- [X] Add totem types (Item, Armor, [Structure?])
 
 # Building
 * [Gradle](https://gradle.org/) - Dependency Management
