@@ -19,7 +19,7 @@ object ItemConsumeEvent {
         val item = event.item
 
         if (!PlayerUtil.hasTotem(player)) return
-        val totem = TotemUtil.getTotem(item)!!
+        val totem = TotemUtil.getTotem(item) ?: return
         val type = totem.data.types
         val option = totem.data.options
 
@@ -46,7 +46,7 @@ object ItemConsumeEvent {
         val item = event.item
 
         if (!PlayerUtil.hasTotem(player)) return
-        val totem = TotemUtil.getTotem(item)!!
+        val totem = TotemUtil.getTotem(item) ?: return
         val type = totem.data.types.type
         val option = totem.data.options
 

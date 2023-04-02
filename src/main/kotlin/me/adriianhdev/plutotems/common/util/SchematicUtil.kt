@@ -142,6 +142,8 @@ object SchematicUtil {
         info("Undoing all pasted schematics...")
         info("Schematics: ${schematics.size}")
 
+        if (schematics.isEmpty()) return
+
         try {
             schematics.forEach { (uuid, session) ->
                 val world = uuid.split(":")[1]

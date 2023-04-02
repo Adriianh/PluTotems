@@ -164,7 +164,7 @@ object ExecutorUtils {
         player.health = (player.health + healthAmount)
             .coerceAtMost(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.defaultValue)
 
-        if (playAnimation == true) {
+        if (playAnimation) {
             player.playEffect(EntityEffect.HURT)
             player.playEffect(EntityEffect.TOTEM_RESURRECT)
         }

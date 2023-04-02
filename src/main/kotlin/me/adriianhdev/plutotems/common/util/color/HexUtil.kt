@@ -10,6 +10,10 @@ import java.util.stream.Collectors
 import kotlin.math.floor
 import kotlin.math.roundToInt
 
+/*
+    @author: Esophose
+    converted from: https://github.com/Rosewood-Development/RoseGarden
+ */
 object HexUtil {
     private const val CHARS_UNTIL_LOOP = 30
     private val RAINBOW_PATTERN =
@@ -350,3 +354,4 @@ object HexUtil {
 }
 
 fun String.colorify() = HexUtil.colorify(this)
+fun List<String>.colorify() = this.map { it.colorify() }

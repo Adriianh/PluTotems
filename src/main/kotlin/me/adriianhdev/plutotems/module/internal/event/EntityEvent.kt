@@ -2,6 +2,7 @@ package me.adriianhdev.plutotems.module.internal.event
 
 import me.adriianhdev.plutotems.common.util.ExecutorUtils
 import me.adriianhdev.plutotems.common.util.TotemUtil
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
@@ -53,12 +54,14 @@ object EntityEvent {
     @SubscribeEvent
     fun onEntityTargetPlayer(event: EntityTargetLivingEntityEvent) {
         val player = event.target as? Player ?: return
-        val entity = event.entity as LivingEntity
+        val entity = event.entity
+
+        if (entity.type == EntityType.EXPERIENCE_ORB) return
 
         if (!TotemUtil.isTotem(entity)) return
-        if (!TotemUtil.isOwner(entity, player.uniqueId)) return
+        if (!TotemUtil.isOwner(entity as LivingEntity, player.uniqueId)) return
 
-        entity.navigationMove(player.location, 1.0)
+        entity.navigationMove(player.location)
         event.isCancelled = true
     }
 }

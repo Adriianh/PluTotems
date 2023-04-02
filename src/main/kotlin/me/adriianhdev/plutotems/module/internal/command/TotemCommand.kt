@@ -67,6 +67,9 @@ object TotemCommand {
         }
     }
 
+    /*
+        @author Arasple
+     */
     private fun generateMainHelper(sender: CommandSender) {
         val proxySender = adaptCommandSender(sender)
         proxySender.sendMessage("")

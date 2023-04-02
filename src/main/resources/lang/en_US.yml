@@ -20,6 +20,7 @@ Command-Remove-Description: "Remove a totem from a player"
 Command-Info-Description: "Get information about a totem"
 Command-List-Description: "List loaded totems"
 Command-Reload-Description: "Reload all configurations"
+Command-Schematic-Description: "Manage schematics"
 
 # Messages
 Totem-Non-Entity: "§8[§6PluTotems§8] §cERROR §f| &7Totem {0} has entity type but it doesn't have an entity."
