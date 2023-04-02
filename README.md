@@ -25,7 +25,6 @@ PluTotems is a plugin that allows you to create totems with custom effects, trig
 - `/totem remove <name> [player]` - Remove a totem from a player.
 
 ## TODO
-- [ ] GUI / Editor
 - [ ] Add more actions
 - [ ] Add more triggers
 - [X] Add totem types (Item, Armor, [Structure?])
