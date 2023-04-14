@@ -16,7 +16,7 @@ taboolib {
     install("module-navigation", "module-ai")
     install("platform-bukkit")
     classifier = null
-    version = "6.0.10-96"
+    version = "6.0.10-114"
 
     description {
         contributors {
@@ -36,7 +36,7 @@ repositories {
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://repo.tabooproject.org/repository/releases/")
     maven("https://eldonexus.de/repository/maven-public")
-    maven("https://ptms.ink:8081/repository/releases")
+    maven("https://mvn.lumine.io/repository/maven-public")
 }
 
 dependencies {
@@ -47,6 +47,7 @@ dependencies {
     implementation("net.kyori:adventure-text-minimessage:4.13.0")
 
     compileOnly("net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT")
+    compileOnly("io.lumine:Mythic-Dist:5.2.1")
     compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core:2.5.2")
     compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:2.5.2") {
         isTransitive = false

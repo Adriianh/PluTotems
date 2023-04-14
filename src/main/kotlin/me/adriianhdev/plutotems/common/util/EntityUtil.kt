@@ -1,6 +1,8 @@
 package me.adriianhdev.plutotems.common.util
 
 import de.eldoria.eldoutilities.builder.EntityBuilder
+import io.lumine.mythic.bukkit.BukkitAdapter
+import io.lumine.mythic.bukkit.MythicBukkit
 import me.adriianhdev.plutotems.PluTotems
 import me.adriianhdev.plutotems.common.util.color.colorify
 import me.adriianhdev.plutotems.module.conf.totem.Totem
@@ -14,7 +16,6 @@ import taboolib.common.platform.function.info
 import taboolib.platform.util.sendLang
 import java.util.*
 import kotlin.math.sin
-
 
 data class TotemEntity(
     val type: String?,
@@ -59,12 +60,11 @@ data class EntityEquipment(
     val offHand: ItemStack? = null
 )
 
-
 class EntityAnimation(
     private val armorStand: ArmorStand,
     private val amplitude: Double,
     private val frequency: Double
-) :
+):
     BukkitRunnable() {
         private var currentTick: Long = 0
         private var lastYOffset = 0.0
@@ -89,10 +89,16 @@ object EntityUtil {
         val entityType = totemEntity.type ?: return player.sendLang("Totem-Non-Entity", totem.id)
         val uuid = "${UUID.randomUUID()}:$entityType"
 
-        val entity: Entity? = if (entityType.equals("armor_stand", true)) {
-            buildArmorStand(totemEntity, player.location)
-        } else {
-            buildEntity(totemEntity, player.location)
+        val entity: Entity? = when {
+            entityType.equals("armor_stand", true) -> {
+                buildArmorStand(totemEntity, player.location)
+            }
+            entityType.startsWith("mm:", true) ->{
+                buildMythicMob(entityType, player.location)
+            }
+            else -> {
+                buildEntity(totemEntity, player.location)
+            }
         }
 
         entities[uuid] = entity!!
@@ -109,7 +115,7 @@ object EntityUtil {
             entityWalk.runTaskTimer(PluTotems.plugin, 0, 1)
 
             if (totem.data.types.animation == true) {
-                EntityAnimation(entity as ArmorStand, 1.0, 9.0)
+                me.adriianhdev.plutotems.common.util.EntityAnimation(entity as ArmorStand, 1.0, 9.0)
                     .runTaskTimer(PluTotems.plugin, 0, 1)
             }
         }
@@ -205,6 +211,17 @@ object EntityUtil {
                 eq.setItemInOffHand(entity.equipment.offHand)
             }
             .build()
+    }
+
+    private fun buildMythicMob(entity: String, location: Location?): Entity {
+        val id = entity.split("mm:")[1]
+        val mob = MythicBukkit.inst().mobManager
+            .getMythicMob(id)
+            .orElse(null) ?: error ("MythicMob $id not found")
+
+        val spawn = mob.spawn(BukkitAdapter.adapt(location), 1.0)
+
+        return spawn.entity.bukkitEntity
     }
 
     private fun vectorToEulerAngle(vector: Vector): EulerAngle {
