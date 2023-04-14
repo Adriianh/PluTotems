@@ -115,7 +115,7 @@ object EntityUtil {
             entityWalk.runTaskTimer(PluTotems.plugin, 0, 1)
 
             if (totem.data.types.animation == true) {
-                me.adriianhdev.plutotems.common.util.EntityAnimation(entity as ArmorStand, 1.0, 9.0)
+                EntityAnimation(entity as ArmorStand, 1.0, 9.0)
                     .runTaskTimer(PluTotems.plugin, 0, 1)
             }
         }
