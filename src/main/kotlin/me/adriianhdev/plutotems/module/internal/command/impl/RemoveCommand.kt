@@ -17,17 +17,17 @@ val removeCommand = subCommand {
             suggestion<Player> { _, _ ->
                 Bukkit.getOnlinePlayers().map { it.name }
             }
-            execute<CommandSender> { sender, context, argument ->
-                val player = Bukkit.getPlayer(argument)!!
-                val totem = TotemManager.getTotem(context.argument(-1))!!
+            execute<CommandSender> { sender, context, _ ->
+                val player = Bukkit.getPlayer(context["player"])!!
+                val totem = TotemManager.getTotem(context["id"])!!
 
                 sender.sendLang("Command-Totem-Remove", totem.id, player.name)
                 player.sendLang("Totem-Remove-Item", sender.name, totem.id)
                 PlayerUtil.removeTotem(player, totem)
             }
         }
-        execute<Player> { sender, _, argument ->
-            val totem = TotemManager.getTotem(argument)!!
+        execute<Player> { sender, context, _ ->
+            val totem = TotemManager.getTotem(context["id"])!!
 
             sender.sendLang("Command-Totem-Remove", totem.id, sender.name)
             PlayerUtil.removeTotem(sender, totem)

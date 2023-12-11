@@ -1,5 +1,7 @@
 package me.adriianhdev.plutotems.common.util.color
 
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.minimessage.MiniMessage
 import net.md_5.bungee.api.ChatColor
 import taboolib.common5.mirrorNow
 import java.awt.Color
@@ -54,6 +56,7 @@ object HexUtil {
         parsed = parseGradients(parsed)
         parsed = parseHex(parsed)
         parsed = parseLegacy(parsed)
+        parsed = parseMiniMessage(parsed)
         return parsed
     }
 
@@ -216,6 +219,18 @@ object HexUtil {
         return ChatColor.translateAlternateColorCodes('&', message)
     }
 
+    private fun parseMiniMessage(message: String): String {
+        val regex = "<mm>(.*?)</mm>".toRegex()
+        val matches = regex.findAll(message)
+
+        if (matches.count() == 0) return message
+
+        val miniMessage = MiniMessage.miniMessage()
+        val parsed: Component = miniMessage.deserialize(message)
+
+        return parsed.toString()
+    }
+
     private fun findStop(content: String, searchAfter: Int): Int {
         val matcher = STOP.matcher(content)
         while (matcher.find()) {
@@ -242,27 +257,6 @@ object HexUtil {
 
     private fun translateHex(color: Color): String {
         return ChatColor.of(color).toString()
-    }
-
-    private enum class ChatColorHexMapping(hex: Int) {
-        BLACK(0x000000), DARK_BLUE(0x0000AA), DARK_GREEN(
-            0x00AA00
-        ),
-        DARK_AQUA(0x00AAAA), DARK_RED(0xAA0000), DARK_PURPLE(
-            0xAA00AA
-        ),
-        GOLD(0xFFAA00), GRAY(0xAAAAAA), DARK_GRAY(0x555555), BLUE(
-            0x5555FF
-        ),
-        GREEN(0x55FF55), AQUA(0x55FFFF), RED(0xFF5555), LIGHT_PURPLE(
-            0xFF55FF
-        ),
-        YELLOW(0xFFFF55), WHITE(0xFFFFFF);
-
-        val red: Int = (hex shr 16) and 0xFF
-        val green: Int = (hex shr 8) and 0xFF
-        val blue: Int = hex and 0xFF
-
     }
 
     private interface ColorGenerator {
@@ -327,21 +321,14 @@ object HexUtil {
      */
     open class Rainbow(totalColors: Int, saturation: Float, brightness: Float) :
         ColorGenerator {
-        private val hueStep: Float
-        private val saturation: Float
-        private val brightness: Float
-        protected var hue: Float
+        private val hueStep: Float = 1.0f / if (totalColors < 1) 1 else totalColors
+        private val saturation: Float = 0f.coerceAtLeast(1f.coerceAtMost(saturation))
+        private val brightness: Float = 0f.coerceAtLeast(1f.coerceAtMost(brightness))
+        protected var hue: Float = 0f
         override fun next(): Color {
             val color = Color.getHSBColor(hue, saturation, brightness)
             hue += hueStep
             return color
-        }
-
-        init {
-            hueStep = 1.0f / if (totalColors < 1) 1 else totalColors
-            this.saturation = 0f.coerceAtLeast(1f.coerceAtMost(saturation))
-            this.brightness = 0f.coerceAtLeast(1f.coerceAtMost(brightness))
-            hue = 0f
         }
     }
 

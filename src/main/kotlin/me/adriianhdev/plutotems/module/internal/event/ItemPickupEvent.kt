@@ -3,14 +3,11 @@ package me.adriianhdev.plutotems.module.internal.event
 import me.adriianhdev.plutotems.common.util.ExecutorUtils.checkCondition
 import me.adriianhdev.plutotems.common.util.ExecutorUtils.checkEffects
 import me.adriianhdev.plutotems.common.util.ExecutorUtils.run
-import me.adriianhdev.plutotems.common.util.ExecutorUtils.runType
 import me.adriianhdev.plutotems.common.util.TotemUtil
-import me.adriianhdev.plutotems.module.conf.totem.Totem
+import me.adriianhdev.plutotems.common.util.TotemUtil.checkType
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityPickupItemEvent
-import org.bukkit.inventory.ItemStack
 import taboolib.common.platform.event.SubscribeEvent
-import java.util.*
 
 object ItemPickupEvent {
     @SubscribeEvent
@@ -69,21 +66,6 @@ object ItemPickupEvent {
         } else {
             event.item.remove()
             checkType(type, player, totem, item)
-        }
-    }
-
-    private fun checkType(type: String, player: Player, totem: Totem, item: ItemStack) {
-        when (type.lowercase(Locale.getDefault())) {
-            "structure" -> {
-                checkEffects(player, item)
-                runType(player, totem)
-                item.amount--
-            }
-            "entity" -> {
-                checkEffects(player, item)
-                runType(player, totem)
-                item.amount--
-            }
         }
     }
 }

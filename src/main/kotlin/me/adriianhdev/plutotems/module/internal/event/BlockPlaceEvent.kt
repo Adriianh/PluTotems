@@ -3,13 +3,12 @@ package me.adriianhdev.plutotems.module.internal.event
 import me.adriianhdev.plutotems.common.util.ExecutorUtils.checkCondition
 import me.adriianhdev.plutotems.common.util.ExecutorUtils.checkEffects
 import me.adriianhdev.plutotems.common.util.ExecutorUtils.run
-import me.adriianhdev.plutotems.common.util.ExecutorUtils.runType
 import me.adriianhdev.plutotems.common.util.PlayerUtil
 import me.adriianhdev.plutotems.common.util.TotemUtil
+import me.adriianhdev.plutotems.common.util.TotemUtil.checkType
 import org.bukkit.event.block.BlockPlaceEvent
 import taboolib.common.platform.event.SubscribeEvent
 import taboolib.platform.util.sendLang
-import java.util.*
 
 object BlockPlaceEvent {
     @SubscribeEvent
@@ -65,18 +64,7 @@ object BlockPlaceEvent {
         }
 
         if (type != null) {
-            when (type.lowercase(Locale.getDefault())) {
-                "structure" -> {
-                    checkEffects(player, item)
-                    runType(player, totem)
-                    item.amount--
-                }
-                "entity" -> {
-                    checkEffects(player, item)
-                    runType(player, totem)
-                    item.amount--
-                }
-            }
+            checkType(type, player, totem, item)
         }
     }
 }

@@ -2,21 +2,24 @@ plugins {
     `java-library`
     `maven-publish`
     id("io.izzel.taboolib") version "1.56"
-    id("org.jetbrains.kotlin.jvm") version "1.8.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.21"
 }
 
 taboolib {
-    install("common")
-    install("common-5")
-    install("module-chat")
-    install("module-configuration")
-    install("module-kether")
-    install("module-lang")
-    install("module-nms", "module-nms-util")
-    install("module-navigation", "module-ai")
-    install("platform-bukkit")
+    install(
+        "common",
+        "common-5",
+        "module-chat",
+        "module-configuration",
+        "module-kether",
+        "module-lang",
+        "module-nms", "module-nms-util",
+        "module-navigation", "module-ai",
+        "platform-bukkit"
+    )
+
     classifier = null
-    version = "6.0.10-114"
+    version = "6.0.12-40"
 
     description {
         contributors {
@@ -31,33 +34,35 @@ taboolib {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven("https://repo.codemc.io/repository/maven-public/")
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://repo.tabooproject.org/repository/releases/")
     maven("https://eldonexus.de/repository/maven-public")
     maven("https://mvn.lumine.io/repository/maven-public")
+    maven("https://repo.xenondevs.xyz/releases")
 }
 
 dependencies {
     implementation("xyz.xenondevs:particle:1.8.4")
-    implementation("de.eldoria:eldo-util:1.14.4")
-    implementation("net.kyori:adventure-api:4.13.0")
-    implementation("net.kyori:adventure-platform-bukkit:4.3.0")
-    implementation("net.kyori:adventure-text-minimessage:4.13.0")
+    implementation("de.eldoria.util:eldo-util:2.0.3")
+    implementation("net.kyori:adventure-api:4.14.0")
+    implementation("net.kyori:adventure-platform-bukkit:4.3.1")
+    implementation("net.kyori:adventure-text-minimessage:4.14.0")
+    implementation("com.github.cryptomorin:XSeries:9.7.0") { isTransitive = false }
 
     compileOnly("net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT")
-    compileOnly("io.lumine:Mythic-Dist:5.2.1")
+    compileOnly("io.lumine:Mythic-Dist:5.3.5")
     compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core:2.5.2")
-    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:2.5.2") {
-        isTransitive = false
-    }
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:2.5.2") { isTransitive = false }
 
-    taboo("ink.ptms:um:1.0.0-beta-24")
-    compileOnly("ink.ptms.core:v11904:11904-minimize:mapped")
-    compileOnly("ink.ptms.core:v11904:11904-minimize:universal")
+    taboo("ink.ptms:um:1.0.0-beta-33")
+    compileOnly("ink.ptms.core:v12002:12002:mapped")
+    compileOnly("ink.ptms.core:v12002:12002:universal")
     compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
+    implementation(kotlin("reflect"))
 }
 
 java {

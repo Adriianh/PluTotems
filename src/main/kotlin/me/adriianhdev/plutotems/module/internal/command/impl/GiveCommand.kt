@@ -18,9 +18,9 @@ val giveCommand = subCommand {
             suggestion<Player> { _, _ ->
                 TotemManager.totems.map { it.id }
             }
-            execute<CommandSender> { sender, context, argument ->
-                val totem = TotemManager.getTotem(argument)
-                val player = Bukkit.getPlayer(context.argument(-1))
+            execute<CommandSender> { sender, context, _ ->
+                val totem = TotemManager.getTotem(context["id"])
+                val player = Bukkit.getPlayer(context["player"])
 
                 giveInfo(sender, player, totem)
                 PlayerUtil.giveTotem(player!!, totem!!)
@@ -29,10 +29,10 @@ val giveCommand = subCommand {
                 suggestion<Player> { _, _ ->
                     (1..64).map { it.toString() }
                 }
-                execute<CommandSender> { sender, context, argument ->
-                    val totem = TotemManager.getTotem(context.argument(-1))
-                    val player = Bukkit.getPlayer(context.argument(-2))
-                    val amount = argument.toInt()
+                execute<CommandSender> { sender, context, _ ->
+                    val totem = TotemManager.getTotem(context["id"])
+                    val player = Bukkit.getPlayer(context["player"])
+                    val amount = context["amount"].toIntOrNull() ?: 1
 
                     giveInfo(sender, player, totem)
                     PlayerUtil.giveTotem(player!!, totem!!, amount)

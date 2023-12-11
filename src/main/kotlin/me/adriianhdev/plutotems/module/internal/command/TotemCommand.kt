@@ -8,7 +8,7 @@ import taboolib.common.platform.command.CommandHeader
 import taboolib.common.platform.command.mainCommand
 import taboolib.common.platform.command.subCommand
 import taboolib.common.platform.function.adaptCommandSender
-import taboolib.module.chat.TellrawJson
+import taboolib.module.chat.Components
 import taboolib.platform.util.asLangText
 import java.util.*
 
@@ -30,10 +30,6 @@ object TotemCommand {
     @TotemHelper
     @CommandBody(permission = "plutotems.command.remove")
     val remove = removeCommand
-
-    @TotemHelper
-    @CommandBody(permission = "plutotems.command.list")
-    val list = listCommand
 
     @TotemHelper
     @CommandBody(permission = "plutotems.command.reload")
@@ -58,10 +54,10 @@ object TotemCommand {
                 return@execute
             }
             sender.sendMessage("§8[§6PluTotems§8] §cERROR §3| Args §6$argument §3not found.")
-            TellrawJson()
+            Components.empty()
                 .append("§8[§6PluTotems§8] §aINFO §f| Type ").append("§6/plutotems help")
                 .hoverText("§f/plutotems help §8- §7more help...")
-                .suggestCommand("/plutotems help")
+                .clickSuggestCommand("/plutotems help")
                 .append("§f for help.")
                 .sendTo(adaptCommandSender(sender))
         }
@@ -73,7 +69,7 @@ object TotemCommand {
     private fun generateMainHelper(sender: CommandSender) {
         val proxySender = adaptCommandSender(sender)
         proxySender.sendMessage("")
-        TellrawJson()
+        Components.empty()
             .append("  ").append("§6PluTotems")
             .append(" ").append("§f${PluTotems.plugin.description.version}")
             .hoverText(
@@ -82,10 +78,10 @@ object TotemCommand {
             """.trimIndent()
             ).sendTo(proxySender)
         proxySender.sendMessage("")
-        TellrawJson()
+        Components.empty()
             .append("  §7${sender.asLangText("Command-Help-Type")}: ").append("§f/plutotems §8[...]")
             .hoverText("§f/plutotems §8[...]")
-            .suggestCommand("/plutotems ")
+            .clickSuggestCommand("/plutotems ")
             .sendTo(proxySender)
         proxySender.sendMessage("  §7${sender.asLangText("Command-Help-Args")}:")
 
@@ -96,10 +92,10 @@ object TotemCommand {
                 name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
             val desc = sender.asLangText("Command-$regularName-Description")
 
-            TellrawJson()
+            Components.empty()
                 .append("    §8- ").append("§f$name")
                 .hoverText("§f/plutotems $name §8- §7$desc")
-                .suggestCommand("/plutotems $name ")
+                .clickSuggestCommand("/plutotems $name ")
                 .sendTo(proxySender)
             proxySender.sendMessage("      §7$desc")
         }

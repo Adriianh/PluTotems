@@ -23,7 +23,7 @@ object ActionManager {
             ActionBar, ActionBossbar, ActionBroadcast, ActionCommand, ActionConsole,
             ActionEffect, ActionFire, ActionFrozen, ActionMessage, ActionParticle,
             ActionScript, ActionSound, ActionTellraw, ActionTitle, ActionLang,
-            ActionMiniMessage
+            ActionMiniMessage, ActionSkill
         )
     }
 

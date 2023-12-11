@@ -1,9 +1,10 @@
 package me.adriianhdev.plutotems.common.util
 
-import de.eldoria.eldoutilities.builder.EntityBuilder
+import de.eldoria.eldoutilities.entities.EntityBuilder
 import io.lumine.mythic.bukkit.BukkitAdapter
 import io.lumine.mythic.bukkit.MythicBukkit
 import me.adriianhdev.plutotems.PluTotems
+import me.adriianhdev.plutotems.common.util.StringUtil.toVector
 import me.adriianhdev.plutotems.common.util.color.colorify
 import me.adriianhdev.plutotems.module.conf.totem.Totem
 import org.bukkit.Location
@@ -13,6 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.EulerAngle
 import org.bukkit.util.Vector
 import taboolib.common.platform.function.info
+import taboolib.module.configuration.Configuration
 import taboolib.platform.util.sendLang
 import java.util.*
 import kotlin.math.sin
@@ -82,6 +84,10 @@ class EntityAnimation(
 object EntityUtil {
     private var entities: HashMap<String, Entity> = HashMap()
 
+    fun getPoseVector(config: Configuration, path: String): Vector? {
+        return config.getString(path)?.toVector()
+    }
+
     fun spawnEntity(player: Player, totem: Totem) {
         val owner = player.uniqueId
         val duration = totem.data.types.duration
@@ -114,7 +120,7 @@ object EntityUtil {
             }
             entityWalk.runTaskTimer(PluTotems.plugin, 0, 1)
 
-            if (totem.data.types.animation == true) {
+            if (totem.data.types.entityOptions?.animation == true) {
                 EntityAnimation(entity as ArmorStand, 1.0, 9.0)
                     .runTaskTimer(PluTotems.plugin, 0, 1)
             }
@@ -125,6 +131,7 @@ object EntityUtil {
                 entity.remove()
             }
         }
+
         removeRunnable.runTaskLater(PluTotems.plugin, duration * 20L)
     }
 

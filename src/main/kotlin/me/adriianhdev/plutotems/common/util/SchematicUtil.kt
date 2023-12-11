@@ -42,19 +42,21 @@ object SchematicUtil {
         }
 
         val duration = totem.data.types.duration
-        val schematic = totem.data.types.schematic?.name ?: return player.sendLang("Totem-Unknown-Schematic")
+        val schematic = totem.data.types.schematic!!
+
         val location = player.location
         val world = FaweAPI.getWorld(location.world!!.name)
 
-        val rotationX = totem.data.types.schematic.rotationX ?: 0.0
-        val rotationY = totem.data.types.schematic.rotationY ?: 0.0
-        val rotationZ = totem.data.types.schematic.rotationZ ?: 0.0
-        val copyEntities = totem.data.types.schematic.entities
-        val ignoreAirBlocks = totem.data.types.schematic.air
+        val schematicName = schematic.name ?: return player.sendLang("Totem-Unknown-Schematic")
+        val rotationX = schematic.rotationX ?: 0.0
+        val rotationY = schematic.rotationY ?: 0.0
+        val rotationZ = schematic.rotationZ ?: 0.0
+        val copyEntities = schematic.entities
+        val ignoreAirBlocks = schematic.air
 
-        val file = File(getDataFolder(), "schematics/$schematic.schem")
+        val file = File(getDataFolder(), "schematics/$schematicName.schem")
         if (!file.exists()) {
-            player.sendLang("Command-Schematic-Not-Found", schematic)
+            player.sendLang("Command-Schematic-Not-Found", schematicName)
             return
         }
 
@@ -69,7 +71,7 @@ object SchematicUtil {
             val clipboard = reader.read()
             val uuid = "${UUID.randomUUID()}:${world.name}"
 
-            WorldEdit.getInstance().editSessionFactory.getEditSession(world, -1).use { session ->
+            WorldEdit.getInstance().newEditSession(world).use { session ->
                 val holder = ClipboardHolder(clipboard)
                 holder.transform = holder.transform.combine(transform)
 
@@ -85,13 +87,14 @@ object SchematicUtil {
 
                 val undoRunnable: BukkitRunnable = object : BukkitRunnable() {
                     override fun run() {
-                        val undo: EditSession? = WorldEdit.getInstance()
-                            .editSessionFactory
-                            .getEditSession(world, -1)
+                        val undoSession = WorldEdit.getInstance().newEditSessionBuilder()
+                            .world(world)
+                            .build()
 
-                        session.undo(undo)
+                        session.undo(undoSession)
                         session.flushQueue()
-                        undo!!.flushQueue()
+                        undoSession.flushQueue()
+                        undoSession.close()
 
                         schematics.remove(uuid)
                     }
@@ -102,6 +105,10 @@ object SchematicUtil {
     }
 
     fun save(player: Player, name: String) {
+        if (!PluTotems.plugin.server.pluginManager.isPluginEnabled("FastAsyncWorldEdit")) {
+            error("FastAsyncWorldEdit is not enabled, this function won't work.")
+        }
+
         val actor: com.sk89q.worldedit.entity.Player = BukkitAdapter.adapt(player)
         val manager = WorldEdit.getInstance().sessionManager
         val localSession = manager[actor]
@@ -131,7 +138,7 @@ object SchematicUtil {
 
         try {
             BuiltInClipboardFormat.FAST.getWriter(FileOutputStream(file))
-                .use { writer -> writer.write(clipboard.clipboard) }
+                .use { writer -> writer.write(clipboard.clipboards[0]) }
             player.sendLang("Command-Schematic-Saved", name)
         } catch (e: IOException) {
             e.printStackTrace()
@@ -139,6 +146,10 @@ object SchematicUtil {
     }
 
     fun undoAll() {
+        if (!PluTotems.plugin.server.pluginManager.isPluginEnabled("FastAsyncWorldEdit")) {
+            error("FastAsyncWorldEdit is not enabled, this function won't work.")
+        }
+
         info("Undoing all pasted schematics...")
         info("Schematics: ${schematics.size}")
 
@@ -147,13 +158,14 @@ object SchematicUtil {
         try {
             schematics.forEach { (uuid, session) ->
                 val world = uuid.split(":")[1]
-                val undo: EditSession? = WorldEdit.getInstance()
-                    .editSessionFactory
-                    .getEditSession(FaweAPI.getWorld(world), -1)
+                val undo = WorldEdit.getInstance().newEditSessionBuilder()
+                    .world(FaweAPI.getWorld(world))
+                    .build()
 
                 session.undo(undo)
                 session.flushQueue()
                 undo!!.flushQueue()
+                undo.close()
             }
         } catch (e: Exception) {
             e.printStackTrace()

@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack
 import taboolib.common.platform.function.adaptPlayer
 import taboolib.common5.Coerce
 import taboolib.module.kether.KetherShell
+import taboolib.module.kether.ScriptOptions
 import taboolib.module.kether.printKetherErrorMessage
 import taboolib.platform.util.sendLang
 
@@ -27,11 +28,15 @@ data class Types(
     val options: TypesOptions,
     val entity: TotemEntity? = null,
     val schematic: TotemSchematic? = null,
+    val entityOptions: EntityOptions? = null,
+    val duration: Int = 15,
+    val radius: Double? = 10.0
+)
+
+data class EntityOptions(
     val animation: Boolean? = null,
     val amplitude: Double = 0.5,
     val frequency: Double = 1.0,
-    val duration: Int = 15,
-    val radius: Double? = 10.0
 )
 
 data class TypesOptions(
@@ -44,6 +49,7 @@ data class TypesOptions(
 data class Options(
     val healthAmount: Double = config.getDouble("Totem.health"),
     val playAnimation: Boolean = config.getBoolean("Totem.playAnimation"),
+    val cooldown: Int? = null,
     val autoTotem: Boolean? = null,
     val isClickable: Boolean? = null,
     val isConsumable: Boolean? = null,
@@ -53,9 +59,7 @@ data class Options(
 )
 
 data class Condition(
-    val chance: Int = 100,
-    val permission: String? = null,
-    val script: List<String>? = null
+    val chance: Int = 100, val permission: String? = null, val script: List<String>? = null
 ) {
     fun check(player: Player): Boolean {
         if (chance != 100 && (0..100).random() > chance) {
@@ -67,7 +71,11 @@ data class Condition(
             return false
         }
         if (script!!.isNotEmpty()) {
-            val result = KetherShell.eval(script, sender = adaptPlayer(player)).thenApply {
+            val result = KetherShell.eval(
+                script, ScriptOptions(
+                    sender = adaptPlayer(player)
+                )
+            ).thenApply {
                 Coerce.toBoolean(it)
             }.exceptionally {
                 it.printKetherErrorMessage()

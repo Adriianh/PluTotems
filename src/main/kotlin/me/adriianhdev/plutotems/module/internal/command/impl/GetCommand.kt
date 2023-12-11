@@ -11,11 +11,11 @@ val getCommand = subCommand {
         suggestion<Player> { _, _ ->
             TotemManager.totems.map { it.id }
         }
-        execute<Player> { sender, _, argument ->
-            val totem = TotemManager.getTotem(argument)
+        execute<Player> { sender, context, _ ->
+            val totem = TotemManager.getTotem(context["id"])
 
             if (totem == null) {
-                sender.sendLang("Command-Unknown-Totem", argument)
+                sender.sendLang("Command-Unknown-Totem", context["id"])
                 return@execute
             }
 
@@ -26,12 +26,12 @@ val getCommand = subCommand {
             suggestion<Player> { _, _ ->
                 (1..64).map { it.toString() }
             }
-            execute<Player> { sender, context, argument ->
-                val totem = TotemManager.getTotem(context.argument(-1))
-                val amount = argument.toInt()
+            execute<Player> { sender, context, _ ->
+                val totem = TotemManager.getTotem(context["id"])
+                val amount = context["amount"].toIntOrNull() ?: 1
 
                 if (totem == null) {
-                    sender.sendLang("Command-Unknown-Totem", context.argument(-1))
+                    sender.sendLang("Command-Unknown-Totem", context["id"])
                     return@execute
                 }
 

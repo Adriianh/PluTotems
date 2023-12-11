@@ -3,6 +3,8 @@ package me.adriianhdev.plutotems.common.util
 import me.adriianhdev.plutotems.common.util.EntityUtil.spawnEntity
 import me.adriianhdev.plutotems.common.util.KetherUtil.eval
 import me.adriianhdev.plutotems.common.util.SchematicUtil.paste
+import me.adriianhdev.plutotems.common.util.TotemUtil.getCooldown
+import me.adriianhdev.plutotems.common.util.TotemUtil.hasCooldown
 import me.adriianhdev.plutotems.common.util.TotemUtil.isAirOrNull
 import me.adriianhdev.plutotems.module.conf.totem.Totem
 import me.adriianhdev.plutotems.module.conf.totem.action.ActionManager
@@ -12,8 +14,11 @@ import org.bukkit.attribute.Attribute
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.inventory.ItemStack
+import taboolib.platform.util.sendLang
 
 object ExecutorUtils {
+    private val cooldownManager = CooldownUtil()
+
     fun run(player: Player, totem: Totem) {
         val actions = totem.data.actions ?: return
         val scripts = totem.data.scripts ?: return
@@ -21,12 +26,18 @@ object ExecutorUtils {
         val types = totem.data.types
         val type = totem.data.types.type
 
+        if (cooldownManager.isCooldown(player)) {
+            player.sendLang("Totem-Cooldown", cooldownManager.getRestTime(player))
+            return
+        }
+
         if (actions.isNotEmpty()) {
             actions.forEach { action ->
                 when {
                     type.equals("item", true) || type.equals("armor", true) -> {
                         ActionManager.execute(action, player)
                     }
+
                     else -> {
                         ActionManager.execute(action, player)
 
@@ -45,6 +56,7 @@ object ExecutorUtils {
                 type.equals("item", true) || type.equals("armor", true) -> {
                     scripts.eval(player)
                 }
+
                 else -> {
                     scripts.eval(player)
 
@@ -63,6 +75,7 @@ object ExecutorUtils {
                     type.equals("item", true) || type.equals("armor", true) -> {
                         Effect.addEffect(effect, player)
                     }
+
                     else -> {
                         Effect.addEffect(effect, player)
 
@@ -76,6 +89,10 @@ object ExecutorUtils {
             }
         }
 
+        if (hasCooldown(totem)) {
+            cooldownManager.setCooldown(player, getCooldown(totem))
+        }
+
         handlePlayer(player, totem)
     }
 
@@ -86,6 +103,7 @@ object ExecutorUtils {
             type.equals("structure", true) -> {
                 paste(player, totem)
             }
+
             type.equals("entity", true) -> {
                 spawnEntity(player, totem)
             }
@@ -104,9 +122,11 @@ object ExecutorUtils {
             TotemUtil.isTotem(offHand) -> {
                 check(offHand, player, event)
             }
+
             TotemUtil.isTotem(hand) -> {
                 check(hand, player, event)
             }
+
             armor.isNotEmpty() -> {
                 for (item in armor) {
                     if (isAirOrNull(item)) continue
@@ -120,6 +140,7 @@ object ExecutorUtils {
                     }
                 }
             }
+
             inventory.any { TotemUtil.isTotem(it) } -> {
                 for (i in 0 until inventory.size) {
                     val item = inventory.getItem(i) ?: continue
@@ -165,7 +186,7 @@ object ExecutorUtils {
             .coerceAtMost(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.defaultValue)
 
         if (playAnimation) {
-            player.playEffect(EntityEffect.HURT)
+            player.playEffect(EntityEffect.HURT_EXPLOSION)
             player.playEffect(EntityEffect.TOTEM_RESURRECT)
         }
     }
@@ -180,6 +201,7 @@ object ExecutorUtils {
 
             return
         }
+
         event.isCancelled = true
 
         checkEffects(player, item)

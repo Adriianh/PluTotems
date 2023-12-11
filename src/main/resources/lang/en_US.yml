@@ -68,3 +68,14 @@ Totem-Script-Failed:
     sound: ENTITY_VILLAGER_NO
     volume: 1
     pitch: 1
+Totem-Cooldown:
+  - type: title
+    title: "&cERROR"
+    subtitle: "You must wait {0} seconds to use this totem again."
+    fadein: 20
+    stay: 15
+    fadeout: 20
+  - type: sound
+    sound: ENTITY_VILLAGER_NO
+    volume: 1
+    pitch: 1
