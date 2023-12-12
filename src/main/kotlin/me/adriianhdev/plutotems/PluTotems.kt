@@ -1,6 +1,6 @@
 package me.adriianhdev.plutotems
 
-import me.adriianhdev.plutotems.common.plugin.PluTotemsLoader
+import me.adriianhdev.plutotems.plugin.PluTotemsLoader
 import taboolib.common.platform.Plugin
 import taboolib.platform.BukkitPlugin
 
