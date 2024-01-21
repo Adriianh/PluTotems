@@ -1,0 +1,13 @@
+Example:
+  name: "Example"
+  item:
+    material: TOTEM_OF_UNDYING
+    name: "&cExample"
+    lore:
+      - "&7Example"
+  type: "Item"
+  options:
+    isClickable: true
+  actions:
+    command: say Hello World!
+    actionbar: Hello World

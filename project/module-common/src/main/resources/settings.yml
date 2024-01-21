@@ -1,0 +1,4 @@
+Settings:
+  Language: en_US
+  # The probability that a player will be resurrected by a totem.
+  Chance: 50

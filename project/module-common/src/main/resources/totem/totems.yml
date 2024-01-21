@@ -1,0 +1,11 @@
+Totem:
+  name: "New Totem"
+  item:
+    material: TOTEM_OF_UNDYING
+    name: "&6New Totem"
+  type: "Item"
+  options:
+    isClickable: true
+  actions:
+    command: say Hello World!
+    actionbar: Hello World
