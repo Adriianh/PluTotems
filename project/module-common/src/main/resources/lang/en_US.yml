@@ -1,0 +1,81 @@
+# Commands (Messages)
+Command-Plugin-Reload: "§8[§6PluTotems§8] §aINFO §f| &7Reload complete, without problems"
+Command-Plugin-Reload-Failed: "§8[§6PluTotems§8] §cERROR §f| §7An error occurred while reloading the plugin. Check your console for more details."
+Command-Totem-Not-Found: "§8[§6PluTotems§8] §cERROR §f| §7Totem &6{0} &7not found"
+Command-Player-Not-Found: "§8[§6PluTotems§8] §cERROR §f| §7Player not found"
+Command-Totem-Get: "§8[§6PluTotems§8] §aINFO §f| &7Received totem &6{0}"
+Command-Totem-Give: "§8[§6PluTotems§8] §aINFO §f| &7Giving totem &6{0} &7to &6{1}"
+Command-Totem-Remove: "§8[§6PluTotems§8] §aINFO §f| &7Removing totem &6{0} &7from &6{1}"
+Command-Schematic-Empty-Clipboard: "§8[§6PluTotems§8] §cERROR §f| §7You must have a schematic in your clipboard"
+Command-Schematic-Invalid-Name: "§8[§6PluTotems§8] §cERROR §f| §7Invalid schematic name"
+Command-Schematic-Already-Exists: "§8[§6PluTotems§8] §cERROR §f| §7Schematic &6{0} &7already exists"
+Command-Schematic-Not-Found: "§8[§6PluTotems§8] §cERROR §f| §7Schematic &6{0} &7not found"
+Command-Schematic-Saving-Failed: "§8[§6PluTotems§8] §cERROR §f| §7An error occurred while saving schematic &6{0}. Check your console for more details."
+Command-Schematic-Saved: "§8[§6PluTotems§8] §aINFO §f| &7Schematic &6{0} &7saved"
+Command-Schematic-Deleted: "§8[§6PluTotems§8] §aINFO §f| &7Schematic &6{0} &7deleted"
+
+# Commands (Description)
+Command-Help-Type: "Type"
+Command-Help-Args: "Args"
+Command-Get-Description: "Get a totem"
+Command-Give-Description: "Give a totem to a player"
+Command-Info-Description: "Get information about a totem"
+Command-List-Description: "List loaded totems"
+Command-Config-Description: "Manage configuration"
+Command-Schematic-Description: "Manage schematics"
+
+# Messages
+Totem-Non-Entity: "§8[§6PluTotems§8] §cERROR §f| &7Totem {0} has entity type but it doesn't have an entity."
+Totem-Non-Structure: "§8[§6PluTotems§8] §cERROR §f| &7Totem {0} has structure type but it doesn't have a structure."
+Totem-Resurrect-Success: "§8[§6PluTotems§8] §aINFO §f| &7The totem worked and you have been saved."
+Totem-Resurrect-Failure: "§8[§6PluTotems§8] §cERROR §f| §7The totem did not work and you have died."
+Totem-Non-Consumable: "§8[§6PluTotems§8] §cERROR §f| §7You can't eat this totem."
+Totem-Non-Placeable: "§8[§6PluTotems§8] §cERROR §f| §7You can't place this totem."
+Totem-Non-Clickable: "§8[§6PluTotems§8] §cERROR §f| §7You can't click this totem."
+Totem-Sound-Not-Found: "§8[§6PluTotems§8] §cERROR §f| §7This sound doesn't exist"
+Totem-Schematic-Not-Found: "§8[§6PluTotems§8] §cERROR §f| §7This schematic doesn't exist"
+Totem-Entity-Protect: "§8[§6PluTotems§8] §cERROR §f| §7You can't damage your own totem entity."
+Totem-Chance-Failed:
+  - type: title
+    title: "&cFAIL"
+    subtitle: "Totem didn't work, try again."
+    fadein: 20
+    stay: 15
+    fadeout: 20
+  - type: sound
+    sound: BLOCK_ANVIL_BREAK
+    volume: 1
+    pitch: 1
+Totem-No-Permission:
+  - type: title
+    title: "&cERROR"
+    subtitle: "You don't have permission to use this totem."
+    fadein: 20
+    stay: 15
+    fadeout: 20
+  - type: sound
+    sound: ENTITY_VILLAGER_NO
+    volume: 1
+    pitch: 1
+Totem-Script-Failed:
+  - type: title
+    title: "&cERROR"
+    subtitle: "You didn't meet the requirements."
+    fadein: 20
+    stay: 15
+    fadeout: 20
+  - type: sound
+    sound: ENTITY_VILLAGER_NO
+    volume: 1
+    pitch: 1
+Totem-Cooldown:
+  - type: title
+    title: "&cERROR"
+    subtitle: "You must wait {0} seconds to use this totem again."
+    fadein: 20
+    stay: 15
+    fadeout: 20
+  - type: sound
+    sound: ENTITY_VILLAGER_NO
+    volume: 1
+    pitch: 1
