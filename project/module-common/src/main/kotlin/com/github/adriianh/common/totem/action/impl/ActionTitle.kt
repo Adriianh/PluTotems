@@ -7,11 +7,11 @@ import taboolib.library.xseries.XMaterial
 
 class ActionTitle : Action<String>() {
     override val id: String = "TITLE"
-    override val description: List<String> = listOf("Sends a message to the player")
+    override val description: List<String> = listOf("Sends a title to the player")
 
     private var title: String = "Hello World!"
 
-    override fun getExampleValue(): String = "ENTITY_VILLAGER_YES-1-1"
+    override fun getExampleValue(): String = title
 
     override fun convertValue(value: Any?): String {
         return value as String

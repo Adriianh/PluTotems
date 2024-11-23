@@ -8,7 +8,7 @@ import org.bukkit.entity.Player
 import taboolib.library.xseries.XMaterial
 
 class ActionMiniMessage : Action<String>() {
-    override val id: String = "MESSAGE"
+    override val id: String = "MINI-MESSAGE"
     override val description: List<String> = listOf("Sends a message to the player")
 
     private var message: String = "Hello world!"

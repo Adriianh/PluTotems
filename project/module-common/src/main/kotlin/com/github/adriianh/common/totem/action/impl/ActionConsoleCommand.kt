@@ -7,10 +7,10 @@ import org.bukkit.entity.Player
 import taboolib.library.xseries.XMaterial
 
 class ActionConsoleCommand : Action<String>() {
-    override val id: String = "console"
+    override val id: String = "CONSOLE"
     override val description: List<String> = listOf("Execute a command as console")
 
-    private var command: String = "say Hello World!"
+    private var command: String = "gamemode creative {player}"
 
     override fun getExampleValue(): String = "gamemode creative {player}"
 

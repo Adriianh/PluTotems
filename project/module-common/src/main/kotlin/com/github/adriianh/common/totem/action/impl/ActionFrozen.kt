@@ -6,7 +6,7 @@ import org.bukkit.entity.Player
 import taboolib.library.xseries.XMaterial
 
 class ActionFrozen : Action<Int>() {
-    override val id: String = "EFFECT"
+    override val id: String = "FROZEN"
     override val description: List<String> = listOf("Frozen the player")
 
     private var duration: Int = 15

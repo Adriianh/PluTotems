@@ -7,10 +7,10 @@ import org.bukkit.entity.Player
 import taboolib.library.xseries.XMaterial
 
 class ActionEffect : Action<String>() {
-    override val id: String = "EFFECT"
+    override val id: String = "ANIMATION"
     override val description: List<String> = listOf("Plays an entity effect")
 
-    private var effect: String = "TELEPORT_ENDER"
+    private var animation: String = "TELEPORT_ENDER"
 
     override fun getExampleValue(): String = "TELEPORT_ENDER"
 
@@ -19,11 +19,11 @@ class ActionEffect : Action<String>() {
     }
 
     override fun setActionValue(value: String) {
-        effect = value
+        animation = value
     }
 
     override fun getActionValue(): String {
-        return effect
+        return animation
     }
 
     override fun getMaterial(): XMaterial = XMaterial.ENDER_PEARL
@@ -42,7 +42,7 @@ class ActionEffect : Action<String>() {
     }
 
     override fun execute(player: Player): Boolean {
-        player.playEffect(EntityEffect.valueOf(effect))
+        player.playEffect(EntityEffect.valueOf(animation))
         return true
     }
 }

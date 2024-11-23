@@ -7,17 +7,24 @@ import org.bukkit.entity.Player
 import taboolib.library.xseries.XMaterial
 
 class ActionScript : Action<List<String>>() {
-    override val id: String = "BOSSBAR"
-    override val description: List<String> = listOf("Send a boss bar to the player")
+    override val id: String = "SCRIPT"
+    override val description: List<String> = listOf("Executes a list of scripts")
 
     private var scripts: List<String> = listOf(
-        ""
+        "player allow flight to true",
+        "player swimming to true"
     )
 
-    override fun getExampleValue(): String = "Hello World!"
+    override fun getExampleValue(): List<String> {
+        return scripts
+    }
 
     override fun convertValue(value: Any?): List<String> {
-        return value as List<String>
+        return if (value is List<*>) {
+            value.filterIsInstance<String>()
+        } else {
+            emptyList()
+        }
     }
 
     override fun setActionValue(value: List<String>) {
