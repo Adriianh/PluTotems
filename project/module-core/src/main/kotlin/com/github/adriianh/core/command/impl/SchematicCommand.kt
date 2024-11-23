@@ -1,5 +1,6 @@
 package com.github.adriianh.core.command.impl
 
+import com.github.adriianh.common.compat.schematic.loadSchematic
 import com.github.adriianh.common.compat.schematic.saveSchematic
 import org.bukkit.entity.Player
 import taboolib.common.platform.command.CommandBody
@@ -10,9 +11,26 @@ import taboolib.platform.util.sendLang
 import java.io.File
 
 @CommandHeader(
-    name = "schem"
+    name = "schematic",
+    aliases = ["schem"],
+    permission = "plutotems.command.schematic",
 )
-object SchemCommand {
+object SchematicCommand {
+    @CommandBody
+    val load = subCommand {
+        dynamic(comment = "schematic") {
+            suggestion<Player> { _, _ ->
+                File(getDataFolder(), "schematics/")
+                    .listFiles()
+                    ?.map { it.nameWithoutExtension }
+                    ?.toMutableList()
+            }
+            execute<Player> { sender, context, _ ->
+                loadSchematic(sender, context["schematic"])
+            }
+        }
+    }
+
     @CommandBody
     val save = subCommand {
         dynamic(comment = "name") {

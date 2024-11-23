@@ -10,11 +10,12 @@ import org.bukkit.entity.Player
 import taboolib.common.platform.command.CommandBody
 import taboolib.common.platform.command.CommandHeader
 import taboolib.common.platform.command.subCommand
+import taboolib.platform.util.isAir
 
 @CommandHeader(
     name = "info",
     aliases = ["i"],
-    permission = "totem.command.info",
+    permission = "plutotems.command.info",
     description = "Get information about a totem."
 )
 object InfoCommand {
@@ -146,6 +147,11 @@ object InfoCommand {
     val checkItem = subCommand {
         execute<Player> { player, _, _ ->
             val item = player.inventory.itemInMainHand
+
+            if (item.isAir) {
+                player.sendMessage("You must be holding an item.")
+                return@execute
+            }
 
             if (TotemFactory.isTotem(item)) {
                 val totem = TotemFactory.getTotem(item)

@@ -10,7 +10,8 @@ import taboolib.platform.util.sendLang
 
 @CommandHeader(
     name = "config",
-    permission = "totem.command.config",
+    aliases = ["cfg"],
+    permission = "plutotems.command.config",
 )
 object ConfigCommand {
     private val manager = ConfigManager

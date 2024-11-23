@@ -2,6 +2,7 @@ package com.github.adriianh.core.command
 
 import com.github.adriianh.core.PluTotems
 import com.github.adriianh.core.command.impl.*
+import com.github.adriianh.core.command.impl.SchematicCommand
 import org.bukkit.command.CommandSender
 import taboolib.common.platform.command.CommandBody
 import taboolib.common.platform.command.CommandHeader
@@ -20,11 +21,7 @@ import java.util.*
 object TotemCommand {
     @TotemHelper
     @CommandBody
-    val get = getCommand
-
-    @TotemHelper
-    @CommandBody
-    val give = giveCommand
+    val item = ItemCommand
 
     @TotemHelper
     @CommandBody
@@ -36,7 +33,15 @@ object TotemCommand {
 
     @TotemHelper
     @CommandBody
-    val schem = SchemCommand
+    val schematic = SchematicCommand
+
+    @TotemHelper
+    @CommandBody
+    val menu = MenuCommand
+
+    @TotemHelper
+    @CommandBody
+    val admin = AdminCommand
 
     @CommandBody
     val main = mainCommand {

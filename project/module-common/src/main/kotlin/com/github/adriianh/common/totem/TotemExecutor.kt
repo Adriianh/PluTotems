@@ -17,7 +17,7 @@ import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.inventory.ItemStack
 import taboolib.common5.cbool
 import taboolib.common5.cdouble
-import taboolib.common5.cint
+import taboolib.common5.clong
 import taboolib.platform.util.sendLang
 import java.util.*
 
@@ -31,8 +31,8 @@ object TotemExecutor {
         isEvent: Boolean = false,
         reduceAmount: Boolean? = true
     ) {
-        if (cooldown.isInCooldown(player)) {
-            player.sendLang("Totem-Cooldown", cooldown.getRestTime(player))
+        if (cooldown.hasCooldown(player, totem.id)) {
+            player.sendLang("Totem-Cooldown", cooldown.getCooldown(player, totem.id))
             return
         }
 
@@ -51,9 +51,9 @@ object TotemExecutor {
             }
         }
 
-        val cooldownTime = totem.getOption("cooldown")?.getOptionValue().cint
+        val cooldownTime = totem.getOption("cooldown")?.getOptionValue().clong
         if (cooldownTime > 0) {
-            cooldown.setCooldown(player, cooldownTime)
+            cooldown.setCooldown(player, totem.id, cooldownTime)
         }
 
         val optionHealth = totem.getOption("health") as? OptionHealth
