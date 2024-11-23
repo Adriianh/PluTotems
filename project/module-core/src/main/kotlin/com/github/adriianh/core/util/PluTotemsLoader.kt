@@ -20,7 +20,7 @@ object PluTotemsLoader {
     fun onPluginLoad() {
         getAbout(plugin)
 
-        Language.path = ConfigManager.settings.getString("Settings.Language")!!
+        Language.path = ConfigManager.settings.getString("Settings.Language").toString()
     }
 
     fun onPluginEnable() {
@@ -36,5 +36,9 @@ object PluTotemsLoader {
         getGoodbye()
         undoSessions()
         removeEntities()
+    }
+
+    fun getOdalitaMenus(): OdalitaMenus? {
+        return odalitaMenus
     }
 }
