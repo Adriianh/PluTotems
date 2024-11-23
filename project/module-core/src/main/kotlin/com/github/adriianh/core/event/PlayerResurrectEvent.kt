@@ -6,6 +6,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityResurrectEvent
 import taboolib.common.platform.event.EventPriority
 import taboolib.common.platform.event.SubscribeEvent
+import taboolib.platform.util.isAir
 import taboolib.platform.util.sendLang
 
 object PlayerResurrectEvent {
@@ -16,6 +17,7 @@ object PlayerResurrectEvent {
         val player = event.entity as? Player ?: return
         val (hand, offhand) = player.inventory.itemInMainHand to player.inventory.itemInOffHand
 
+        if (hand.isAir || offhand.isAir) return
         if (TotemFactory.isTotem(hand) || TotemFactory.isTotem(offhand)) {
             event.isCancelled = true
             return
