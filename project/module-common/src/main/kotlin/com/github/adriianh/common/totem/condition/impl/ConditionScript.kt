@@ -18,7 +18,11 @@ class ConditionScript : Condition<List<String>>() {
     private var script = listOf("check player level < 50")
 
     override fun convertValue(value: Any?): List<String> {
-        return value as? List<String> ?: throw IllegalArgumentException("Value is not a list of strings")
+        return if (value is List<*>) {
+            value.filterIsInstance<String>()
+        } else {
+            emptyList()
+        }
     }
 
     override fun setConditionValue(value: List<String>) {
