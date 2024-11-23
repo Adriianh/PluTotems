@@ -6,12 +6,18 @@ Command-Player-Not-Found: "§8[§6PluTotems§8] §cERROR §f| §7Player not foun
 Command-Totem-Get: "§8[§6PluTotems§8] §aINFO §f| &7Received totem &6{0}"
 Command-Totem-Give: "§8[§6PluTotems§8] §aINFO §f| &7Giving totem &6{0} &7to &6{1}"
 Command-Totem-Remove: "§8[§6PluTotems§8] §aINFO §f| &7Removing totem &6{0} &7from &6{1}"
+Command-Cooldown-Set: "§8[§6PluTotems§8] §aINFO §f| &7Cooldown set to &6{0} &7for {1}'s totem &6{2}"
+Command-Cooldown-Reset: "§8[§6PluTotems§8] §aINFO §f| &7Cooldown removed for &6{0}'s &7totem &6{1}"
 Command-Schematic-Empty-Clipboard: "§8[§6PluTotems§8] §cERROR §f| §7You must have a schematic in your clipboard"
+Command-Schematic-Selection: "§8[§6PluTotems§8] §aINFO §f| &7Trying to save selected region as schematic &6{0}"
+Command-Schematic-Invalid-Selection: "§8[§6PluTotems§8] §cERROR §f| §7Invalid selection"
 Command-Schematic-Invalid-Name: "§8[§6PluTotems§8] §cERROR §f| §7Invalid schematic name"
 Command-Schematic-Already-Exists: "§8[§6PluTotems§8] §cERROR §f| §7Schematic &6{0} &7already exists"
 Command-Schematic-Not-Found: "§8[§6PluTotems§8] §cERROR §f| §7Schematic &6{0} &7not found"
 Command-Schematic-Saving-Failed: "§8[§6PluTotems§8] §cERROR §f| §7An error occurred while saving schematic &6{0}. Check your console for more details."
 Command-Schematic-Saved: "§8[§6PluTotems§8] §aINFO §f| &7Schematic &6{0} &7saved"
+Command-Schematic-Loading-Failed: "§8[§6PluTotems§8] §cERROR §f| §7An error occurred while loading schematic &6{0}. Check your console for more details."
+Command-Schematic-Loaded: "§8[§6PluTotems§8] §aINFO §f| &7Schematic &6{0} &7loaded"
 Command-Schematic-Deleted: "§8[§6PluTotems§8] §aINFO §f| &7Schematic &6{0} &7deleted"
 
 # Commands (Description)
