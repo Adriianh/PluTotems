@@ -59,8 +59,7 @@ object ConfigLoader {
     private fun getDefaults() {
         val dir = File(getDataFolder(), "totem/")
         val examples = arrayListOf(
-            "totem/example.yml",
-            "totem/totems.yml",
+            "totem/Default.yml",
         )
 
         if (!dir.exists()) {

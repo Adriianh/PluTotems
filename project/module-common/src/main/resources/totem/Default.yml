@@ -1,0 +1,38 @@
+DolphinTotem:
+  name: "&#646077Dolphin Totem"
+  type: ITEM
+  item:
+    material: RAW_SALMON
+    name: "&#646077Dolphin Totem"
+    lore: |-
+      &7
+      &fWanna be a dolphin? Use this totem and swim like one!
+      &7
+      &6Effects:
+        &7- &fDolphin Grace &7(0:30)
+        &7- &fWater Breathing &7(1:30)
+      &7
+    enchants:
+      DURABILITY: 1
+    flags: HIDE_ENCHANTS
+  options:
+    consumable: true
+    cooldown: 1200
+  conditions:
+    chance: 100
+    permission: "plutotems.use.dolphin"
+    script: |-
+      check player swimming is true
+  actions:
+    title: "&#646077YOU'RE NOW A DOLPHIN|&7Enjoy the water!"
+    message: "&#646077Swim like a dolphin!"
+    sound: ENTITY_DOLPHIN_AMBIENT-1-1
+  effects:
+    dolphin_grace:
+      duration: 600
+      amplifier: 1
+    water_breathing:
+      duration: 900
+      amplifier: 1
+
+
