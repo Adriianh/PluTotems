@@ -1,32 +1,38 @@
 package com.github.adriianh.common.totem.option.type.impl.base
 
 import com.github.adriianh.common.totem.option.type.OptionBase
+import com.github.adriianh.common.util.TimeUtil
 import com.github.adriianh.common.util.colorify
 import taboolib.library.xseries.XMaterial
 
-class OptionCooldown : OptionBase<Int>() {
+class OptionCooldown : OptionBase<Long>() {
     override val id: String = "COOLDOWN"
     override val description: List<String> = listOf("Totem's cooldown")
     override val optional: Boolean = true
 
-    private var cooldown: Int = 0
+    private var cooldown: Long = 0L
 
-    override fun isTypeCompatible(value: Int): Boolean = true
+    override fun isTypeCompatible(value: Long): Boolean = true
 
-    override fun getDefaultValue(): Int = 0
+    override fun getDefaultValue(): Long = 0L
 
-    override fun getExampleValue(): Int = 15
+    override fun getExampleValue(): Long = 15L
 
-    override fun setOptionValue(value: Int) {
+    override fun setOptionValue(value: Long) {
         cooldown = value
     }
 
-    override fun getOptionValue(): Int {
+    override fun getOptionValue(): Long {
         return cooldown
     }
 
-    override fun getConvertedValue(value: Any?): Int {
-        return value as Int
+    override fun getConvertedValue(value: Any?): Long {
+        return when (value) {
+            is String -> TimeUtil.parseTimeToMillis(value) / 1000
+            is Long -> value
+            is Int -> value.toLong()
+            else -> throw IllegalArgumentException("Invalid value type for cooldown")
+        }
     }
 
     override fun getMaterial(): XMaterial = XMaterial.EXPERIENCE_BOTTLE
@@ -36,9 +42,9 @@ class OptionCooldown : OptionBase<Int>() {
     override fun getItemLore(): List<String> {
         return """
             &7Edit totem's cooldown
-            &7Example: &a10
+            &7Example: &a10 or 1h30m
             &7Default value: &a${getDefaultValue()}
-            
+
             &7» &6Left click to edit
             &7» &6Right click to reset
             &7
