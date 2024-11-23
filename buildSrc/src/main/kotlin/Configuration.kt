@@ -8,7 +8,7 @@ const val coroutineVersion = "1.8.1"
 const val shadowJarVersion = "8.1.1"
 const val taboolibPluginVersion = "2.0.19"
 
-const val taboolibVersion = "6.2.0-beta33"
+const val taboolibVersion = "6.2.0-beta38"
 
 val adventureModules = setOf(
     "net.kyori:adventure-api:4.16.0",

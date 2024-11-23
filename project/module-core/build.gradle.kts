@@ -20,10 +20,14 @@ dependencies {
     compileTaboo("bukkit-nms", "bukkit-nms-stable", "bukkit-nms-ai")
 
     /* Odalita Menus */
-//    implementation("nl.odalitadevelopments.odalitamenus:core:0.5.10")
+    implementation("io.github.odalita-developments.odalitamenus:core:0.5.13")
+
+    /* Lombok */
+    compileOnly("org.projectlombok:lombok:1.18.20")
 
     /* Libs Folder */
     implementation(fileTree("libs"))
+
 }
 
 buildDirClean()
