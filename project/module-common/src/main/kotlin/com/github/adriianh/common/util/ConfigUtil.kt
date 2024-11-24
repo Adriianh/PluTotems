@@ -66,7 +66,7 @@ object ConfigUtil {
         config.getConfigurationSection("$key.effects")?.getKeys(false)?.forEach { effectName ->
             val effectType = PotionEffectType.getByName(effectName)
             val duration = config.getInt("$key.effects.$effectName.duration")
-            val amplifier = config.getInt("$key.effects.$effectName.level")
+            val amplifier = config.getInt("$key.effects.$effectName.amplifier")
 
             val description = config.getStringList("$key.effects.$effectName.description")
 
