@@ -58,7 +58,7 @@ DolphinTotem:
     script: |-
       check player swimming is true
   actions:
-    title: "&#646077YOU'RE NOW A DOLPHIN|&7Enjoy the water!"
+    title: "&#646077YOU'RE NOW A DOLPHIN|&7Enjoy the water!|10|20|10"
     message: "&#646077Swim like a dolphin!"
     sound: ENTITY_DOLPHIN_AMBIENT-1-1
   effects:
