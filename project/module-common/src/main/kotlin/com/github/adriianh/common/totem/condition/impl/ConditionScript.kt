@@ -1,11 +1,11 @@
 package com.github.adriianh.common.totem.condition.impl
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.condition.Condition
 import com.github.adriianh.common.util.colorify
 import org.bukkit.entity.Player
 import taboolib.common.platform.function.adaptPlayer
 import taboolib.common5.Coerce
-import taboolib.library.xseries.XMaterial
 import taboolib.module.kether.KetherShell
 import taboolib.module.kether.ScriptOptions
 import taboolib.module.kether.printKetherErrorMessage

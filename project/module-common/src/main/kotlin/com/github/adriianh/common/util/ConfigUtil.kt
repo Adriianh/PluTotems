@@ -1,5 +1,6 @@
 package com.github.adriianh.common.util
 
+import com.cryptomorin.xseries.XItemStack
 import com.github.adriianh.common.totem.Property
 import com.github.adriianh.common.totem.Totem
 import com.github.adriianh.common.totem.action.ActionRegistry
@@ -11,7 +12,6 @@ import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffectType
 import taboolib.library.configuration.ConfigurationSection
-import taboolib.library.xseries.XItemStack
 import taboolib.module.configuration.Configuration
 
 object ConfigUtil {

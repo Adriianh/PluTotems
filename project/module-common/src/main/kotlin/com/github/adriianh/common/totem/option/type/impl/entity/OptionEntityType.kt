@@ -1,9 +1,9 @@
 package com.github.adriianh.common.totem.option.type.impl.entity
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionEntity
 import com.github.adriianh.common.util.colorify
 import org.bukkit.entity.EntityType
-import taboolib.library.xseries.XMaterial
 
 class OptionEntityType : OptionEntity<EntityType>() {
     override val id: String = "ENTITYTYPE"

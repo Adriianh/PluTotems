@@ -1,9 +1,9 @@
 package com.github.adriianh.common.totem.option.type.impl.base
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionBase
 import com.github.adriianh.common.util.TimeUtil
 import com.github.adriianh.common.util.colorify
-import taboolib.library.xseries.XMaterial
 
 class OptionCooldown : OptionBase<Long>() {
     override val id: String = "COOLDOWN"

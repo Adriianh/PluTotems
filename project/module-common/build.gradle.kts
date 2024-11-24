@@ -14,8 +14,6 @@ dependencies {
     /* Bukkit API */
     compileTaboo("platform-bukkit")
     compileTaboo("bukkit-util")
-    compileTaboo("bukkit-xseries")
-    compileTaboo("bukkit-xseries")
     compileTaboo("minecraft-chat")
     compileTaboo("minecraft-kether")
     compileTaboo("basic-configuration")
@@ -33,6 +31,9 @@ dependencies {
 
     /* PersistentDataType */
     implementation("com.jeff-media:MorePersistentDataTypes:2.4.0")
+
+    /* XSeries */
+    implementation("com.github.cryptomorin:XSeries:11.3.0")
 }
 
 buildDirClean()

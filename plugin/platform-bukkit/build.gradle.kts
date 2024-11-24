@@ -13,8 +13,6 @@ taboolib {
         install("platform-bukkit", "platform-bukkit-impl")
         /* Bukkit Utilities */
         install("bukkit-hook", "bukkit-util")
-        /* XSeries */
-        install("bukkit-xseries")
         /* Kether */
         install("minecraft-kether")
     }

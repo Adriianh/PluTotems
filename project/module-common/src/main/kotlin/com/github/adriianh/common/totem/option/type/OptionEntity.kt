@@ -1,8 +1,8 @@
 package com.github.adriianh.common.totem.option.type
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.ItemRepresentation
 import com.github.adriianh.common.totem.option.Option
-import taboolib.library.xseries.XMaterial
 
 abstract class OptionEntity<Any> : Option<Any>() {
     abstract override val id: String

@@ -1,11 +1,11 @@
 package com.github.adriianh.common.totem.option.type.impl.base
 
+import com.cryptomorin.xseries.XItemStack
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionBase
 import com.github.adriianh.common.util.colorify
 import org.bukkit.inventory.ItemStack
 import taboolib.library.configuration.ConfigurationSection
-import taboolib.library.xseries.XItemStack
-import taboolib.library.xseries.XMaterial
 
 class OptionItem : OptionBase<ItemStack>() {
     override val id: String = "ITEM"

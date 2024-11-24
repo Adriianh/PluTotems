@@ -1,9 +1,9 @@
 package com.github.adriianh.common.totem.effect
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.ItemRepresentation
 import com.github.adriianh.common.util.colorify
 import org.bukkit.potion.PotionEffectType
-import taboolib.library.xseries.XMaterial
 import taboolib.module.configuration.Configuration
 
 class Effect(

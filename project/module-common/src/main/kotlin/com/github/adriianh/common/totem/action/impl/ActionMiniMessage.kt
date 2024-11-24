@@ -1,11 +1,11 @@
 package com.github.adriianh.common.totem.action.impl
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.adventure.Adventure.adventurePlayer
 import com.github.adriianh.common.totem.action.Action
 import com.github.adriianh.common.util.TextUtil.toMiniMessage
 import com.github.adriianh.common.util.colorify
 import org.bukkit.entity.Player
-import taboolib.library.xseries.XMaterial
 
 class ActionMiniMessage : Action<String>() {
     override val id: String = "MINI-MESSAGE"

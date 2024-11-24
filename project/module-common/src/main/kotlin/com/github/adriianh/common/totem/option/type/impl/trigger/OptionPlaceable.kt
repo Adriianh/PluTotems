@@ -1,8 +1,8 @@
 package com.github.adriianh.common.totem.option.type.impl.trigger
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionBase
 import com.github.adriianh.common.util.colorify
-import taboolib.library.xseries.XMaterial
 
 class OptionPlaceable : OptionBase<Boolean>() {
     override val id: String = "PLACEABLE"

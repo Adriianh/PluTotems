@@ -1,9 +1,9 @@
 package com.github.adriianh.common.totem.action.impl
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.action.Action
 import com.github.adriianh.common.util.colorify
 import org.bukkit.entity.Player
-import taboolib.library.xseries.XMaterial
 
 class ActionTitle : Action<String>() {
     override val id: String = "TITLE"

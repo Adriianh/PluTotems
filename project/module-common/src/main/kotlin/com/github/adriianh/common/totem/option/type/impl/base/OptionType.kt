@@ -1,10 +1,10 @@
 package com.github.adriianh.common.totem.option.type.impl.base
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.TotemType
 import com.github.adriianh.common.totem.getTypeByName
 import com.github.adriianh.common.totem.option.type.OptionBase
 import com.github.adriianh.common.util.colorify
-import taboolib.library.xseries.XMaterial
 
 class OptionType : OptionBase<TotemType>() {
     override val id: String = "TYPE"

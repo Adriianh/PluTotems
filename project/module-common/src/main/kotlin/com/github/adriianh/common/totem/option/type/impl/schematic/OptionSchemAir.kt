@@ -1,8 +1,8 @@
 package com.github.adriianh.common.totem.option.type.impl.schematic
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionSchematic
 import com.github.adriianh.common.util.colorify
-import taboolib.library.xseries.XMaterial
 
 class OptionSchemAir : OptionSchematic<Boolean>() {
     override val id: String = "SCHEMATICAIR"

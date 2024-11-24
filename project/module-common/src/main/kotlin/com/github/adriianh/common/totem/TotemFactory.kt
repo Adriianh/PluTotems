@@ -1,12 +1,12 @@
 package com.github.adriianh.common.totem
 
+import com.cryptomorin.xseries.XItemStack
 import com.jeff_media.morepersistentdatatypes.DataType
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
-import taboolib.library.xseries.XItemStack
 import taboolib.platform.BukkitPlugin
 
 object TotemFactory {

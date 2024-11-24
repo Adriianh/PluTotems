@@ -1,7 +1,7 @@
 package com.github.adriianh.common.totem
 
+import com.cryptomorin.xseries.XMaterial
 import org.bukkit.inventory.ItemStack
-import taboolib.library.xseries.XMaterial
 import taboolib.platform.util.ItemBuilder
 
 object ItemRepresentation {

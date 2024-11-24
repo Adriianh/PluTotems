@@ -1,10 +1,10 @@
 package com.github.adriianh.common.totem.option.type.impl.schematic
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.compat.schematic.SchemRotation
 import com.github.adriianh.common.totem.option.type.OptionSchematic
 import com.github.adriianh.common.util.colorify
 import taboolib.library.configuration.ConfigurationSection
-import taboolib.library.xseries.XMaterial
 
 class OptionSchemRotation  : OptionSchematic<SchemRotation>() {
     override val id: String = "SCHEMATICROTATION"

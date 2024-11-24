@@ -1,10 +1,10 @@
 package com.github.adriianh.common.totem.action.impl
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.action.Action
 import com.github.adriianh.common.util.colorify
 import org.bukkit.EntityEffect
 import org.bukkit.entity.Player
-import taboolib.library.xseries.XMaterial
 
 class ActionEffect : Action<String>() {
     override val id: String = "ANIMATION"

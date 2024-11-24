@@ -1,8 +1,8 @@
 package com.github.adriianh.common.totem.option
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.ItemRepresentation
 import com.github.adriianh.common.totem.Property
-import taboolib.library.xseries.XMaterial
 
 abstract class Option<T> : Property, Cloneable {
     abstract val id: String

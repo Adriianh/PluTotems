@@ -1,9 +1,9 @@
 package com.github.adriianh.common.totem.condition
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.ItemRepresentation
 import com.github.adriianh.common.totem.Property
 import org.bukkit.entity.Player
-import taboolib.library.xseries.XMaterial
 
 abstract class Condition<T> : Property, Cloneable {
     abstract val id: String

@@ -1,11 +1,10 @@
 package com.github.adriianh.common.totem.action.impl
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.action.Action
 import com.github.adriianh.common.util.KetherUtil.eval
 import com.github.adriianh.common.util.colorify
 import org.bukkit.entity.Player
-import taboolib.library.xseries.XMaterial
-import taboolib.common.platform.function.info
 
 class ActionScript : Action<List<String>>() {
     override val id: String = "SCRIPT"

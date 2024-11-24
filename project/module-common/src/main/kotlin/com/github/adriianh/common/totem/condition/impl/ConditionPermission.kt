@@ -1,9 +1,9 @@
 package com.github.adriianh.common.totem.condition.impl
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.condition.Condition
 import com.github.adriianh.common.util.colorify
 import org.bukkit.entity.Player
-import taboolib.library.xseries.XMaterial
 import taboolib.platform.util.sendLang
 
 class ConditionPermission : Condition<String>() {

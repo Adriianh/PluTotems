@@ -1,8 +1,8 @@
 package com.github.adriianh.common.totem.option.type.impl.entity
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionEntity
 import com.github.adriianh.common.util.colorify
-import taboolib.library.xseries.XMaterial
 
 class OptionEntityGravity : OptionEntity<Boolean>() {
     override val id: String = "ENTITYGRAVITY"

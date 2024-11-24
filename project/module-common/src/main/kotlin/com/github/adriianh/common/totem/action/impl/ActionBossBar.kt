@@ -1,5 +1,6 @@
 package com.github.adriianh.common.totem.action.impl
 
+import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.action.Action
 import com.github.adriianh.common.util.colorify
 import org.bukkit.Bukkit
@@ -7,7 +8,6 @@ import org.bukkit.boss.BarColor
 import org.bukkit.boss.BarStyle
 import org.bukkit.entity.Player
 import taboolib.common.platform.function.submit
-import taboolib.library.xseries.XMaterial
 
 class ActionBossBar : Action<String>() {
     override val id: String = "BOSSBAR"

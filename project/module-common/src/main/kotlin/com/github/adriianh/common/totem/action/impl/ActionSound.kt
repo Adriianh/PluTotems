@@ -1,10 +1,10 @@
 package com.github.adriianh.common.totem.action.impl
 
+import com.cryptomorin.xseries.XMaterial
+import com.cryptomorin.xseries.XSound
 import com.github.adriianh.common.totem.action.Action
 import com.github.adriianh.common.util.colorify
 import org.bukkit.entity.Player
-import taboolib.library.xseries.XMaterial
-import taboolib.library.xseries.XSound
 import taboolib.platform.util.sendLang
 
 class ActionSound : Action<String>() {
