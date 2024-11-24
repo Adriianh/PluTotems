@@ -10,7 +10,11 @@ import java.util.concurrent.CompletableFuture
 object KetherUtil {
     fun eval(player: Player, script: String): CompletableFuture<Any?> {
         return try {
-            KetherShell.eval(script, ScriptOptions(sender = adaptPlayer(player)))
+            KetherShell.eval(script, ScriptOptions.builder()
+                .namespace(listOf("plutotems"))
+                .sender(adaptPlayer(player))
+                .build()
+            )
         } catch (e: LocalizedException) {
             warning("§8[&6PluTotems&8] §8An error occurred while parsing kether shell:")
             e.localizedMessage.split("\n").forEach {
@@ -22,7 +26,9 @@ object KetherUtil {
 
     fun List<String>.eval(player: Player) {
         try {
-            KetherShell.eval(this, ScriptOptions(sender = adaptPlayer(player)))
+            forEach { script ->
+                eval(player, script)
+            }
         } catch (e: Throwable) {
             e.printKetherErrorMessage()
         }
