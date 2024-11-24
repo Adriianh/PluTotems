@@ -5,6 +5,7 @@ import com.github.adriianh.common.util.KetherUtil.eval
 import com.github.adriianh.common.util.colorify
 import org.bukkit.entity.Player
 import taboolib.library.xseries.XMaterial
+import taboolib.common.platform.function.info
 
 class ActionScript : Action<List<String>>() {
     override val id: String = "SCRIPT"
@@ -20,10 +21,16 @@ class ActionScript : Action<List<String>>() {
     }
 
     override fun convertValue(value: Any?): List<String> {
-        return if (value is List<*>) {
-            value.filterIsInstance<String>()
-        } else {
-            emptyList()
+        return when (value) {
+            is List<*> -> {
+                value.filterIsInstance<String>()
+            }
+            is String -> {
+                listOf(value)
+            }
+            else -> {
+                emptyList()
+            }
         }
     }
 
@@ -52,7 +59,6 @@ class ActionScript : Action<List<String>>() {
 
     override fun execute(player: Player): Boolean {
         scripts.eval(player)
-
         return true
     }
 }
