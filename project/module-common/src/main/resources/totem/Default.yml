@@ -1,8 +1,42 @@
+ChickenTotem:
+  name: "&#ff9300Chicken Totem"
+  type: ITEM
+  item:
+    material: PLAYER_HEAD
+    skull: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzAzMWE5ODI2NTUyOGMwNDAxMjEzNTJkNWRhYTc4ODFhMjI1YjIyNGQ3ZDVlYmRmNjUyNzliYTgzODQ2OTZmYSJ9fX0=
+    name: "&#ff9300Chicken Totem"
+    lore: |-
+      &7
+      &fWanna fly like a chicken? Use this totem and jump high!
+      &7
+      &6Effects:
+      &7- &fJump Boost &7(0:30)
+      &7
+    enchants:
+      DURABILITY: 1
+    flags: HIDE_ENCHANTS
+  options:
+    clickable: true
+    cooldown: "1h"
+  conditions:
+    chance: 50
+    permission: "plutotems.use.chicken"
+  actions:
+    title: "&#ff9300YOU'RE NOW A CHICKEN|&7Enjoy the sky!|10|20|10"
+    message: "&#ff9300Fly like a chicken!"
+    sound: ENTITY_CHICKEN_AMBIENT-1-1
+    script: |-
+      player flying to true
+      sleep 15s
+      sound ENTITY_CHICKEN_DEATH by 1 1
+      player flying to false
+      title "&cWHAT?" subtitle "&7Chickens can't fly!" by 10 20 10
 DolphinTotem:
   name: "&#646077Dolphin Totem"
   type: ITEM
   item:
-    material: RAW_SALMON
+    material: PLAYER_HEAD
+    skull: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGU5Njg4Yjk1MGQ4ODBiNTViN2FhMmNmY2Q3NmU1YTBmYTk0YWFjNmQxNmY3OGU4MzNmNzQ0M2VhMjlmZWQzIn19fQ==
     name: "&#646077Dolphin Totem"
     lore: |-
       &7
@@ -34,5 +68,35 @@ DolphinTotem:
     water_breathing:
       duration: 900
       amplifier: 1
-
-
+TurtleTotem:
+  name: "&#10612fTurtle Totem"
+  type: ITEM
+  item:
+    material: PLAYER_HEAD
+    skull: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGZhNTUyMTM5OTY2YzVmYWMxYjk4MDYxY2UyM2ZjMGRkZWYwNThjMTYzMTQyZGQ2ZDFjNzY4Y2QyZGEyMDdjMiJ9fX0=
+    name: "&#10612fTurtle Totem"
+    lore: |-
+      &7
+      &fWanna be a turtle? Use this totem and be protected!
+      &7
+      &6Effects:
+        &7- &fResistance X &7(1:30)
+        &7- &fSlowness X &7(1:30)
+      &7
+    enchants:
+      DURABILITY: 1
+    flags: HIDE_ENCHANTS
+  options:
+    clickable: true
+    cooldown: "1d"
+  actions:
+    title: "&#10612fYOU'RE NOW A TURTLE|&7Tough and slow like a turtle!|10|20|10"
+    message: "&#10612fBe protected like a turtle!"
+    sound: ENTITY_TURTLE_AMBIENT-1-1
+  effects:
+    resistance:
+      duration: 900
+      amplifier: 9
+    slowness:
+      duration: 900
+      amplifier: 9
