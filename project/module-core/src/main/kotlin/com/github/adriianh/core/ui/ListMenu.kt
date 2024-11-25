@@ -2,7 +2,6 @@ package com.github.adriianh.core.ui
 
 import com.github.adriianh.common.totem.Totem
 import com.github.adriianh.common.totem.TotemRegistry
-import com.github.adriianh.common.util.colorify
 import com.github.adriianh.core.sorter.TotemSorter
 import nl.odalitadevelopments.menus.annotations.Menu
 import nl.odalitadevelopments.menus.contents.MenuContents
@@ -19,7 +18,6 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import taboolib.platform.util.ItemBuilder
-
 
 @Menu(
     title = "Totem List | Menu",
@@ -86,12 +84,7 @@ class ListMenu : PlayerMenuProvider {
 
     private fun createObjectIterator(contents: MenuContents): MenuObjectIterator<Totem> {
         return contents.createObjectIterator(MenuIteratorType.HORIZONTAL, 0, 0, Totem::class.java) { totem: Totem ->
-            DisplayItem.of(
-                ItemBuilder(totem.item).apply {
-                    name = totem.name.colorify()
-                    hideAll()
-                }.build()
-            )
+            DisplayItem.of(totem.item)
         }.sorter(0, TotemSorter.NAME_ASCENDING.getComparator())
     }
 }
