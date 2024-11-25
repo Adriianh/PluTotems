@@ -139,7 +139,7 @@ object TotemExecutor {
         }
 
         val optionAnimation = totem.getOption("animation") as? OptionAnimation
-        if (optionAnimation?.getOptionValue() == true) {
+        if (optionAnimation == null || optionAnimation.getOptionValue()) {
             playAnimation(player)
         }
 
