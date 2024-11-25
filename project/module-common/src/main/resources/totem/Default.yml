@@ -26,9 +26,11 @@ ChickenTotem:
     message: "&#ff9300Fly like a chicken!"
     sound: ENTITY_CHICKEN_AMBIENT-1-1
     script: |-
+      player allow flight to true
       player flying to true
       sleep 15s
       sound ENTITY_CHICKEN_DEATH by 1 1
+      player alow flight to false
       player flying to false
       title "&cWHAT?" subtitle "&7Chickens can't fly!" by 10 20 10
 DolphinTotem:
@@ -100,3 +102,34 @@ TurtleTotem:
     slowness:
       duration: 900
       amplifier: 9
+SuspiciousTotem:
+  name: "<rainbow>Suspicious Totem"
+  type: ITEM
+  item:
+    material: SUSPICIOUS_STEW
+    name: "<rainbow>Suspicious Totem"
+    lore: |-
+      &7
+      &fYou may get regeneration or poison, who knows?
+      &7
+      &6Effects:
+        &7- &fRegeneration II &7(0:30)
+        &7- &fPoison II &7(0:30)
+      &7
+  options:
+    consumable: true
+    cooldown: 600
+  conditions:
+    script: |-
+      check player health < 10
+  actions:
+    script: |-
+      if all [
+        check random 1 to 2 is 1
+      ] then [
+        effect give regeneration 30 1
+        tell color "&aYou got regenerated!"
+      ] else [
+        effect give poison 30 1
+        tell color "&cYou got poisoned!"
+      ]x
