@@ -16,12 +16,13 @@ object PlayerPickupEvent {
         val loc = event.item.location
 
         if (!TotemFactory.isTotem(item)) return
-        event.isCancelled = true
 
         val totem = TotemFactory.getTotem(item)
         val option = totem.getOption("pickupable") ?: return
 
         if (!option.getOptionValue().cbool) return
+        event.isCancelled = true
+
         handleEvent(player, item, "pickupable", event, true, false)
         player.playSound(player.location, "entity.item.pickup", 1f, 1f)
 
