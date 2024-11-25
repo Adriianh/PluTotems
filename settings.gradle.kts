@@ -8,4 +8,3 @@ fun applyAll(name: String) {
         include("$name:${it.name}")
     }
 }
-
