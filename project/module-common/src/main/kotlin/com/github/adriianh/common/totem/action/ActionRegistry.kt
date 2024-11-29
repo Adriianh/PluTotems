@@ -10,7 +10,7 @@ object ActionRegistry {
         registerActions(
             ActionBar(), ActionBossBar(), ActionBroadcast(), ActionCommand(),
             ActionConsoleCommand(), ActionEffect(), ActionFire(), ActionFrozen(),
-            ActionMessage(), ActionScript(), ActionSound(), ActionTitle()
+            ActionMessage(), ActionMiniMessage(), ActionScript(), ActionSound(), ActionTitle()
         )
     }
 
