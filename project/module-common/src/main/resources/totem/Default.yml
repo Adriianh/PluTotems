@@ -132,4 +132,4 @@ SuspiciousTotem:
       ] else [
         effect give poison 30 1
         tell color "&cYou got poisoned!"
-      ]x
+      ]
