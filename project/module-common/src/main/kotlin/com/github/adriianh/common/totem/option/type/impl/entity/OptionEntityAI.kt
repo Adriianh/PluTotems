@@ -17,8 +17,8 @@ class OptionEntityAI : OptionEntity<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        ai = value
+    override fun setOptionValue(value: Any) {
+        ai = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

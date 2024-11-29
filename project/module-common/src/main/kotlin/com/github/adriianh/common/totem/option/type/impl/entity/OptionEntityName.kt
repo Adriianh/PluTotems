@@ -17,8 +17,8 @@ class OptionEntityName : OptionEntity<String>() {
 
     override fun getExampleValue(): String = "Angel"
 
-    override fun setOptionValue(value: String) {
-        entityType = value
+    override fun setOptionValue(value: Any) {
+        entityType = getConvertedValue(value)
     }
 
     override fun getOptionValue(): String {

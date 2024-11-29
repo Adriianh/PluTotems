@@ -15,12 +15,12 @@ class ActionMiniMessage : Action<String>() {
 
     override fun getExampleValue(): String = "Hello world!"
 
-    override fun convertValue(value: Any?): String {
+    override fun getConvertedValue(value: Any?): String {
         return value as String
     }
 
-    override fun setActionValue(value: String) {
-        message = value
+    override fun setActionValue(value: Any) {
+        message = getConvertedValue(value)
     }
 
     override fun getActionValue(): String {

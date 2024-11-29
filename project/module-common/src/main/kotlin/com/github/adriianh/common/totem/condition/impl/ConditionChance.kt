@@ -12,12 +12,12 @@ class ConditionChance : Condition<Int>() {
 
     private var value: Int = 100
 
-    override fun convertValue(value: Any?): Int {
+    override fun getConvertedValue(value: Any?): Int {
         return value as? Int ?: throw IllegalArgumentException("Value is not an integer")
     }
 
-    override fun setConditionValue(value: Int) {
-        this.value = value
+    override fun setConditionValue(value: Any) {
+        this.value = getConvertedValue(value)
     }
 
     override fun getConditionValue(): Int {

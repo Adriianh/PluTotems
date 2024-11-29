@@ -17,8 +17,8 @@ class OptionSchemAir : OptionSchematic<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        air = value
+    override fun setOptionValue(value: Any) {
+        air = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

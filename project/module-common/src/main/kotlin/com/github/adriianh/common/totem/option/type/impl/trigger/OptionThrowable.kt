@@ -17,8 +17,8 @@ class OptionThrowable : OptionBase<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        throwable = value
+    override fun setOptionValue(value: Any) {
+        throwable = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

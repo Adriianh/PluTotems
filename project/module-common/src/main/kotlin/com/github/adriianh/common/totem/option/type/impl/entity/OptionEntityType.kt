@@ -18,8 +18,8 @@ class OptionEntityType : OptionEntity<EntityType>() {
 
     override fun getExampleValue(): EntityType = EntityType.ZOMBIE
 
-    override fun setOptionValue(value: EntityType) {
-        entityType = value
+    override fun setOptionValue(value: Any) {
+        entityType = getConvertedValue(value)
     }
 
     override fun getOptionValue(): EntityType {

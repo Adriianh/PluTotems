@@ -18,8 +18,8 @@ class OptionCooldown : OptionBase<Long>() {
 
     override fun getExampleValue(): Long = 15L
 
-    override fun setOptionValue(value: Long) {
-        cooldown = value
+    override fun setOptionValue(value: Any) {
+        cooldown = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Long {

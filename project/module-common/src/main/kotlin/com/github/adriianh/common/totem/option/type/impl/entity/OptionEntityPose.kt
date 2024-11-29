@@ -20,8 +20,8 @@ class OptionEntityPose : OptionEntity<EntityPose>() {
 
     override fun getExampleValue(): EntityPose = EntityPose()
 
-    override fun setOptionValue(value: EntityPose) {
-        pose = value
+    override fun setOptionValue(value: Any) {
+        pose = getConvertedValue(value)
     }
 
     override fun getOptionValue(): EntityPose {

@@ -17,8 +17,8 @@ class OptionConsumable : OptionBase<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        consumable = value
+    override fun setOptionValue(value: Any) {
+        consumable = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

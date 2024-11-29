@@ -19,7 +19,7 @@ class ActionScript : Action<List<String>>() {
         return scripts
     }
 
-    override fun convertValue(value: Any?): List<String> {
+    override fun getConvertedValue(value: Any?): List<String> {
         return when (value) {
             is List<*> -> {
                 value.filterIsInstance<String>()
@@ -33,8 +33,8 @@ class ActionScript : Action<List<String>>() {
         }
     }
 
-    override fun setActionValue(value: List<String>) {
-        scripts = value
+    override fun setActionValue(value: Any) {
+        scripts = getConvertedValue(value)
     }
 
     override fun getActionValue(): List<String> {

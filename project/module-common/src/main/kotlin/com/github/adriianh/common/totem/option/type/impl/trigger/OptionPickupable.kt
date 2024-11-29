@@ -17,8 +17,8 @@ class OptionPickupable : OptionBase<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        pickupable = value
+    override fun setOptionValue(value: Any) {
+        pickupable = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

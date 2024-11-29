@@ -17,8 +17,8 @@ class OptionSchem : OptionSchematic<String>() {
 
     override fun getExampleValue(): String = "Altar"
 
-    override fun setOptionValue(value: String) {
-        schematic = value
+    override fun setOptionValue(value: Any) {
+        schematic = getConvertedValue(value)
     }
 
     override fun getOptionValue(): String {

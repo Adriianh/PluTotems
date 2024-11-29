@@ -1,40 +1,42 @@
 package com.github.adriianh.common.totem.option.type.impl.base
 
-import com.cryptomorin.xseries.XItemStack
 import com.cryptomorin.xseries.XMaterial
-import com.github.adriianh.common.totem.option.type.OptionBase
+import com.github.adriianh.common.totem.option.Option
 import com.github.adriianh.common.util.colorify
-import org.bukkit.inventory.ItemStack
 import taboolib.library.configuration.ConfigurationSection
 
-class OptionItem : OptionBase<ItemStack>() {
+class OptionItem : Option<ConfigurationSection>() {
     override val id: String = "ITEM"
     override val description: List<String> = listOf("Totem's item")
     override val optional: Boolean = false
 
-    private var item: ItemStack = XMaterial.TOTEM_OF_UNDYING.parseItem()!!
+    private var item: Map<String, Any>? = null
 
-    override fun isTypeCompatible(value: ItemStack): Boolean = true
+    override fun isTypeCompatible(value: ConfigurationSection): Boolean = true
 
-    override fun getDefaultValue(): ItemStack = item
-
-    override fun getExampleValue(): ItemStack = item
-
-    override fun setOptionValue(value: ItemStack) {
-        item = value
+    override fun getDefaultValue(): Map<String, Any> {
+        return mapOf()
     }
 
-    override fun getOptionValue(): ItemStack {
-        return item
+    override fun getExampleValue(): Map<String, Any> {
+        return mapOf()
     }
 
-    override fun getConvertedValue(value: Any?): ItemStack {
-        val section = value as ConfigurationSection
+    override fun setOptionValue(value: Any) {
+        val convertedValue = getConvertedValue(value)
 
-        return XItemStack.deserialize(section.getValues(false))
+        item = convertedValue.getValues(false).mapValues { it.value ?: "" as Any }
     }
 
-    override fun getMaterial(): XMaterial = XMaterial.TOTEM_OF_UNDYING
+    override fun getOptionValue(): Any {
+        return item ?: getDefaultValue()
+    }
+
+    override fun getConvertedValue(value: Any?): ConfigurationSection {
+        return value as ConfigurationSection
+    }
+
+    override fun getMaterial(): XMaterial = XMaterial.SPLASH_POTION
 
     override fun getItemName(): String = "&aItem".colorify()
 

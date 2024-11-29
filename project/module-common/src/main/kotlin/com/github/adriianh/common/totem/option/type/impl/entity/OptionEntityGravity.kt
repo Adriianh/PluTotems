@@ -17,8 +17,8 @@ class OptionEntityGravity : OptionEntity<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        gravity = value
+    override fun setOptionValue(value: Any) {
+        gravity = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

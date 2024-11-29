@@ -17,8 +17,8 @@ class OptionEntityCollidable : OptionEntity<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        collidable = value
+    override fun setOptionValue(value: Any) {
+        collidable = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

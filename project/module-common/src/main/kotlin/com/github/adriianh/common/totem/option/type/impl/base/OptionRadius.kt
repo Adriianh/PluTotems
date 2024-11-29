@@ -17,8 +17,8 @@ class OptionRadius : OptionBase<Double>() {
 
     override fun getExampleValue(): Double = 10.5
 
-    override fun setOptionValue(value: Double) {
-        radius = value
+    override fun setOptionValue(value: Any) {
+        radius = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Double {

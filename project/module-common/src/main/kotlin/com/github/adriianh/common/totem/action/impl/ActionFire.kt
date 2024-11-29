@@ -13,12 +13,12 @@ class ActionFire : Action<Int>() {
 
     override fun getExampleValue(): Int = 10
 
-    override fun convertValue(value: Any?): Int {
+    override fun getConvertedValue(value: Any?): Int {
         return value as Int
     }
 
-    override fun setActionValue(value: Int) {
-        duration = value
+    override fun setActionValue(value: Any) {
+        duration = getConvertedValue(value)
     }
 
     override fun getActionValue(): Int {

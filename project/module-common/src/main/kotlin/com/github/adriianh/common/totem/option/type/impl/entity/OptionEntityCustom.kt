@@ -17,8 +17,8 @@ class OptionEntityCustom : OptionEntity<String>() {
 
     override fun getExampleValue(): String = "Golem"
 
-    override fun setOptionValue(value: String) {
-        model = value
+    override fun setOptionValue(value: Any) {
+        model = getConvertedValue(value)
     }
 
     override fun getOptionValue(): String {

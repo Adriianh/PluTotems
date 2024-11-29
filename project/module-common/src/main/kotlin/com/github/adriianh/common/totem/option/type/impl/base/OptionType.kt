@@ -19,8 +19,8 @@ class OptionType : OptionBase<TotemType>() {
 
     override fun getExampleValue(): TotemType = TotemType.ENTITY
 
-    override fun setOptionValue(value: TotemType) {
-        type = value
+    override fun setOptionValue(value: Any) {
+        type = getConvertedValue(value)
     }
 
     override fun getOptionValue(): TotemType {
@@ -28,7 +28,11 @@ class OptionType : OptionBase<TotemType>() {
     }
 
     override fun getConvertedValue(value: Any?): TotemType {
-        return getTypeByName(value as String)
+        return when (value) {
+            is TotemType -> value
+            is String -> getTypeByName(value)
+            else -> throw IllegalArgumentException("Unsupported value type: ${value?.javaClass?.name}")
+        }
     }
 
     override fun getMaterial(): XMaterial = XMaterial.SPLASH_POTION
@@ -40,7 +44,7 @@ class OptionType : OptionBase<TotemType>() {
             &7Edit totem's type
             &7Example: &aSTRUCTURE
             &7Default value: &a${getDefaultValue()}
-            
+
             &7» &6Left click to edit
             &7» &6Right click to reset
             &7

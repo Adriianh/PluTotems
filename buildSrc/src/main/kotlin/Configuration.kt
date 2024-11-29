@@ -2,13 +2,13 @@ const val rootName = "PluTotems"
 const val rootGroup = "com.github.adriianh"
 const val rootVersion = "2.0.0"
 
-const val kotlinVersion = "2.0.20"
+const val kotlinVersion = "2.0.21"
 const val serializationVersion = "1.7.1"
 const val coroutineVersion = "1.8.1"
 const val shadowJarVersion = "8.1.1"
 const val taboolibPluginVersion = "2.0.19"
 
-const val taboolibVersion = "6.2.0-beta38"
+const val taboolibVersion = "6.2.1-7a5f6e9"
 
 val adventureModules = setOf(
     "net.kyori:adventure-api:4.16.0",

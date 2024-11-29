@@ -14,12 +14,12 @@ class ActionEffect : Action<String>() {
 
     override fun getExampleValue(): String = "TELEPORT_ENDER"
 
-    override fun convertValue(value: Any?): String {
+    override fun getConvertedValue(value: Any?): String {
         return value as String
     }
 
-    override fun setActionValue(value: String) {
-        animation = value
+    override fun setActionValue(value: Any) {
+        animation = getConvertedValue(value)
     }
 
     override fun getActionValue(): String {

@@ -17,8 +17,8 @@ class OptionClickable: OptionBase<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        clickable = value
+    override fun setOptionValue(value: Any) {
+        clickable = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

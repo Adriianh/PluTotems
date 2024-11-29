@@ -11,6 +11,7 @@ import com.github.adriianh.common.totem.option.OptionRegistry
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffectType
+import taboolib.common.platform.function.warning
 import taboolib.library.configuration.ConfigurationSection
 import taboolib.module.configuration.Configuration
 
@@ -51,6 +52,11 @@ object ConfigUtil {
         sections.forEach { section ->
             config.getConfigurationSection(section)?.getValues(false)?.forEach { (element, value) ->
                 registryGetter(element)?.let { property ->
+                    if (value == null) {
+                        warning("Invalid value for $element in $section")
+                        return@let
+                    }
+
                     property.setConvertedValue(value)
                     elements.add(property)
                 }

@@ -17,8 +17,8 @@ class OptionEntityBase : OptionEntity<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        baseplate = value
+    override fun setOptionValue(value: Any) {
+        baseplate = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {
@@ -28,6 +28,7 @@ class OptionEntityBase : OptionEntity<Boolean>() {
     override fun getConvertedValue(value: Any?): Boolean {
         return value as Boolean
     }
+
     override fun getMaterial(): XMaterial = XMaterial.SPLASH_POTION
 
     override fun getItemName(): String = "&aBase Plate".colorify()

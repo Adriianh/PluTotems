@@ -17,8 +17,8 @@ class OptionEntityVisible : OptionEntity<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        visible = value
+    override fun setOptionValue(value: Any) {
+        visible = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

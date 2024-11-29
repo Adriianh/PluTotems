@@ -17,8 +17,8 @@ class OptionEntityInvulnerable : OptionEntity<Boolean>() {
 
     override fun getExampleValue(): Boolean = true
 
-    override fun setOptionValue(value: Boolean) {
-        invulnerable = value
+    override fun setOptionValue(value: Any) {
+        invulnerable = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

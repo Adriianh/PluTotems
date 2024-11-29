@@ -17,8 +17,8 @@ class OptionSchemEntities : OptionSchematic<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        entities = value
+    override fun setOptionValue(value: Any) {
+        entities = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

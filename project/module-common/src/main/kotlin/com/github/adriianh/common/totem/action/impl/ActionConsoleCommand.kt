@@ -14,12 +14,12 @@ class ActionConsoleCommand : Action<String>() {
 
     override fun getExampleValue(): String = "gamemode creative {player}"
 
-    override fun convertValue(value: Any?): String {
+    override fun getConvertedValue(value: Any?): String {
         return value as String
     }
 
-    override fun setActionValue(value: String) {
-        command = value
+    override fun setActionValue(value: Any) {
+        command = getConvertedValue(value)
     }
 
     override fun getActionValue(): String {

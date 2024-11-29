@@ -16,6 +16,7 @@ dependencies {
     /* Bukkit API */
     compileTaboo("platform-bukkit")
     compileTaboo("bukkit-util")
+    compileTaboo("bukkit-xseries")
     compileTaboo("minecraft-chat")
     compileTaboo("bukkit-nms", "bukkit-nms-stable", "bukkit-nms-ai")
 

@@ -20,8 +20,8 @@ class OptionEntityRotation : OptionEntity<EntityRotation>() {
 
     override fun getExampleValue(): EntityRotation = EntityRotation()
 
-    override fun setOptionValue(value: EntityRotation) {
-        pose = value
+    override fun setOptionValue(value: Any) {
+        pose = getConvertedValue(value)
     }
 
     override fun getOptionValue(): EntityRotation {

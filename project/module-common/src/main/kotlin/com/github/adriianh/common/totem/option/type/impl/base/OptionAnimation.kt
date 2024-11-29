@@ -17,8 +17,8 @@ class OptionAnimation : OptionBase<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        enabled = value
+    override fun setOptionValue(value: Any) {
+        enabled = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

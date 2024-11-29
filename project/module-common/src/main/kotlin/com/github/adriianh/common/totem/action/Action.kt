@@ -13,9 +13,9 @@ abstract class Action<T> : Property, Cloneable {
 
     abstract fun getExampleValue(): Any
 
-    abstract fun convertValue(value: Any?): T
+    abstract fun getConvertedValue(value: Any?): Any
 
-    abstract fun setActionValue(value: T)
+    abstract fun setActionValue(value: Any)
 
     abstract fun getActionValue(): T
 
@@ -27,10 +27,8 @@ abstract class Action<T> : Property, Cloneable {
 
     fun getItem() = ItemRepresentation.asItem(getMaterial())
 
-    override fun setConvertedValue(value: Any?) {
-        val convertedValue = convertValue(value)
-
-        return setActionValue(convertedValue)
+     override fun setConvertedValue(value: Any) {
+        return setActionValue(getConvertedValue(value))
     }
 
     public override fun clone(): Action<*> {

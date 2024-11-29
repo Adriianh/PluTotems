@@ -17,8 +17,8 @@ class OptionEntityKill : OptionEntity<Boolean>() {
 
     override fun getExampleValue(): Boolean = true
 
-    override fun setOptionValue(value: Boolean) {
-        execute = value
+    override fun setOptionValue(value: Any) {
+        execute = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

@@ -17,12 +17,12 @@ class ActionBossBar : Action<String>() {
 
     override fun getExampleValue(): String = "Hello World!"
 
-    override fun convertValue(value: Any?): String {
+    override fun getConvertedValue(value: Any?): String {
         return value as String
     }
 
-    override fun setActionValue(value: String) {
-        bossbar = value
+    override fun setActionValue(value: Any) {
+        bossbar = getConvertedValue(value)
     }
 
     override fun getActionValue(): String {

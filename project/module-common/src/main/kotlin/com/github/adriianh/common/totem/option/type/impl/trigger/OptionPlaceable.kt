@@ -17,8 +17,8 @@ class OptionPlaceable : OptionBase<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        placeable = value
+    override fun setOptionValue(value: Any) {
+        placeable = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

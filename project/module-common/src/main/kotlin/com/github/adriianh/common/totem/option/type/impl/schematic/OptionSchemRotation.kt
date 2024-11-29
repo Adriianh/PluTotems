@@ -19,8 +19,8 @@ class OptionSchemRotation  : OptionSchematic<SchemRotation>() {
 
     override fun getExampleValue(): SchemRotation = SchemRotation()
 
-    override fun setOptionValue(value: SchemRotation) {
-        rotation = value
+    override fun setOptionValue(value: Any) {
+        rotation = getConvertedValue(value)
     }
 
     override fun getOptionValue(): SchemRotation {

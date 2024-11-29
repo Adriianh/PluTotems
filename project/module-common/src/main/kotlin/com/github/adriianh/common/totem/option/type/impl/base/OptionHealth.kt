@@ -17,8 +17,8 @@ class OptionHealth : OptionBase<Double>() {
 
     override fun getExampleValue(): Double = 20.0
 
-    override fun setOptionValue(value: Double) {
-        health = value
+    override fun setOptionValue(value: Any) {
+        health = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Double {

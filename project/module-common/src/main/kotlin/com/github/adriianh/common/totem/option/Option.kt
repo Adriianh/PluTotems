@@ -18,11 +18,11 @@ abstract class Option<T> : Property, Cloneable {
 
     abstract fun getExampleValue(): Any
 
-    abstract fun setOptionValue(value: T)
+    abstract fun setOptionValue(value: Any)
 
     abstract fun getOptionValue(): Any
 
-    abstract fun getConvertedValue(value: Any?): T
+    abstract fun getConvertedValue(value: Any?): Any
 
     abstract fun getMaterial(): XMaterial
 
@@ -32,7 +32,7 @@ abstract class Option<T> : Property, Cloneable {
 
     open fun getItem() = ItemRepresentation.asItem(getMaterial())
 
-    override fun setConvertedValue(value: Any?) {
+    override fun setConvertedValue(value: Any) {
         val convertedValue = getConvertedValue(value)
 
         return setOptionValue(convertedValue)

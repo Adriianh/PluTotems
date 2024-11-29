@@ -17,8 +17,8 @@ class OptionDuration : OptionBase<Int>() {
 
     override fun getExampleValue(): Int = 30
 
-    override fun setOptionValue(value: Int) {
-        duration = value
+    override fun setOptionValue(value: Any) {
+        duration = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Int {

@@ -22,18 +22,16 @@ abstract class Condition<T> : Property, Cloneable {
 
     abstract fun getItemLore(): List<String>
 
-    abstract fun convertValue(value: Any?): T
+    abstract fun getConvertedValue(value: Any?): Any
 
-    abstract fun setConditionValue(value: T)
+    abstract fun setConditionValue(value: Any)
 
     abstract fun getConditionValue(): T
 
     fun getItem() = ItemRepresentation.asItem(getMaterial())
 
-    override fun setConvertedValue(value: Any?) {
-        val convertedValue = convertValue(value)
-
-        return setConditionValue(convertedValue)
+    override fun setConvertedValue(value: Any) {
+        return setConditionValue(getConvertedValue(value))
     }
 
     public override fun clone(): Condition<*> {

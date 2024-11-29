@@ -17,8 +17,8 @@ class OptionInventory : OptionBase<Boolean>() {
 
     override fun getExampleValue(): Boolean = true
 
-    override fun setOptionValue(value: Boolean) {
-        enabled = value
+    override fun setOptionValue(value: Any) {
+        enabled = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

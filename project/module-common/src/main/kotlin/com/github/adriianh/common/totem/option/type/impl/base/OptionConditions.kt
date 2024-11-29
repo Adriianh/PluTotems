@@ -5,12 +5,12 @@ import com.github.adriianh.common.totem.option.Option
 import com.github.adriianh.common.util.colorify
 import taboolib.library.configuration.ConfigurationSection
 
-class OptionEffects : Option<ConfigurationSection>() {
-    override val id: String = "EFFECTS"
-    override val description: List<String> = listOf("Totem's effects")
+class OptionConditions : Option<ConfigurationSection>() {
+    override val id: String = "CONDITIONS"
+    override val description: List<String> = listOf("Totem's conditions")
     override val optional: Boolean = true
 
-    private var effects: Map<String, Any>? = null
+    private var conditions: Map<String, Any>? = null
 
     override fun isTypeCompatible(value: ConfigurationSection): Boolean = true
 
@@ -25,24 +25,24 @@ class OptionEffects : Option<ConfigurationSection>() {
     override fun setOptionValue(value: Any) {
         val convertedValue = getConvertedValue(value)
 
-        effects = convertedValue.getValues(false).mapValues { it.value ?: "" as Any }
+        conditions = convertedValue.getValues(false).mapValues { it.value ?: "" as Any }
     }
 
     override fun getOptionValue(): Any {
-        return effects ?: getDefaultValue()
+        return conditions ?: getDefaultValue()
     }
 
     override fun getConvertedValue(value: Any?): ConfigurationSection {
         return value as ConfigurationSection
     }
 
-    override fun getMaterial(): XMaterial = XMaterial.POTION
+    override fun getMaterial(): XMaterial = XMaterial.BOOK
 
-    override fun getItemName(): String = "&aEffects".colorify()
+    override fun getItemName(): String = "&aConditions".colorify()
 
     override fun getItemLore(): List<String> {
         return """
-            &7Edit totem's effects
+            &7Edit totem's conditions
 
             &7» &6Left click to edit
             &7» &6Right click to reset

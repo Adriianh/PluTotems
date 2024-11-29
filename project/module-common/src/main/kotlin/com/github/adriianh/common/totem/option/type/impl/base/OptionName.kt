@@ -17,8 +17,8 @@ class OptionName: OptionBase<String>() {
 
     override fun getExampleValue(): String = "New Totem"
 
-    override fun setOptionValue(value: String) {
-        name = value
+    override fun setOptionValue(value: Any) {
+        name = getConvertedValue(value)
     }
 
     override fun getOptionValue(): String {

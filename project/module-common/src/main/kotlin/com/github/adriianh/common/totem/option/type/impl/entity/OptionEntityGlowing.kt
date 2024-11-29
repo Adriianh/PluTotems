@@ -17,8 +17,8 @@ class OptionEntityGlowing : OptionEntity<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        glowing = value
+    override fun setOptionValue(value: Any) {
+        glowing = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

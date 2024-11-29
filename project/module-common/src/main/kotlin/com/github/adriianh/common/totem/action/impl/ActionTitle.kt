@@ -13,12 +13,12 @@ class ActionTitle : Action<String>() {
 
     override fun getExampleValue(): String = title
 
-    override fun convertValue(value: Any?): String {
+    override fun getConvertedValue(value: Any?): String {
         return value as String
     }
 
-    override fun setActionValue(value: String) {
-        title = value
+    override fun setActionValue(value: Any) {
+        title = getConvertedValue(value)
     }
 
     override fun getActionValue(): String {

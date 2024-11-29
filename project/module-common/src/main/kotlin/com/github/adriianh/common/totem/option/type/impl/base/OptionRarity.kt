@@ -17,8 +17,8 @@ class OptionRarity : OptionBase<String>() {
 
     override fun getExampleValue(): String = "LEGENDARY"
 
-    override fun setOptionValue(value: String) {
-        rarity = value
+    override fun setOptionValue(value: Any) {
+        rarity = getConvertedValue(value)
     }
 
     override fun getOptionValue(): String {

@@ -17,8 +17,8 @@ class OptionEntitySmall : OptionEntity<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        small = value
+    override fun setOptionValue(value: Any) {
+        small = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {

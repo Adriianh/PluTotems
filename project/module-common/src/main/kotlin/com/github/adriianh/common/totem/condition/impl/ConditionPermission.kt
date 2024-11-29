@@ -12,12 +12,12 @@ class ConditionPermission : Condition<String>() {
 
     private var permission: String = "plutotems.totem.usage"
 
-    override fun convertValue(value: Any?): String {
+    override fun getConvertedValue(value: Any?): String {
         return value as? String ?: throw IllegalArgumentException("Value is not a string")
     }
 
-    override fun setConditionValue(value: String) {
-        this.permission = value
+    override fun setConditionValue(value: Any) {
+        permission = getConvertedValue(value)
     }
 
     override fun getConditionValue(): String {

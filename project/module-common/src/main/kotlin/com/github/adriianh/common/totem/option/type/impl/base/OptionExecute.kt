@@ -4,9 +4,9 @@ import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionBase
 import com.github.adriianh.common.util.colorify
 
-class OptionScripts : OptionBase<String>() {
-    override val id: String = "SCRIPTSEXECUTOR"
-    override val description: List<String> = listOf("Totem's scripts")
+class OptionExecute : OptionBase<String>() {
+    override val id: String = "EXECUTE"
+    override val description: List<String> = listOf("Totem's actions")
     override val optional: Boolean = true
 
     private var execute: String = "self"
@@ -17,8 +17,8 @@ class OptionScripts : OptionBase<String>() {
 
     override fun getExampleValue(): String = "all"
 
-    override fun setOptionValue(value: String) {
-        execute = value
+    override fun setOptionValue(value: Any) {
+        execute = value.toString()
     }
 
     override fun getOptionValue(): String {
@@ -31,11 +31,11 @@ class OptionScripts : OptionBase<String>() {
 
     override fun getMaterial(): XMaterial = XMaterial.SPLASH_POTION
 
-    override fun getItemName(): String = "&aScripts".colorify()
+    override fun getItemName(): String = "&aActions".colorify()
 
     override fun getItemLore(): List<String> {
         return """
-            &7Edit totem's scripts (self, all, none)
+            &7Edit totem's actions (self, all, none)
             &7Example: &anone
             &7Default value: &a${getDefaultValue()}
             

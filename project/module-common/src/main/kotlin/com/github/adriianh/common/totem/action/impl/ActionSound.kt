@@ -15,12 +15,12 @@ class ActionSound : Action<String>() {
 
     override fun getExampleValue(): String = "ENTITY_VILLAGER_YES-1-1"
 
-    override fun convertValue(value: Any?): String {
+    override fun getConvertedValue(value: Any?): String {
         return value as String
     }
 
-    override fun setActionValue(value: String) {
-        sound = value
+    override fun setActionValue(value: Any) {
+        sound = getConvertedValue(value)
     }
 
     override fun getActionValue(): String {

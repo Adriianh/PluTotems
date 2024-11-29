@@ -24,8 +24,8 @@ class OptionEntityEquipment : OptionEntity<EntityEquipment>() {
         offhand = XMaterial.SHIELD.parseItem()
     )
 
-    override fun setOptionValue(value: EntityEquipment) {
-        equipment = value
+    override fun setOptionValue(value: Any) {
+        equipment = getConvertedValue(value)
     }
 
     override fun getOptionValue(): EntityEquipment {

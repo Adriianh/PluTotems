@@ -17,8 +17,8 @@ class OptionEntityMarker : OptionEntity<Boolean>() {
 
     override fun getExampleValue(): Boolean = false
 
-    override fun setOptionValue(value: Boolean) {
-        isMarker = value
+    override fun setOptionValue(value: Any) {
+        isMarker = getConvertedValue(value)
     }
 
     override fun getOptionValue(): Boolean {
