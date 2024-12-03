@@ -3,15 +3,18 @@ package com.github.adriianh.common.totem.option.type.impl.schematic
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.compat.schematic.SchemRotation
 import com.github.adriianh.common.totem.option.type.OptionSchematic
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 import taboolib.library.configuration.ConfigurationSection
 
-class OptionSchemRotation  : OptionSchematic<SchemRotation>() {
-    override val id: String = "SCHEMATICROTATION"
+class OptionSchemRotation  : OptionSchematic<SchemRotation>(OptionTypes.SCHEMATIC) {
+    override val id: String = "ROTATION"
     override val description: List<String> = listOf("Totem's schematic rotation")
     override val optional: Boolean = true
 
     private var rotation: SchemRotation = SchemRotation()
+
+    override fun getOptionPath(): String = "options.schematic.$identifier"
 
     override fun isTypeCompatible(value: SchemRotation): Boolean = true
 

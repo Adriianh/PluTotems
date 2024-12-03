@@ -2,14 +2,17 @@ package com.github.adriianh.common.totem.option.type.impl.trigger
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionBase
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 
-class OptionThrowable : OptionBase<Boolean>() {
+class OptionThrowable : OptionBase<Boolean>(OptionTypes.BASE) {
     override val id: String = "THROWABLE"
     override val description: List<String> = listOf("If the totem is throwable")
     override val optional: Boolean = true
 
     private var throwable: Boolean = true
+
+    override fun getOptionPath(): String = "options.$identifier"
 
     override fun isTypeCompatible(value: Boolean): Boolean = true
 
@@ -26,7 +29,11 @@ class OptionThrowable : OptionBase<Boolean>() {
     }
 
     override fun getConvertedValue(value: Any?): Boolean {
-        return value as Boolean
+        return when (value) {
+            is Boolean -> value
+            is String -> value.toBoolean()
+            else -> throw IllegalArgumentException("Value is not a boolean")
+        }
     }
 
     override fun getMaterial(): XMaterial = XMaterial.OAK_BUTTON

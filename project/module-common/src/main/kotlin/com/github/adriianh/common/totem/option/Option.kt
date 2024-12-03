@@ -3,14 +3,17 @@ package com.github.adriianh.common.totem.option
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.ItemRepresentation
 import com.github.adriianh.common.totem.Property
+import com.github.adriianh.common.totem.option.type.OptionTypes
 
-abstract class Option<T> : Property, Cloneable {
+abstract class Option<T>(val type: OptionTypes) : Property, Cloneable {
     abstract val id: String
     abstract val description: List<String>
     abstract val optional: Boolean
 
     override val identifier: String
         get() = id
+
+    abstract fun getOptionPath(): String
 
     abstract fun isTypeCompatible(value: T): Boolean
 

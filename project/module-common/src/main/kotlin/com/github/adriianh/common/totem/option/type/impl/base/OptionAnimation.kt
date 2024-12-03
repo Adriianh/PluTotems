@@ -2,14 +2,17 @@ package com.github.adriianh.common.totem.option.type.impl.base
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionBase
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 
-class OptionAnimation : OptionBase<Boolean>() {
+class OptionAnimation : OptionBase<Boolean>(OptionTypes.BASE) {
     override val id: String = "ANIMATION"
     override val description: List<String> = listOf("Totem's animation")
     override val optional: Boolean = true
 
     private var enabled: Boolean = true
+
+    override fun getOptionPath(): String = "options.$identifier"
 
     override fun isTypeCompatible(value: Boolean): Boolean = true
 
@@ -26,7 +29,11 @@ class OptionAnimation : OptionBase<Boolean>() {
     }
 
     override fun getConvertedValue(value: Any?): Boolean {
-        return value as Boolean
+        return when (value) {
+            is Boolean -> value
+            is String -> value.toBoolean()
+            else -> throw IllegalArgumentException("Value is not a boolean")
+        }
     }
 
     override fun getMaterial(): XMaterial = XMaterial.TOTEM_OF_UNDYING

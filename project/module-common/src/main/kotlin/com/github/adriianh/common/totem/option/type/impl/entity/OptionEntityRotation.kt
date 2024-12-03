@@ -4,15 +4,18 @@ import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.compat.entity.EntityRotation
 import com.github.adriianh.common.compat.entity.getVector
 import com.github.adriianh.common.totem.option.type.OptionEntity
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 import taboolib.library.configuration.ConfigurationSection
 
-class OptionEntityRotation : OptionEntity<EntityRotation>() {
-    override val id: String = "ENTITYROTATION"
+class OptionEntityRotation : OptionEntity<EntityRotation>(OptionTypes.ENTITY) {
+    override val id: String = "ROTATION"
     override val description: List<String> = listOf("Entity's equipment")
     override val optional: Boolean = true
 
     private var pose: EntityRotation = EntityRotation()
+
+    override fun getOptionPath(): String = "options.entity.$identifier"
 
     override fun isTypeCompatible(value: EntityRotation): Boolean = true
 

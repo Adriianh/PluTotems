@@ -2,14 +2,17 @@ package com.github.adriianh.common.totem.option.type.impl.entity
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionEntity
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 
-class OptionEntityCustom : OptionEntity<String>() {
-    override val id: String = "ENTITYMODEL"
+class OptionEntityCustom : OptionEntity<String>(OptionTypes.ENTITY) {
+    override val id: String = "MODEL"
     override val description: List<String> = listOf("Totem's custom entity (model)")
     override val optional: Boolean = true
 
     private var model: String = "Squirrel"
+
+    override fun getOptionPath(): String = "options.entity.$identifier"
 
     override fun isTypeCompatible(value: String): Boolean = true
 

@@ -5,7 +5,9 @@ import com.github.adriianh.common.totem.action.Action
 import com.github.adriianh.common.totem.condition.Condition
 import com.github.adriianh.common.totem.effect.Effect
 import com.github.adriianh.common.totem.option.Option
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import org.bukkit.inventory.ItemStack
+import taboolib.library.configuration.ConfigurationSection
 import taboolib.module.configuration.Configuration
 import java.util.*
 
@@ -30,6 +32,10 @@ class Totem(
     fun getEffects(): List<Effect> = effectsMap.values.toList()
     fun getConditions(): List<Condition<*>> = conditionsMap.values.toList()
 
+    fun getOption(identifier: String, type: OptionTypes): Option<*>? {
+        return optionsMap.values.find { it.identifier == identifier && it.type == type }
+    }
+
     fun getOption(identifier: String): Option<*>? {
         return optionsMap[identifier.uppercase(Locale.getDefault())]
     }
@@ -44,6 +50,10 @@ class Totem(
 
     fun getCondition(identifier: String): Condition<*>? {
         return conditionsMap[identifier.uppercase(Locale.getDefault())]
+    }
+
+    fun getConfigurationSection(): ConfigurationSection {
+        return settings?.getConfigurationSection(id)!!
     }
 
     override fun getParameters(name: String): Any? {

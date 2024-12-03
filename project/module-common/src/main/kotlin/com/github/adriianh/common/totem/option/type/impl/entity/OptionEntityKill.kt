@@ -2,14 +2,17 @@ package com.github.adriianh.common.totem.option.type.impl.entity
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionEntity
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 
-class OptionEntityKill : OptionEntity<Boolean>() {
-    override val id: String = "ENTITYKILL"
+class OptionEntityKill : OptionEntity<Boolean>(OptionTypes.ENTITY) {
+    override val id: String = "KILL"
     override val description: List<String> = listOf("Run totem when entity is killed")
     override val optional: Boolean = true
 
     private var execute: Boolean = false
+
+    override fun getOptionPath(): String = "options.entity.$identifier"
 
     override fun isTypeCompatible(value: Boolean): Boolean = true
 
@@ -26,7 +29,11 @@ class OptionEntityKill : OptionEntity<Boolean>() {
     }
 
     override fun getConvertedValue(value: Any?): Boolean {
-        return value as Boolean
+        return when (value) {
+            is Boolean -> value
+            is String -> value.toBoolean()
+            else -> throw IllegalArgumentException("Value is not a boolean")
+        }
     }
 
     override fun getMaterial(): XMaterial = XMaterial.SPLASH_POTION

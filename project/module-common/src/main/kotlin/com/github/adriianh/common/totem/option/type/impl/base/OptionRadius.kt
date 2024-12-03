@@ -2,14 +2,17 @@ package com.github.adriianh.common.totem.option.type.impl.base
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionBase
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 
-class OptionRadius : OptionBase<Double>() {
+class OptionRadius : OptionBase<Double>(OptionTypes.BASE) {
     override val id: String = "RADIUS"
     override val description: List<String> = listOf("Totem's duration")
     override val optional: Boolean = true
 
     private var radius: Double = 0.0
+
+    override fun getOptionPath(): String = "options.$identifier"
 
     override fun isTypeCompatible(value: Double): Boolean = true
 

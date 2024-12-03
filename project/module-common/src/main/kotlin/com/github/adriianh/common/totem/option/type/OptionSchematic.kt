@@ -4,7 +4,7 @@ import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.ItemRepresentation
 import com.github.adriianh.common.totem.option.Option
 
-abstract class OptionSchematic<Any> : Option<Any>() {
+abstract class OptionSchematic<Any>(type: OptionTypes) : Option<Any>(type) {
     abstract override val id: String
     abstract override val description: List<String>
     abstract override val optional: Boolean

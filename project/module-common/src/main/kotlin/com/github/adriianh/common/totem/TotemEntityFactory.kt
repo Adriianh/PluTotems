@@ -3,6 +3,7 @@ package com.github.adriianh.common.totem
 import com.github.adriianh.common.compat.entity.EntityAnimation
 import com.github.adriianh.common.compat.entity.EntityFactory
 import com.github.adriianh.common.compat.entity.moveEntity
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.totem.option.type.impl.base.OptionAnimation
 import com.github.adriianh.common.totem.option.type.impl.base.OptionDuration
 import com.github.adriianh.common.totem.option.type.impl.entity.OptionEntityType
@@ -21,7 +22,7 @@ object TotemEntityFactory {
     fun spawnEntity(player: Player, totem: Totem) {
         val location = player.location
         val duration = totem.getOption("duration") as OptionDuration
-        val type = (totem.getOption("entitytype") as? OptionEntityType)?.getOptionValue()
+        val type = (totem.getOption("type", OptionTypes.ENTITY) as? OptionEntityType)?.getOptionValue()
             ?: return player.sendLang("Totem-Non-Entity")
 
         val entity = when (type) {

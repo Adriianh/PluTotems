@@ -2,15 +2,18 @@ package com.github.adriianh.common.totem.option.type.impl.entity
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionEntity
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 import org.bukkit.entity.EntityType
 
-class OptionEntityType : OptionEntity<EntityType>() {
-    override val id: String = "ENTITYTYPE"
+class OptionEntityType : OptionEntity<EntityType>(OptionTypes.ENTITY) {
+    override val id: String = "TYPE"
     override val description: List<String> = listOf("Totem's entity type")
     override val optional: Boolean = true
 
     private var entityType: EntityType = EntityType.ZOMBIE
+
+    override fun getOptionPath(): String = "options.entity.$identifier"
 
     override fun isTypeCompatible(value: EntityType): Boolean = true
 

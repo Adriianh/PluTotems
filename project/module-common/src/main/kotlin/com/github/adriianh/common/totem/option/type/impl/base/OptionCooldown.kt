@@ -2,15 +2,18 @@ package com.github.adriianh.common.totem.option.type.impl.base
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionBase
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.TimeUtil
 import com.github.adriianh.common.util.colorify
 
-class OptionCooldown : OptionBase<Long>() {
+class OptionCooldown : OptionBase<Long>(OptionTypes.BASE) {
     override val id: String = "COOLDOWN"
     override val description: List<String> = listOf("Totem's cooldown")
     override val optional: Boolean = true
 
     private var cooldown: Long = 0L
+
+    override fun getOptionPath(): String = "options.$identifier"
 
     override fun isTypeCompatible(value: Long): Boolean = true
 

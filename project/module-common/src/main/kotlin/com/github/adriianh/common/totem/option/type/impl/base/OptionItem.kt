@@ -1,16 +1,19 @@
 package com.github.adriianh.common.totem.option.type.impl.base
 
 import com.cryptomorin.xseries.XMaterial
-import com.github.adriianh.common.totem.option.Option
+import com.github.adriianh.common.totem.option.type.OptionBase
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 import taboolib.library.configuration.ConfigurationSection
 
-class OptionItem : Option<ConfigurationSection>() {
+class OptionItem : OptionBase<ConfigurationSection>(OptionTypes.BASE) {
     override val id: String = "ITEM"
     override val description: List<String> = listOf("Totem's item")
     override val optional: Boolean = false
 
     private var item: Map<String, Any>? = null
+
+    override fun getOptionPath(): String = identifier
 
     override fun isTypeCompatible(value: ConfigurationSection): Boolean = true
 

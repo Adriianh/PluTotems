@@ -7,7 +7,9 @@ import com.github.adriianh.common.totem.action.ActionRegistry
 import com.github.adriianh.common.totem.condition.ConditionRegistry
 import com.github.adriianh.common.totem.effect.Effect
 import com.github.adriianh.common.totem.getTypeByName
+import com.github.adriianh.common.totem.option.Option
 import com.github.adriianh.common.totem.option.OptionRegistry
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffectType
@@ -27,12 +29,38 @@ object ConfigUtil {
         name = config.getString("$key.name")!!,
         item = getItemStack(config, "$key.item")!!,
         type = getTypeByName(config.getString("$key.type")!!),
-        options = getElements(config, key, "options", OptionRegistry::getOption),
+        options = getOptions(config, key),
         actions = getElements(config, key, "actions", ActionRegistry::getAction),
         effects = getEffects(config, key),
         conditions = getElements(config, key, "conditions", ConditionRegistry::getCondition),
         settings = config,
     )
+
+    private fun getOptions(config: Configuration, key: String): List<Option<*>> {
+        val options = mutableListOf<Option<*>>()
+        val sections = mutableMapOf(
+            "$key" to OptionTypes.BASE,
+            "$key.options" to OptionTypes.BASE,
+            "$key.options.entity" to OptionTypes.ENTITY,
+            "$key.options.schematic" to OptionTypes.SCHEMATIC
+        )
+
+        sections.forEach { (section, type) ->
+            config.getConfigurationSection(section)?.getValues(false)?.forEach { (element, value) ->
+                OptionRegistry.getOption(element, type)?.let { option ->
+                    if (value == null) {
+                        warning("Invalid value for $element in $section")
+                        return@let
+                    }
+
+                    option.setConvertedValue(value)
+                    options.add(option)
+                }
+            }
+        }
+
+        return options
+    }
 
     private fun <T : Property> getElements(
         config: Configuration,
@@ -41,25 +69,17 @@ object ConfigUtil {
         registryGetter: (String) -> T?
     ): List<T> {
         val elements = mutableListOf<T>()
+        val section = "$key.$path"
 
-        val sections = mutableListOf(
-            key,
-            "$key.$path",
-            "$key.$path.entity",
-            "$key.$path.structure",
-        )
-
-        sections.forEach { section ->
-            config.getConfigurationSection(section)?.getValues(false)?.forEach { (element, value) ->
-                registryGetter(element)?.let { property ->
-                    if (value == null) {
-                        warning("Invalid value for $element in $section")
-                        return@let
-                    }
-
-                    property.setConvertedValue(value)
-                    elements.add(property)
+        config.getConfigurationSection(section)?.getValues(false)?.forEach { (element, value) ->
+            registryGetter(element)?.let { property ->
+                if (value == null) {
+                    warning("Invalid value for $element in $section")
+                    return@let
                 }
+
+                property.setConvertedValue(value)
+                elements.add(property)
             }
         }
 

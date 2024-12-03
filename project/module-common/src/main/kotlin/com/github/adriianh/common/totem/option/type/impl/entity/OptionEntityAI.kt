@@ -2,14 +2,17 @@ package com.github.adriianh.common.totem.option.type.impl.entity
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionEntity
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 
-class OptionEntityAI : OptionEntity<Boolean>() {
-    override val id: String = "ENTITYAI"
+class OptionEntityAI : OptionEntity<Boolean>(OptionTypes.ENTITY) {
+    override val id: String = "AI"
     override val description: List<String> = listOf("Enable entity AI")
     override val optional: Boolean = true
 
     private var ai: Boolean = true
+
+    override fun getOptionPath(): String = "options.entity.$identifier"
 
     override fun isTypeCompatible(value: Boolean): Boolean = true
 
@@ -26,7 +29,11 @@ class OptionEntityAI : OptionEntity<Boolean>() {
     }
 
     override fun getConvertedValue(value: Any?): Boolean {
-        return value as Boolean
+        return when (value) {
+            is Boolean -> value
+            is String -> value.toBoolean()
+            else -> throw IllegalArgumentException("Value is not a boolean")
+        }
     }
 
     override fun getMaterial(): XMaterial = XMaterial.SPLASH_POTION

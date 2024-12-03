@@ -2,6 +2,7 @@ package com.github.adriianh.core.event
 
 import com.github.adriianh.common.totem.TotemExecutor.execute
 import com.github.adriianh.common.totem.TotemFactory
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
@@ -22,7 +23,7 @@ object EntityEvents {
         if (TotemFactory.isOwner(player, entity)) return
 
         val totem = TotemFactory.getTotem(entity)
-        val option = totem.getOption("ENTITYKILL") ?: return
+        val option = totem.getOption("kill", OptionTypes.ENTITY) ?: return
 
         if (!option.getOptionValue().cbool) return
 

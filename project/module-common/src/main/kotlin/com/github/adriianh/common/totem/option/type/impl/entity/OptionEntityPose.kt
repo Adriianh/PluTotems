@@ -4,15 +4,18 @@ import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.compat.entity.EntityPose
 import com.github.adriianh.common.compat.entity.getVector
 import com.github.adriianh.common.totem.option.type.OptionEntity
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 import taboolib.library.configuration.ConfigurationSection
 
-class OptionEntityPose : OptionEntity<EntityPose>() {
-    override val id: String = "ENTITYEQUIPMENT"
+class OptionEntityPose : OptionEntity<EntityPose>(OptionTypes.ENTITY) {
+    override val id: String = "EQUIPMENT"
     override val description: List<String> = listOf("Entity's equipment")
     override val optional: Boolean = true
 
     private var pose: EntityPose = EntityPose()
+
+    override fun getOptionPath(): String = "options.entity.$identifier"
 
     override fun isTypeCompatible(value: EntityPose): Boolean = true
 

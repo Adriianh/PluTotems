@@ -4,7 +4,7 @@ import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.ItemRepresentation
 import com.github.adriianh.common.totem.option.Option
 
-abstract class OptionBase<Any> : Option<Any>() {
+abstract class OptionBase<T>(type: OptionTypes) : Option<T>(type) {
     abstract override val id: String
     abstract override val description: List<String>
     abstract override val optional: Boolean
@@ -12,7 +12,7 @@ abstract class OptionBase<Any> : Option<Any>() {
     override val identifier: String
         get() = id
 
-    abstract override fun isTypeCompatible(value: Any): Boolean
+    abstract override fun isTypeCompatible(value: T): Boolean
 
     abstract override fun getDefaultValue(): kotlin.Any
 

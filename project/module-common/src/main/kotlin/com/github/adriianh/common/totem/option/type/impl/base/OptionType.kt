@@ -4,14 +4,17 @@ import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.TotemType
 import com.github.adriianh.common.totem.getTypeByName
 import com.github.adriianh.common.totem.option.type.OptionBase
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 
-class OptionType : OptionBase<TotemType>() {
+class OptionType : OptionBase<TotemType>(OptionTypes.BASE) {
     override val id: String = "TYPE"
     override val description: List<String> = listOf("Totem's actions")
     override val optional: Boolean = true
 
-    private var type: TotemType = TotemType.ITEM
+    private var totemType: TotemType = TotemType.ITEM
+
+    override fun getOptionPath(): String = identifier
 
     override fun isTypeCompatible(value: TotemType): Boolean = true
 
@@ -20,11 +23,11 @@ class OptionType : OptionBase<TotemType>() {
     override fun getExampleValue(): TotemType = TotemType.ENTITY
 
     override fun setOptionValue(value: Any) {
-        type = getConvertedValue(value)
+        totemType = getConvertedValue(value)
     }
 
     override fun getOptionValue(): TotemType {
-        return type
+        return totemType
     }
 
     override fun getConvertedValue(value: Any?): TotemType {

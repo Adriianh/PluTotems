@@ -2,14 +2,17 @@ package com.github.adriianh.common.totem.option.type.impl.trigger
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionBase
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 
-class OptionPickupable : OptionBase<Boolean>() {
+class OptionPickupable : OptionBase<Boolean>(OptionTypes.BASE) {
     override val id: String = "PICKUPABLE"
     override val description: List<String> = listOf("If the totem is pickupable")
     override val optional: Boolean = true
 
     private var pickupable: Boolean = true
+
+    override fun getOptionPath(): String = "options.$identifier"
 
     override fun isTypeCompatible(value: Boolean): Boolean = true
 
@@ -26,7 +29,11 @@ class OptionPickupable : OptionBase<Boolean>() {
     }
 
     override fun getConvertedValue(value: Any?): Boolean {
-        return value as Boolean
+        return when (value) {
+            is Boolean -> value
+            is String -> value.toBoolean()
+            else -> throw IllegalArgumentException("Value is not a boolean")
+        }
     }
 
     override fun getMaterial(): XMaterial = XMaterial.COOKED_BEEF

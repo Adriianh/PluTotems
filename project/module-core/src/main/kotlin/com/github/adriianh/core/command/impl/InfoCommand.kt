@@ -5,6 +5,7 @@ import com.github.adriianh.common.totem.TotemRegistry
 import com.github.adriianh.common.totem.action.ActionRegistry
 import com.github.adriianh.common.totem.condition.ConditionRegistry
 import com.github.adriianh.common.totem.option.OptionRegistry
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import taboolib.common.platform.command.CommandBody
@@ -65,12 +66,19 @@ object InfoCommand {
                 suggestion<Player> { _, context ->
                     val totem = TotemRegistry.getTotem(context["id"])
 
-                    totem?.getOptions()?.map { it.id }
+                    totem?.getOptions()?.map { "${it.identifier} (${it.type})" }
                 }
                 execute<CommandSender> { sender, context, _ ->
                     val totem = TotemRegistry.getTotem(context["id"])!!
-                    val option = totem.getOption(context["option"])
 
+                    val identifier = context["option"].substringBefore(" (")
+                    val type = OptionTypes.valueOf(
+                        context["option"]
+                            .substringAfter(" (")
+                            .substringBefore(")")
+                    )
+
+                    val option = totem.getOption(identifier, type)
                     sender.sendMessage("${option?.getOptionValue()}")
                 }
             }

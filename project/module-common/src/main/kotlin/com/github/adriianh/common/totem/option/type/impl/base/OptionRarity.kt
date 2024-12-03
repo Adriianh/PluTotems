@@ -2,14 +2,17 @@ package com.github.adriianh.common.totem.option.type.impl.base
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionBase
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 
-class OptionRarity : OptionBase<String>() {
+class OptionRarity : OptionBase<String>(OptionTypes.BASE) {
     override val id: String = "RARITY"
     override val description: List<String> = listOf("Totem's rarity")
     override val optional: Boolean = true
 
     private var rarity: String = "COMMON"
+
+    override fun getOptionPath(): String = "options.$identifier"
 
     override fun isTypeCompatible(value: String): Boolean = true
 

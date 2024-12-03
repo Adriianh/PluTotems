@@ -2,11 +2,13 @@ package com.github.adriianh.core.ui
 
 import com.github.adriianh.common.totem.Totem
 import com.github.adriianh.common.totem.TotemRegistry
+import com.github.adriianh.common.util.colorify
 import com.github.adriianh.core.sorter.TotemSorter
+import com.github.adriianh.core.ui.MenuHelper.FILL_ITEM
+import com.github.adriianh.core.ui.icon.getClickableTotem
 import nl.odalitadevelopments.menus.annotations.Menu
 import nl.odalitadevelopments.menus.contents.MenuContents
 import nl.odalitadevelopments.menus.items.ClickableItem
-import nl.odalitadevelopments.menus.items.DisplayItem
 import nl.odalitadevelopments.menus.items.buttons.CloseItem
 import nl.odalitadevelopments.menus.items.buttons.PageItem
 import nl.odalitadevelopments.menus.iterators.MenuIteratorType
@@ -25,16 +27,9 @@ import taboolib.platform.util.ItemBuilder
 )
 class ListMenu : PlayerMenuProvider {
     override fun onLoad(player: Player, menuContents: MenuContents) {
-        menuContents.fillBorders(
-            DisplayItem.of(
-                ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).apply {
-                    name = ""
-                    hideAll()
-                }.build()
-            )
-        )
+        menuContents.fillBorders(FILL_ITEM)
 
-        val pagination: ObjectPagination<Totem> = menuContents.pagination("player_example_pagination", 36)
+        val pagination: ObjectPagination<Totem> = menuContents.pagination("paginated_list_menu", 36)
             .objectIterator(this.createObjectIterator(menuContents))
             .create()
 
@@ -55,22 +50,23 @@ class ListMenu : PlayerMenuProvider {
         menuContents.setRefreshable(51) {
             val cachedSorter: TotemSorter = menuContents.cache("sorter", TotemSorter.NAME_ASCENDING)
             ClickableItem.of(ItemBuilder(Material.HOPPER).apply {
-                name = "Sorter"
+                name = "&6Sorter"
 
-                lore.add("")
-                for (sorter in TotemSorter.entries) {
-                    lore.add(
-                        if (cachedSorter == sorter) "§a${sorter.name}"
-                        else "§7${sorter.name}"
-                    )
-                }
+                lore.addAll(listOf(
+                    "",
+                    "&7• &aSorted by ${cachedSorter.name}",
+                    ""
+                ).colorify())
 
                 val next: TotemSorter = cachedSorter.next()
                 val previous: TotemSorter = cachedSorter.previous()
 
-                lore.add("")
-                lore.add("§7Left Click: §a${next.name}")
-                lore.add("§7Right Click: §a${previous.name}")
+                lore.addAll(listOf(
+                        "",
+                        "&7• &6Left Click &7to sort by ${next.name}",
+                        "&7• &6Right Click &7to sort by ${previous.name}",
+                        ""
+                ).colorify())
             }.build()) { event: InventoryClickEvent ->
                 val next: TotemSorter = if (event.isRightClick) cachedSorter.next() else cachedSorter.previous()
                 pagination.sorter(0, next.getComparator())
@@ -83,8 +79,16 @@ class ListMenu : PlayerMenuProvider {
     }
 
     private fun createObjectIterator(contents: MenuContents): MenuObjectIterator<Totem> {
+        val lore = listOf(
+            "&7",
+            "&7• &6Left Click &7to get",
+            "&7• &6Right Click &7to edit",
+            "&7• &6Shift + Right Click &7to delete",
+            "&7"
+        ).colorify()
+
         return contents.createObjectIterator(MenuIteratorType.HORIZONTAL, 0, 0, Totem::class.java) { totem: Totem ->
-            DisplayItem.of(totem.item)
+            getClickableTotem(totem, lore)
         }.sorter(0, TotemSorter.NAME_ASCENDING.getComparator())
     }
 }

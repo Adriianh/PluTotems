@@ -2,14 +2,17 @@ package com.github.adriianh.common.totem.option.type.impl.schematic
 
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.totem.option.type.OptionSchematic
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.colorify
 
-class OptionSchemAir : OptionSchematic<Boolean>() {
-    override val id: String = "SCHEMATICAIR"
+class OptionSchemAir : OptionSchematic<Boolean>(OptionTypes.SCHEMATIC) {
+    override val id: String = "AIR"
     override val description: List<String> = listOf("Enable schematic air")
     override val optional: Boolean = true
 
     private var air: Boolean = true
+
+    override fun getOptionPath(): String = "options.schematic.$identifier"
 
     override fun isTypeCompatible(value: Boolean): Boolean = true
 
@@ -26,7 +29,11 @@ class OptionSchemAir : OptionSchematic<Boolean>() {
     }
 
     override fun getConvertedValue(value: Any?): Boolean {
-        return value as Boolean
+        return when (value) {
+            is Boolean -> value
+            is String -> value.toBoolean()
+            else -> throw IllegalArgumentException("Value is not a boolean")
+        }
     }
     override fun getMaterial(): XMaterial = XMaterial.SPLASH_POTION
 

@@ -3,16 +3,19 @@ package com.github.adriianh.common.totem.option.type.impl.entity
 import com.cryptomorin.xseries.XMaterial
 import com.github.adriianh.common.compat.entity.EntityEquipment
 import com.github.adriianh.common.totem.option.type.OptionEntity
+import com.github.adriianh.common.totem.option.type.OptionTypes
 import com.github.adriianh.common.util.ConfigUtil.getItemStack
 import com.github.adriianh.common.util.colorify
 import taboolib.library.configuration.ConfigurationSection
 
-class OptionEntityEquipment : OptionEntity<EntityEquipment>() {
-    override val id: String = "ENTITYEQUIPMENT"
+class OptionEntityEquipment : OptionEntity<EntityEquipment>(OptionTypes.ENTITY) {
+    override val id: String = "EQUIPMENT"
     override val description: List<String> = listOf("Entity's equipment")
     override val optional: Boolean = true
 
     private var equipment: EntityEquipment = EntityEquipment()
+
+    override fun getOptionPath(): String = "options.entity.$identifier"
 
     override fun isTypeCompatible(value: EntityEquipment): Boolean = true
 
